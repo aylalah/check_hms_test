@@ -1,0 +1,268 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                  <h1>Pharmacy Dashboard (Admin)</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Lock Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create Campaign</a>
+                    <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a>
+                </div> -->
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="card">
+                    <div class="body ribbon">
+                        <div class="ribbon-box green"></div>
+                        <a href="#" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]" class="my_sort_cut text-muted">
+                            <i class="icon-users"></i>
+                            <span>Users</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="card">
+                    <div class="body">
+                        <a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]" class="my_sort_cut text-muted">
+                            <i class="icon-like"></i>
+                            <span>Pharmacy Log</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="card">
+                    <div class="body ribbon">
+                        <div class="ribbon-box orange"></div>
+                        <a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]" class="my_sort_cut text-muted">
+                            <i class="icon-calendar"></i>
+                            <span>Refill</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="card">
+                    <div class="body">
+                        <a href="payroll.html" [routerLink]="['/Admin', {outlets: {side: ['items']}}]" class="my_sort_cut text-muted">
+                            <i class="icon-credit-card"></i>
+                            <span>Inventory</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="card">
+                    <div class="body">
+                        <a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]" class="my_sort_cut text-muted">
+                            <i class="icon-calculator"></i>
+                            <span>Accounts</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-6 col-md-4 col-xl-2">
+                <div class="card">
+                    <div class="body">
+                        <a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]" class="my_sort_cut text-muted">
+                            <i class="icon-pie-chart"></i>
+                            <span>Report</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+  
+        <div class="row clearfix">
+  
+          <div class="col-lg-4 col-md-12">
+              <div class="card">
+                  <div class="header">
+                      <h2>Stock Report</h2>
+                  </div>
+                  <div class="body">
+                      <div id="chart-Events-Interest" style="height: 300px"></div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-8 col-md-12">
+              <div class="card user_statistics">
+                  <div class="header">
+                      <h2>Earning Report</h2>
+                  </div>
+                  <div class="body">                            
+                      <div id="chart-bar" style="height: 302px"></div>
+                  </div>
+              </div>
+          </div>  
+  
+      </div>
+      
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h2>Patient Structure</h2>
+                    </div>
+                    <div class="body text-center">
+                        <div id="chart-bar-stacked" style="height: 130px"></div>
+                        <hr>
+                        <div class="row clearfix">
+                            <div class="col-6">
+                                <h6 class="mb-0">{{pat.male}}</h6>
+                                <small class="text-muted">Male</small>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="mb-0">{{pat.female}}</h6>
+                                <small class="text-muted">Female</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                  <div class="body">
+                      <div class="card-value float-right text-muted"><i class="icon-user"></i></div>
+                      <h3 class="mb-1">{{pat.patient}}</h3>
+                      <div>All Patients</div>
+                  </div>
+              </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="header">
+                        <h2>Employee Status</h2>
+                    </div>
+                    <div class="body text-center">
+                        <div id="chart-area-spline-sracked" style="height: 130px"></div>
+                        <hr>
+                        <div class="row clearfix">
+                            <div class="col-6">
+                                <h6 class="mb-0">{{active}}</h6>
+                                <small class="text-muted">Active</small>
+                            </div>
+                            <div class="col-6">
+                                <h6 class="mb-0">{{suspended}}</h6>
+                                <small class="text-muted">Suspended</small>
+                            </div>
+                        </div>
+                    </div>                        
+                </div>
+                <!-- <div class="card">
+                    <div class="body">
+                        <div class="card-value float-right text-muted"><i class="icon-user"></i></div>
+                        <h3 class="mb-1">13</h3>
+                        <div>New Users</div>
+                    </div>
+                </div> -->
+        
+            </div>
+            <div class="col-lg-6 col-md-12">
+              <div class="card">
+                  <div class="header">
+                      <h2>Appointments Analysis</h2>
+                      <ul class="header-dropdown dropdown">                                
+                          <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                          <li class="dropdown">
+                              <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                              <ul class="dropdown-menu">
+                                  <li><a href="javascript:void(0);">Action</a></li>
+                                  <li><a href="javascript:void(0);">Another Action</a></li>
+                                  <li><a href="javascript:void(0);">Something else</a></li>
+                              </ul>
+                          </li>
+                      </ul>
+                  </div>
+                  <div class="body">
+                      <div id="stackedbar-chart" class="ct-chart"></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+        
+        <div class="row clearfix">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+                <div class="card">
+                    <div class="header">
+                        <h2>Stock Items</h2>
+                        <ul class="header-dropdown dropdown">
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);">Print</a></li>
+                                    <li><a href="javascript:void(0);">Copy</a></li>
+                                    <li><a href="javascript:void(0);">Export</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <input [(ngModel)]="filterString" placeholder="Search..." (ngModelChange)="onFilterChange()" class="form-control"/>
+                    <div
+                    class="search-results"
+                    infiniteScroll
+                    [infiniteScrollDistance]="2"
+                    [infiniteScrollThrottle]="50"
+                    (scrolled)="onScroll()"
+                  >
+                    <div class="table-responsive">
+                        <table class="table table-hover js-basic-example dataTable table-custom spacing5 mb-0">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Image</th>
+                                    <th>Item Detail</th>
+                                    <th>Category Name</th>
+                                    <th *ngFor="let br of bran">{{br.name}}</th>
+                                    <th>Visualization</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+  
+                                <tr *ngFor="let item of item; let r = index">
+                                  <td>{{r+1}}</td>
+                                  <td class="width45">
+                                      <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{item.item_img}}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar   Name">
+                                  </td>
+                                  <td>
+                                      <a href="javascript:void(0);" [routerLink]="['/Admin', {outlets: {side: ['item_profile', item.item_id]}}]" title=""><h6 class="mb-0">{{item.generic_name}}</h6></a>
+                                      <span>{{item.name}}</span>
+                                  </td>
+                                      <td><span>{{item.cat_name}}</span></td>
+                                      <ng-container *ngFor="let inb of stocks.inbranch[r];">
+                                          <td>{{inb}}</td>
+                                      </ng-container>
+                                      <td>
+                                          <span class="chart">{{stocks.inbranch[r]}},</span>
+                                      </td>
+                                </tr>
+                                <div *ngIf="!item">
+                                  <div class="spinner-grow text-primary" role="status">
+                                  <span class="sr-only">Loading...</span>
+                              </div>
+                          <div class="spinner-grow text-secondary" role="status">
+      <span class="sr-only">Loading...</span>
+      </div>
+      <div class="spinner-grow text-success" role="status">
+      <span class="sr-only">Loading...</span>
+      </div>
+                                </div> 
+                            </tbody>
+                        </table>
+  
+                        </div>
+  
+  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>

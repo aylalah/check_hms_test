@@ -1,0 +1,251 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h1>Phamarcy Log</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]">Refill</a></li>                        
+                        <li class="breadcrumb-item active" aria-current="page">Phamarcy Log</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="" data-toggle="modal" data-target="#AddPatients">Create Account</a> -->
+                    <!-- <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a> -->
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="card">
+                    <div class="body">
+                        <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onClickSubmit()" #filter="ngForm" >
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-6">
+                                <label>Search User</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"  placeholder="Search..." [(ngModel)]="form.customer" name="customer" [formControl]="control"  [matAutocomplete]="auto">
+                                    <!-- name="customer2" -->
+                                    <mat-autocomplete #auto="matAutocomplete" >
+                                        <mat-option *ngFor="let street of filteredStreets | async" [value]="street" >
+                                         {{street}} 
+                                        </mat-option>
+                                    </mat-autocomplete>
+                                    
+                                </div>
+                            </div>                           
+                            <div class="col-lg-2 col-md-4 col-sm-6">
+                                <label>&nbsp;</label>
+                                <button type="submit" class="btn btn-sm btn-primary btn-block" title="">Log<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+
+                            </div>
+                        </div>
+                    </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6" *ngFor= "let l of log">
+                <div class="card c_grid c_yellow">
+                    <div class="body text-center p-4">
+                        <div class="circle">
+                            <img class="rounded-circle" src="http://{{ imgLink}}/backend/public/upload/uploads/{{l.patient_image}}" alt="">
+                        </div>
+                        <h6 class="mt-3 mb-0">{{l.pat_name+ ' ' +l.othername}}</h6>
+                        <a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['treatment', l.cust_id]}}]"><span>{{l.card_number}}</span></a>
+                        <ul class="mt-3 mb-4 list-unstyled d-flex justify-content-center">
+                            <li><a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['refill', l.id]}}]">Refill</a></li>
+                            <li><a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['invoice', l.id]}}]">Invoice</a></li>
+                            <li><a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['voucher', l.id]}}]">Voucher</a></li>
+                        </ul>
+                        <hr>Status<hr>
+                        <div class="d-flex justify-content-between">
+                            <div class="text text-primary" *ngIf ="l.invoice=== 'open'">{{l.invoice}}</div>
+                            <div class="text text-warning" *ngIf ="l.invoice=== 'unpaid'">{{l.invoice}}</div>
+                            <div class="text text-success" *ngIf ="l.invoice=== 'paid'">{{l.invoice}}</div>
+                            <div class="text text-primary" *ngIf ="l.voucher=== 'open'">{{l.voucher}}</div>
+                            <div class="text text-success" *ngIf ="l.voucher=== 'checkout'">{{l.voucher}}</div>
+                            <div class="text text-success" *ngIf ="l.voucher=== 'success'">{{l.voucher}}</div>
+                            <div class="text text-secondary" *ngIf ="l.voucher=== 'refill'">{{l.voucher}}</div>
+                        </div>
+                    </div>                        
+                </div>
+            </div> 
+            <div *ngIf="!log">
+                <div class="spinner-grow text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        <div class="spinner-grow text-secondary" role="status">
+<span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+<span class="sr-only">Loading...</span>
+</div>
+              </div>    
+        </div>
+    </div>
+</div>
+
+<!-- Default Size -->
+<div class="modal fade" id="AddPatients" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title h4" id="myLargeModalLabel">Add Patient</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmit(fm)" #fm="ngForm"> 
+          <div class="modal-body">             
+              <div class="row clearfix">
+                  <div class="col-md-8">
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder=" Patient Firstname" ngModel name="name" required>
+                      </div>
+                  </div>             
+              </div>
+          </div>
+          <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Patient Other Name" ngModel name="othername" required>
+                    </div>
+                </div>             
+            </div>
+        </div>
+        <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                                <label class="fancy-radio custom-color-green"><input name="gender" ngModel name="gender" value="Male" type="radio" checked><span><i></i>Male</span></label>
+                                <label class="fancy-radio custom-color-green"><input name="gender" ngModel name="gender" value="Female" type="radio"><span><i></i>Female</span></label>
+                          </div>
+                    </div>             
+                </div>
+            </div>
+        <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Patient Email Address if available" ngModel name="email">
+                        </div>
+                    </div>             
+                </div>
+            </div>
+        <div class="modal-body">             
+          <div class="row clearfix">
+              <div class="col-md-8">
+                  <div class="form-group">
+                      <input type="text" class="form-control" placeholder="Patient Contact Number" ngModel name="mobile_number" required>
+                  </div>
+              </div>             
+          </div>
+      </div>
+      <div class="modal-body">             
+        <div class="row clearfix">
+            <div class="col-md-8">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Patient Address" ngModel name="address" required>
+                </div>
+            </div>             
+        </div>
+    </div>
+    <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Patient City" ngModel name="city" required>
+                    </div>
+                </div>             
+            </div>
+        </div>
+        <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Patient State" ngModel name="state" required>
+                        </div>
+                    </div>             
+                </div>
+            </div>
+            <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Patient Country" ngModel name="country" required>
+                            </div>
+                        </div>              
+                    </div>
+                </div>
+                <div class="modal-body">             
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                        <input type="date" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Patient Date of Birth" ngModel name="d_o_b" required>
+                                    </div>
+                            </div>              
+                        </div>
+                    </div>
+                <div class="modal-body">             
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Patient Card Number" ngModel name="card_number" required>
+                                </div>
+                            </div>             
+                        </div>
+                    </div>
+                    <div class="modal-body">             
+                            <div class="row clearfix">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Patient NHIS" ngModel name="n_h_i_s" required>
+                                    </div>
+                                </div>             
+                            </div>
+                        </div>
+                        <div class="modal-body">             
+                                <div class="row clearfix">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Patient Allergy" ngModel name="allergy" required>
+                                        </div>
+                                    </div>             
+                                </div>
+                            </div>
+                            <div class="modal-body">             
+                                    <div class="row clearfix">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="About Patient" ngModel name="about" required>
+                                            </div>
+                                        </div>             
+                                    </div>
+                                </div>
+          <div class="modal-body">             
+              <div class="row clearfix">
+                  <div class="col-md-8">
+                      <div class="form-group">
+                          <select class="form-control show-tick" ngModel name="status">
+                              <option value="">-- Select Status --</option>
+                              <option value="active">Active</option>
+                              <option value="suspend">Suspend</option>                                
+                          </select>                  
+                        </div>
+                  </div>             
+              </div>
+          </div>      
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-round btn-primary">Add<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+              <button type="button" class="btn btn-round btn-default" data-toggle="modal">Close</button>
+          </div>
+          </form>
+      </div>
+    </div>
+    </div>

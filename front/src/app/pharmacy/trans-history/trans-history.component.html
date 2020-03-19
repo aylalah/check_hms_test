@@ -1,0 +1,172 @@
+<div id="main-content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <div class="row clearfix">
+              <div class="col-md-6 col-sm-12">
+                  <h1>Phamarcy Report</h1>
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">Inventory</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Report</li>
+                      </ol>
+                  </nav>
+              </div>            
+          </div>
+      </div>
+
+        <div class="row clearfix">
+            <div class="col-12">
+                <div class="card">
+                    <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onClickSubmit(filter)" #filter="ngForm">
+                    <div class="body">
+                        <div class="row">
+                            <div class="col-lg-3 col-md-3 col-sm-4">
+                                <label>Date: From</label>
+                                <div class="form-group">
+                                    <input type="date" class="form-control"  ngModel name="sDate" required>
+                                </div>
+                            </div>
+                            
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <label>Date: To</label>
+                                <div class="form-group">
+                                    <input type="date" (click)="get()" class="form-control" ngModel name="eDate" required>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <label>Branch</label>
+                                <div class="form-group">
+                                    <select class="form-control" ngModel name="to" required>                           
+                                        <option value="">Select Branch...</option>
+                                        <option  *ngFor="let br of bran" value="{{br.br_name}}" [ngValue]="br.br_name">{{br.name}}</option>                          
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-2 col-sm-6 m-t-30">
+                                <!-- <button class="buttonload" *ngIf="spin=='disable'" type="submit" class="btn btn-primary">
+                                    <i class="fa fa-spinner fa-spin"></i>Search
+                                  </button> -->
+                                <button type="submit" class="btn btn-primary">Search<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+                            
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+            </div>
+    </div>
+    <div *ngIf="!payloads">
+        <div class="col-lg-12 col-md-12 col-sm-12 card">
+            <div class="card-header">
+                <h4 class="text-center text-primary">No search result</h4>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12" *ngIf="payloads">
+        <div class="card">
+            <div class="header">
+                <h2>{{sBranch}} Center<small>History Table</small></h2>
+                <ul class="header-dropdown dropdown">
+                    
+                    <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                    <li class="dropdown">
+                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                        <ul class="dropdown-menu">
+                            <li><a (click)="printComponent()">Print</a></li>
+                            <!-- <li><a href="javascript:void(0);">Copy</a></li> -->
+                            <li><a (click)="exportAsXLSX()">Export</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <!-- Sales -->
+            <div class="body">
+                <div class="table-responsive" id="print-history">
+                    <div>
+                        <h5 class="text-center">Bowen University Teaching Hospital Ogbomoso</h5>
+                        <h5 class="text-center">{{sBranch}} Center Stock Report List From <b>{{sDate}}</b> To <b>{{eDate}}</b></h5>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>S/N</th>
+                                <th>Image</th>
+                                <th>Item</th>
+                                <th>Open Balance</th>
+                                <th>Add</th>
+                                <th>Transfer</th>
+                                <th>Sales</th>
+                                <th>Balance</th>
+                                <th>Close Balance</th>
+                                <th>Variance</th>
+                                <th>Physical Balance</th>
+                                <th>General Price</th>
+                                <th>Price 2 (GORAH)</th>
+                                <th>Price 3 (NHIS)</th>
+                                <th>Total Price</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let item of payItem; let r = index">
+                                <td>{{r+1}}</td>
+                                <td class="width45">
+                                    <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{item.item_img}}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0);" [routerLink]="['/Admin', {outlets: {side: ['item_profile', item.item_id]}}]" title=""><h6 class="mb-0">{{item.generic_name}}</h6></a>
+                                    <span>{{item.name}}</span>
+                                </td>  
+                                <ng-container *ngFor="let det of payDetail[r]">
+                                    <td class="text text-success">{{det.open_stock == null ? 0 : det.open_stock}}</td>
+                                    <td class="text text-primary">{{det.receive == null ? 0 : det.receive}}</td>
+                                    <td class="text text-warning">{{det.transfer == null ? 0 : det.transfer}}</td>
+                                    <td class="text text-danger">{{det.sales == null ? 0 : det.sales}}</td>
+                                    <td class="text text-info">{{det.balance == null ? 0 : det.balance}}</td>
+                                    <td>
+                                        <div class="avtar-pic w50 bg-success" data-toggle="tooltip" data-placement="top" title="Current in Stock" data-original-title=""><span>{{det.total_remain}}</span></div>
+                                    </td>
+                                    <td>
+                                        <div class="avtar-pic w50 bg-secondary" data-toggle="tooltip" data-placement="top" title="Damaged, Expire" data-original-title=""><span>{{det.variance == null ? 0 : det.variance}}</span></div>
+                                    </td>
+                                    <td>
+                                        <div class="avtar-pic w50 bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title=""><span>{{det.physical_balance == null ? 0 : det.physical_balance}}</span></div>
+                                    </td>
+                                <td>
+                                    <span class="badge badge-success" *ngIf ="item.markup_price != '0'">{{item.purchasing_price*item.markup_price | currency:'NGN':'symbol-narrow'}}</span>
+                                    <span class="badge badge-success" *ngIf ="item.markup_price == '0'">{{item.purchasing_price | currency:'NGN':'symbol-narrow'}}</span>                                                    
+                                </td>
+                                <td>
+                                    <span class="badge badge-warning">{{item.price_2 | currency:'NGN':'symbol-narrow'}}</span>
+                                </td>
+                                <td>
+                                        <span class="badge badge-info">{{item.price_3 | currency:'NGN':'symbol-narrow'}}</span>
+                                    </td>
+                                <td>
+                                    <span class="badge badge-success" *ngIf ="item.markup_price != '0'">{{item.purchasing_price*item.markup_price*det.total_remain | currency:'NGN':'symbol-narrow'}}</span>
+                                    <span class="badge badge-success" *ngIf ="item.markup_price == '0'">{{item.purchasing_price*det.total_remain | currency:'NGN':'symbol-narrow'}}</span>
+                                </td>
+                            </ng-container>
+
+                            </tr> 
+                            <div  *ngIf="spin=='disable'">
+                                <div class="spinner-grow text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        <div class="spinner-grow text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-success" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>
+                              </div>                            
+                        </tbody>
+                    </table>
+                </div>
+                <!-- <button (click)="printComponent()">Print</button> -->
+            </div>            
+        </div>
+    </div>
+  </div>
+</div>

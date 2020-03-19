@@ -1,0 +1,7 @@
+{
+    "/*": {
+         "target": "https://hms.jtcheck.com",
+        "secure": false,
+        "changeOrigin": true
+    }
+}

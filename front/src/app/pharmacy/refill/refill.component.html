@@ -1,0 +1,75 @@
+<div id="main-content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <div class="row clearfix">
+              <div class="col-md-6 col-sm-12">
+                  <h1>Refill History</h1>
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Phamarcy Log</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Refill History</li>
+                      </ol>
+                  </nav>
+              </div>            
+          </div>
+      </div>
+
+      <div class="row clearfix">
+          <div class="col-sm-12">
+              <div class="table-responsive">
+                  <table class="table table-hover table-custom spacing8">
+                      <thead>
+                          <tr> 
+                              <th>#</th>
+                              <th>Customer Name</th>
+                              <!-- <th>Item</th>
+                              <th>Type</th> -->
+                              <th>Quantity</th>
+                              <th>Refill</th>                          
+                              <th>Phamarcist</th>
+                              <th>Branch</th>
+                              <th>Date</th>
+                              <th>Time</th>
+                              <th>Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                          <tr *ngFor="let r of refill; let i =index" >
+                             <td>{{i+1}}</td>                                                                                     
+                              <td style="color: #17C2D7;">{{r.customer_name}} {{r.customer_othername}}</td>
+                              <!-- <td>
+                                <a href="javascript:void(0);" title=""><h6 class="mb-0">{{r.generic_name}}</h6></a>
+                                <span>{{r.item_type_id}}</span>
+                            </td>
+                              <td>{{r.item_type_id}}</td> -->
+                              <td>{{r.refill_remain}}</td> 
+                              <td>{{r.total_refill}}</td>                        
+                              <!-- <td>10/12/2019</td>     -->
+                              <td>{{r.lastname}} {{r.fistname}}</td>
+                              <td>{{r.name}}</td>                           
+                              <td>{{r.v_date}}</td>  
+                              <td>{{r.v_time}}</td>        
+                              <td>
+                                  <a class="btn btn-default btn-sm" style="color: limegreen;" title="Voucher Details" [routerLink]="['/Admin', {outlets: {side: ['refill-details', r.id]}}]"><i class="fa fa-pencil"></i> Voucher</a>
+                                  <!-- <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="onDelete(d.id)"><i class="fa fa-trash-o"></i> Councel</button> -->
+                              </td>
+                          </tr>  
+                          <div *ngIf="!refill">
+                            <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    <div class="spinner-grow text-secondary" role="status">
+<span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+<span class="sr-only">Loading...</span>
+</div>
+                          </div>                                                  
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

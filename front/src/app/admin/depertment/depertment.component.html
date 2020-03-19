@@ -1,0 +1,97 @@
+    <div id="main-content">
+        <div class="container-fluid">
+            <div class="block-header">
+                <div class="row clearfix">
+                    <div class="col-md-6 col-sm-12">
+                        <h1>Departments</h1>
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="../html/index.html">Dashboard</a></li>
+                            <li class="breadcrumb-item"><a href="index.html">Hospital</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">Departments</li>
+                            </ol>
+                        </nav>
+                    </div>            
+                    <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                        <button class="btn btn-sm btn-primary" title="" data-toggle="modal" data-target="#AddDepartments">Add</button>
+                        <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a>
+                    </div> -->
+                </div>
+            </div>
+
+            <div class="row clearfix">
+                <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12" *ngFor="let d of dept">
+                    <div class="card">
+                        <img class="img-fluid rounded" src="http://{{ imgLink}}/backend/public/upload/uploads/{{d.image}}" alt="">
+                        <div class="body">
+                            <h6 class="mt-3">{{d. name}}</h6>
+                            <div class="text-muted">{{d.description}}</div>
+                        </div>
+                        <div class="card-footer">
+                            <ul class="list-unstyled sm team-info margin-0" >
+                                <li class="mr-3"><small>Team</small></li>
+                                <li *ngFor="let t of staff"><img *ngIf="t.dept_id === d.id" src="http://{{ imgLink}}/backend/public/upload/uploads/{{t.image}}" alt="Avatar"></li>
+                               
+                            </ul>
+                        </div>
+                    </div>
+                </div>   
+                <div *ngIf="!dept">
+                    <div class="spinner-grow text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            <div class="spinner-grow text-secondary" role="status">
+<span class="sr-only">Loading...</span>
+</div>
+<div class="spinner-grow text-success" role="status">
+<span class="sr-only">Loading...</span>
+</div>
+                  </div>             
+            </div>
+        </div>
+    </div>
+    
+
+<!-- Default Size -->
+<!-- <div class="modal fade" id="AddDepartments" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Add Departments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmit(fm)" #fm="ngForm"> 
+            <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Departments Name" ngModel name="name" required>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <select class="form-control show-tick" ngModel name="position_id">
+                                <option value="">- Select Team -</option>
+                                <option *ngFor="let p of pos" [value]="p.id">{{p.position_name}}</option>                                
+                            </select>
+                        </div>
+                    </div>                    
+                    <div class="col-sm-12">
+                        <div class="form-group mt-3">
+                            <textarea rows="6" class="form-control no-resize" placeholder="Please type about the depertment..." ngModel name="description" required></textarea>
+                        </div>
+                    </div>
+                   
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-round btn-primary">Add</button>
+                <button type="button" class="btn btn-round btn-default" data-dismiss="modal">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div> -->
+

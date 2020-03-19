@@ -1,0 +1,224 @@
+<div id="main-content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <div class="row clearfix">
+              <div class="col-md-6 col-sm-12">
+                  <h2>Treatment</h2>
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['doctor_log']}}]">Appointment Log</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Treatment</li>
+                      </ol>
+                  </nav>
+              </div>            
+          </div>
+      </div>
+      <div class="row clearfix">
+          <div class="col-md-12">
+              <div class="card social">
+                  <div class="profile-header d-flex justify-content-between justify-content-center">
+                      <div class="d-flex">
+                          <div class="mr-3">
+                              <img src="http://localhost/buth-pharm/backend/public/upload/uploads/{{patient?.patient_image}}" class="rounded" alt="Patient_Photo">
+                          </div>
+                         <div class="details">
+                                <h4 class="mb-0">Card Number : {{patient?.card_number}}</h4>
+                                <span class="text-light"><b>Name : </b>{{patient?.name + " " + patient?.othername}}</span>
+                                <div><b>Mobile: </b>{{patient?.mobile_number}}</div>
+                          </div>                                 
+                      </div>
+                      <div class="col text-center">
+                        <div class="m-0"><b>Customer Category: </b>{{patient?.category_name}}</div>
+                        
+                        <div class="m-0"><b>Percentage: </b>{{patient?.pacentage_value}}%</div>
+                       
+                      </div>
+                      
+                  </div>
+              </div>                    
+          </div>
+      </div>
+
+
+    <div class="row clearfix">
+        <div class="col-12">
+                <div class="card">
+                    <form class="form-auth-small m-t-20" role="form"  #data="ngForm"> 
+                    <div class="header">
+                        <h2>Patient Details</h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                                                         
+                            <div class="col-lg-12 col-md-12">
+                                <ul class="list-unstyled d-flex justify-content-center">
+                                  <li><a class="p-3" href="#" [routerLink]="['/Admin', {outlets: {side: ['treatment', patient?.cust_id]}}]">Treatment</a></li>
+                                  <li><a class="p-3" href="#" [routerLink]="['/Admin', {outlets: {side: ['refer', patient?.cust_id]}}]">Refer</a></li>
+                                  
+                              </ul>
+                                <hr>
+
+
+                                <div class="row">
+                                
+                                   
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Card Number</label>
+                                        <div class="form-group">
+                                            {{patient?.card_number}}
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Name</label>
+                                        <div class="form-group">
+                                            {{patient?.name+" "+patient?.othername}} 
+                                        </div>
+                                    </div> 
+                                    
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Gender</label>
+                                        <div class="form-group">
+                                            {{patient?.gender}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Email</label>
+                                        <div class="form-group">
+                                            {{patient?.email}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Date of Birth</label>
+                                        <div class="form-group">
+                                            {{patient?.d_o_b}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Allergy</label>
+                                        <div class="form-group">
+                                            {{patient?.allergy}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Blood Group</label>
+                                        <div class="form-group">
+                                            {{patient?.blood_group}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Genotype</label>
+                                        <div class="form-group">
+                                            {{patient?.genotype}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>NHIS</label>
+                                        <div class="form-group">
+                                            {{patient?.n_h_i_s}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>About Patient</label>
+                                        <div class="form-group">
+                                            {{patient?.about}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Mobile</label>
+                                        <div class="form-group">
+                                            {{patient?.mobile}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Address</label>
+                                        <div class="form-group">
+                                            {{patient?.address}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Age</label>
+                                        <div class="form-group">
+                                            {{patient?.age}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>City & State</label>
+                                        <div class="form-group">
+                                            {{patient?.city+" & "+ patient?.state}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Religion</label>
+                                        <div class="form-group">
+                                            {{patient?.religion}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Occupation</label>
+                                        <div class="form-group">
+                                            {{patient?.occupation}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Marital Status</label>
+                                        <div class="form-group">
+                                            {{patient?.marital_status}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Next of Kin</label>
+                                        <div class="form-group">
+                                            {{patient?.next_of_kin_name}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Relationship with Kin</label>
+                                        <div class="form-group">
+                                            {{patient?.kin_relationship}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Next of Kin Address</label>
+                                        <div class="form-group">
+                                            {{patient?.next_of_kin_address}}
+                                        </div>
+                                    </div> 
+
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Next of Kin Mobile</label>
+                                        <div class="form-group">
+                                            {{patient?.next_of_kin_mobile}}
+                                        </div>
+                                    </div> 
+                                </div>
+                           
+                                                              
+                            </div>
+                        </div>
+                       
+                    </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+  
+</div>

@@ -1,0 +1,226 @@
+<div id="main-content">
+  <div class="container-fluid">
+    <div class="block-header">
+      <div class="row clearfix">
+          <div class="col-md-6 col-sm-12">
+              <h2>Invoice / Label Details</h2>
+              <nav aria-label="breadcrumb">
+                  <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                  <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Phamarcy Log</a></li>
+                  <!-- <li class="breadcrumb-item"><a href="#">Voucher</a></li> -->
+                  <li class="breadcrumb-item active" aria-current="page">Invoices</li>
+                  </ol>
+              </nav>
+          </div>            
+          <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+              <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-round" title="">Add New</a>
+          </div> -->
+      </div>
+  </div>
+      <div class="row clearfix">
+          <div class="col-lg-12">
+              <div class="card">
+                  <div class="header">
+                      <h2 >Buth Phamarcy Sales Invoice <small> </small></h2>
+                  </div>
+                  <div class="body" id="print-history">
+                      <div class="row clearfix"> 
+                        <div class="col-md-12 col-sm-12">
+                          <div style="margin-left:33% ;" class="col-md-6 col-sm-6">
+                          <img width="70%" src="http://{{imgLink}}/backend/public/upload/icons/{{icon}}" alt="Check Logo" class="center"><span id="cin"></span>
+                          <!-- </div>
+                          <div class="col-md-4 col-sm-4">  -->
+                            <p id="oid"><strong>Order ID: </strong> {{voucher_Id}}</p> 
+                          </div>
+                          <hr>  
+                        </div>
+                          <div class="col-md-6 col-sm-6">                           
+                            <p class="m-b-0"><strong>Order Date: </strong> {{p_date}}</p>
+                              <p class="m-b-0"><strong>Name: </strong>{{name}} {{othername}}</p>
+                              <p class="m-b-0"><strong>Card Number: </strong> {{card_number}}</p> 
+                              <p class="m-b-0"><strong>Address: </strong>{{address}}, {{city}}, {{state}}, {{country}}</p>
+                              <p class="m-b-0"><strong>Mobile Contact: </strong>{{mobile_no}}</p>                                   
+                          </div>
+                          <div class="col-md-6 col-sm-6 text-right">
+                              
+                          </div>
+                      </div>
+                      <div class="row clearfix">
+                          <div class="col-md-12">
+                              <div class="table-responsive">
+                                  <table class="table table-hover table-custom spacing5 mb-5">
+                                      <thead>
+                                          <tr>
+                                              <th>#</th>                                                        
+                                              <th>Item</th>
+                                              <th style="width: 120px;">Quantity</th>
+                                              <th class="hidden-sm-down" style="width: 80px;">Cost</th>
+                                              <th style="width: 80px;">Total</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody *ngIf="isEmpty !='0'">
+                                            <tr *ngFor="let i of pres; let n =index">
+                                                <!-- <ng-container *ngIf = "i.status == 'invoice'" > -->
+                                                    <td>{{n+1}}</td>
+                                                    <td>
+                                                        <span>{{i.generic_name}}</span>
+                                                        <p class="hidden-sm-down mb-0 text-muted"> {{i.name}}</p>
+                                                    </td>                                                    
+                                                    <td>{{i.quantity}}</td>
+                                                    <td class="hidden-sm-down">{{i.amount  | currency:'NGN':'symbol-narrow'}}</td>
+                                                    <td class="text-right">{{i.amount_paid  | currency:'NGN':'symbol-narrow'}}</td>
+                                                <!-- </ng-container> -->
+                                            </tr>
+                                         
+                                      </tbody>
+                                      <div *ngIf="isEmpty =='0'" class="alert alert-danger" role="alert">
+                                        No Invoice
+                                    </div>
+                                 
+                                    <div *ngIf="!inv">
+                                        
+                                        <div class="spinner-grow text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                <div class="spinner-grow text-secondary" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                        <div class="spinner-grow text-success" role="status">
+                        <span class="sr-only">Loading...</span>
+                        </div>
+                                      </div> 
+                                      <tfoot>
+                                          <tr class="text-left">  
+                                              <td colspan="3"></td> 
+                                              <td>
+                                                Sub Total: <br>
+                                                Discount %:<br>
+                                                Service Charge: <br>
+                                                Total: <br>
+                                            </td>
+                                            <td>
+                                                <strong class="text-success">{{amount | currency:'NGN':'symbol-narrow'}}</strong><br>
+                                                <strong class="text-warning">{{schemePercentToView}}%</strong><br>
+                                                <strong class="text-success">{{'50'  | currency:'NGN':'symbol-narrow'}}</strong><br>
+                                                <strong class="text-success">{{afterPercentCost  | currency:'NGN':'symbol-narrow'}}</strong><br>
+                                            </td>
+                                          </tr>
+                                      </tfoot>
+                                  </table>
+                              </div>
+                          </div>
+                      </div>
+                      <!-- <div class="row clearfix">
+                          <div class="col-md-6">
+                              <span><strong>Note:</strong> Ipsum is simply dummy text of the printing and typesetting industry.</span>
+                          </div>
+                      </div>  -->
+                  </div>
+                  <div class="row clearfix mt-2">
+                        <div class="col-md-6 text-left">
+                              <strong>Invoice Status: </strong><span *ngIf = "invoice == 'unpaid'" class="badge badge-danger">{{invoice}}</span> <span *ngIf = "invoice == 'paid'" class="badge badge-success">{{invoice}}</span>
+                        </div>
+                      <div class="col-md-6 text-right">
+
+                          <!-- Print -->
+                          <button class="btn btn-info ml-2" (click)="printComponent()"><i class="icon-printer"></i>Print</button>
+                          <!-- Payment -->
+
+                          <!-- <button class="btn btn-success ml-2" (click)="saveToInvoice()" *ngIf = "inv.pres[0].status == 'invoice'"><i class="icon-printer"></i>Payment</button>
+                          <button class="btn btn-success ml-2" *ngIf = "inv.pres[0].status == 'paid'" disabled><i class="icon-printer"></i>Payment</button> -->
+                          <button class="btn btn-success ml-2" (click)="saveToInvoice()" *ngIf = "invoice == 'unpaid'"><i class="icon-printer fa fa-spin fa-spinner" *ngIf="disabled"></i>Payment</button>
+                          <button class="btn btn-success ml-2" *ngIf = "invoice == 'paid'" disabled><i class="icon-printer"></i>Payment</button>
+
+                          <!-- Terminate -->
+                          <!-- <button class="btn btn-danger ml-2" (click)="terminateAppointment(inv.pres[0].voucher_id)" *ngIf = "inv.pres[0].status == 'invoice'" title="Terminate Appointment"><i class="fa fa-times-circle"></i>Terminate Transaction</button>
+                          <button class="btn btn-danger ml-2" *ngIf = "appointments[0].invoice == 'paid'" disabled><i class="fa fa-times-circle"></i>Terminate Transaction</button> -->
+                        </div>
+                    </div>
+              </div>                                       
+          </div>
+      </div>
+
+      
+  </div>
+
+  <div class="container-fluid">
+    <div class="block-header">
+        <div class="row clearfix">
+            <div class="col-md-6 col-sm-12">
+                <h2>Label Table</h2>  <strong>Invoice Status: </strong><span *ngIf = "invoice == 'unpaid'" class="badge badge-danger">{{invoice}}</span> <span *ngIf = "invoice == 'paid'" class="badge badge-success">{{invoice}}</span>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">                    
+                    <li class="breadcrumb-item active" aria-current="page">The following lable description wounld be printable immediatle Payment have been made</li>
+                    </ol>
+                </nav>
+            </div>            
+            <div class="col-md-6 col-sm-12 text-right">
+                <button class="btn btn-sm btn-primary btn-round" title="End process after label is printed" *ngIf = "status == 'invoice'" disabled><i class="fa fa-hourglass-end fa fa-spin fa-spinner"></i>End Process</button>
+                <button class="btn btn-sm btn-primary btn-round"  (click)="closeAppointment()" title="End process after label is printed"*ngIf = "status == 'paid'"><i class="icon-printer"></i>End Process</button>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-lg-12">
+            <div class="table-responsive invoice_list mb-4">
+                <table class="table table-hover table-custom spacing8">
+                    <thead>
+                        <tr> 
+                            <th style="width: 20px;">#</th>
+                            <th>Client</th>
+                            <th style="width: 50px;">Amount</th>
+                            <!-- <th style="width: 50px;">Status</th> -->
+                            <th style="width: 110px;">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody *ngIf="isEmpty !='0'">
+                        <tr *ngFor="let i of pres; let n =index">
+                            <!-- <ng-container *ngIf = "i.status == 'paid'" > -->
+                                <td>
+                                        <span>{{n+1}}</span>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex align-items-center">
+                                                <img src="https://{{imgLink}}/backend/public/upload/uploads/{{i.item_img}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 h35 rounded">
+                                                <div class="ml-3">
+                                                <a href="javascript:void(0);" title="{{i.generic_name}} ">{{i.generic_name}}</a>
+                                                <p class="mb-0">{{i.name}}</p>
+                                            </div>
+                                        </div>                                        
+                                    </td>
+                                    <td>{{i.amount  | currency:'NGN':'symbol-narrow'}}</td>
+                                    <!-- <td><span class="badge badge-success ml-0 mr-0">{{appointments[0].invoice}}</span></td> -->
+                                    <td>
+                                        <!-- <button type="button" class="btn btn-sm btn-default" title="Send Invoice" data-toggle="tooltip" data-placement="top"><i class="icon-envelope"></i></button> -->
+                                        <button type="button" class="btn btn-sm btn-danger" *ngIf = "invoice != 'paid'" disabled title="Print Label" ><i class="icon-printer"></i></button>
+                                        <button type="button" class="btn btn-sm btn-success" *ngIf = "invoice == 'paid'" (click)="openPrintDialogue(i.id)" title="Print Label" data-toggle="tooltip" data-placement="top"><i class="icon-printer"></i></button>
+                                        <!-- <button type="button" class="btn btn-sm btn-default" title="Delete" data-toggle="tooltip" data-placement="top"><i class="icon-trash"></i></button> -->
+                                    </td>
+                            <!-- </ng-container> -->
+                        </tr>
+                       
+                    </tbody>
+                    <div *ngIf="isEmpty =='0'" class="alert alert-danger" role="alert">
+                        No Label
+                    </div>
+                 
+                    <div *ngIf="!inv">
+                        
+                        <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                <div class="spinner-grow text-secondary" role="status">
+        <span class="sr-only">Loading...</span>
+        </div>
+        <div class="spinner-grow text-success" role="status">
+        <span class="sr-only">Loading...</span>
+        </div>
+                      </div> 
+                </table>
+            </div>
+           
+        </div>
+    </div>
+</div>
+</div>

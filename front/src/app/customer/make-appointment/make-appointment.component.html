@@ -1,0 +1,227 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h1>Appointments</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/home']">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="index.html" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]">Patient</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Appointment</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <button class="btn btn-sm btn-primary" title="" data-toggle="modal" data-target="#MakeAppointment">Make Appointment</button>
+                   
+                </div> -->
+            </div>
+        </div>
+  
+        <div class="row clearfix">
+            <div class="col-12">
+                <input [(ngModel)]="filterString" placeholder="Search..." (ngModelChange)="onFilterChange()" class="form-control"/>
+                <div
+                class="search-results"
+                infiniteScroll
+                [infiniteScrollDistance]="2"
+                [infiniteScrollThrottle]="50"
+                (scrolled)="onScroll()"
+              >
+                <div class="">
+                    <table class="table header-border table-hover  spacing5">
+                        <thead>
+                            <tr>
+                                <!-- <th>S/N</th> -->
+                                <th>Image</th>
+                                <th>Patient ID</th>
+                                <th>Depertment</th>
+                                <th>Lab</th>
+                                <th>Treatment</th>
+                                <th>Prescription</th>
+                                <th>Voucher</th>
+                                <th>Invoice</th>
+                                <th>Status</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <!-- <th>Progress</th> -->
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let a of appoint ; let r = index">
+                                <!-- <td> {{r+1}} </td>| paginate: {itemsPerPage:10, currentPage: p} -->
+                                <td class="w60">
+                                    <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{a.patient_image}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 rounded">
+                                </td>
+                                <td>
+                                    <a href="javascript:void(0);" title="">{{a.card_number}}</a>
+                                    <p class="mb-0">{{a.pat_name}}</p>
+                                </td>
+                                <td>{{a.dept_name}}</td>
+                                <td>
+                                    
+                                    <span class="badge badge-danger" *ngIf ="a.lab=== 'terminated'">Terminated</span>
+                                        <span class="badge badge-success" *ngIf ="a.lab=== 'success'">Success</span> 
+                                        <span class="badge badge-warning" *ngIf ="a.lab=== 'invoice'">Invoice</span> 
+                                        <span class="badge badge-primary" *ngIf ="a.lab=== 'open'">Open</span>  
+                                        <span class="badge badge-warning" *ngIf ="a.lab=== 'close'">close</span>                                                                               
+                                </td>
+                                <td>
+                                        <span class="badge badge-danger" *ngIf ="a.treatment=== 'terminated'">Terminated</span>
+                                        <span class="badge badge-success" *ngIf ="a.treatment=== 'success'">Success</span> 
+                                        <!-- <span class="badge badge-warning" *ngIf ="a.treatment=== 'invoice'">Invoice</span>  -->
+                                        <span class="badge badge-primary" *ngIf ="a.treatment=== 'open'">Open</span> 
+                                        <span class="badge badge-warning" *ngIf ="a.treatment=== 'close'">close</span>                                                                           
+                                </td>
+                                <td>                                      
+                                        <span class="badge badge-danger" *ngIf ="a.prescription=== 'terminated'">Terminated</span>
+                                        <span class="badge badge-success" *ngIf ="a.prescription=== 'success'">Success</span> 
+                                        <span class="badge badge-warning" *ngIf ="a.prescription=== 'checkout'">Checkout</span> 
+                                        <span class="badge badge-primary" *ngIf ="a.prescription=== 'open'">Open</span>     
+                                        <span class="badge badge-warning" *ngIf ="a.prescription=== 'close'">close</span>                                                                         
+                                </td>
+                                <td>                                        
+                                        <span class="badge badge-danger" *ngIf ="a.voucher=== 'terminated'">Terminated</span>
+                                        <span class="badge badge-success" *ngIf ="a.voucher=== 'success'">Success</span> 
+                                        <span class="badge badge-secondary" *ngIf ="a.voucher=== 'refill'">Refill</span> 
+                                        <span class="badge badge-warning" *ngIf ="a.voucher=== 'checkout'">Checkout</span> 
+                                        <span class="badge badge-primary" *ngIf ="a.voucher=== 'open'">Open</span>
+                                        <span class="badge badge-warning" *ngIf ="a.voucher=== 'close'">close</span>                                                                               
+                                </td>
+                                <td>
+                                        <span class="badge badge-danger" *ngIf ="a.invoice=== 'terminated'">Terminated</span>
+                                        <span class="badge badge-success" *ngIf ="a.invoice=== 'paid'">paid</span> 
+                                        <span class="badge badge-warning" *ngIf ="a.invoice=== 'unpaid'">Unpaid</span> 
+                                        <span class="badge badge-primary" *ngIf ="a.invoice=== 'open'">Open</span>    
+                                        <span class="badge badge-warning" *ngIf ="a.invoice=== 'close'">close</span>                                                                            
+                                </td>
+                                <td>
+                                        <span class="badge badge-success" *ngIf ="a.status=== 'active'">Active</span>
+                                        <span class="badge badge-danger" *ngIf ="a.status=== 'terminated'">Terminated</span>
+                                        <span class="badge badge-success" *ngIf ="a.status=== 'close'">Close</span>                                                                               
+                                </td>                                
+                                <td>{{a.date}}</td> 
+                                <td>{{a.time}}</td>                                
+                                <!-- <td>
+                                    <span class="badge badge-warning">20%</span>
+                                </td> -->
+                                <td>                
+                                    <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="onDelete(a.id)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                            <!-- <div *ngIf="!appoint">
+                                <div class="spinner-grow text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        <div class="spinner-grow text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-success" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>
+                              </div>   -->
+                        </tbody>
+                    </table>
+                    <!-- <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>   -->
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div> 
+  <!-- Default Size -->
+  <div class="modal fade" id="MakeAppointment" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title h4" id="myLargeModalLabel">Make Appointment</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmitApp(fm)" #fm="ngForm"> 
+        <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                            <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Select Department</label>
+                                </div>
+                        <select class="custom-select"  id="inputGroupSelect01"  ngModel name="dept_id">
+                            <option *ngFor="let d of department" [value]="d.id">{{d.name}}</option>                                       
+                        </select>   
+                    </div>
+                </div>                                                                                                                                                          
+            </div>
+        </div> 
+        <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                            <div class="input-group-prepend">
+                                    <label class="input-group-text" for="inputGroupSelect01">Select Patient</label>
+                                </div>
+                            <select class="custom-select"  id="inputGroupSelect01" aria-placeholder="Dkwdjo" ngModel name="patient_id">
+                                <option *ngFor="let p of pat" [value]="p.id">{{p.name + " " + p.othername}}</option>                                       
+                            </select>             
+                      </div>
+                </div>             
+            </div>  
+        </div>      
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-round btn-primary">Appoint</button>
+            <!-- <button type="button" class="btn btn-round btn-default" data-toggle="modal">Close</button> -->
+        </div>
+        </form>
+    </div>
+  </div>
+  </div>
+  
+  
+  <!-- Default Size -->
+  <div class="modal fade" id="EditDepartments" tabindex="1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Update Item Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onUpdate(ed)" #ed="ngForm"> 
+            <div class="modal-body">             
+                <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [value]="catName" placeholder="Manufacturer Name" ngModel name="name" required>
+                                <input type="hidden" [value]="manufid" ngModel name="id">
+                              </div>
+                        </div>             
+                    </div>
+                </div>
+                
+                <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <select class="form-control show-tick" ngModel name="status">
+                                    <option active value="active">Active</option>
+                                    <option value="suspend">Suspend</option>                                
+                                </select>                  
+                              </div>
+                        </div>             
+                    </div>
+                </div>      
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-round btn-primary">Update</button>
+                <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+  

@@ -1,0 +1,93 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h2>Treatment</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['doctor_log']}}]">Appointment Log</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Treatment</li>
+                        </ol>
+                    </nav>
+                </div>            
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card social">
+                    <div class="profile-header d-flex justify-content-between justify-content-center">
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <img src="http://localhost/buth-pharm/backend/public/upload/uploads/{{patient?.patient_image}}" class="rounded" alt="Patient_Photo">
+                            </div>
+                           <div class="details">
+                                  <h4 class="mb-0">Card Number : {{patient?.card_number}}</h4>
+                                  <span class="text-light"><b>Name : </b>{{patient?.name + " " + patient?.othername}}</span>
+                                  <div><b>Mobile: </b>{{patient?.mobile_number}}</div>
+                            </div>                                 
+                        </div>
+                        <div class="col text-center">
+                          <div class="m-0"><b>Customer Category: </b>{{patient?.category_name}}</div>
+                          
+                          <div class="m-0"><b>Percentage: </b>{{patient?.pacentage_value}}%</div>
+                         
+                        </div>
+                        
+                    </div>
+                </div>                    
+            </div>
+        </div>
+  
+  
+      <div class="row clearfix">
+          <div class="col-12">
+                  <div class="card">
+                      <form class="form-auth-small m-t-20" role="form"  #data="ngForm"> 
+                      <div class="header">
+                          <h2>Treatment</h2>
+                      </div>
+                      <div class="body">
+                          <div class="row clearfix">
+                                                           
+                              <div class="col-lg-12 col-md-12">
+                                  <hr>
+  
+                                  <div class="row">
+                                  
+                                     
+                                      <div class="col-lg-4 col-md-4 col-sm-6">
+                                          <label>Day(s)</label>
+                                          <div class="form-group">
+                                              <input type="number" class="form-control"  placeholder="Input Number of Day(s)">
+                                          </div>
+                                      </div> 
+                                      <div class="col-lg-4 col-md-4 col-sm-6">
+                                          <label>Dispensable Period</label>
+                                          <div class="form-group">
+                                              <input type="number" class="form-control" placeholder="0" ngModel name="dispense">
+                                          </div>
+                                      </div> 
+                                      
+                                      <div class="col-lg-4 col-md-4 col-sm-6">
+                                          <label>Dispensable Period</label>
+                                          <div class="form-group">
+                                              <input type="number" class="form-control" placeholder="0" ngModel name="dispense">
+                                          </div>
+                                      </div> 
+                                  </div>
+                             
+                                                                
+                              </div>
+                          </div>
+                         
+                      </div>
+                      </form>
+                  </div>
+          </div>
+      </div>
+  
+    
+  </div>
+  

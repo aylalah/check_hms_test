@@ -1,0 +1,301 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h1>Patients List</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/home']">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]">Appointments Log</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Patient</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <!-- <button class="btn btn-sm btn-primary" title="" data-toggle="modal" data-target="#AddPatients">Add Patient</button> -->
+                    <!-- <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create Campaign</a>
+                    <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a> -->
+                </div>
+            </div>
+        </div>
+        
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <!-- <div class="header">
+                        <h2>Basic Table <small>Basic example without any additional modification classes</small></h2>
+                        <ul class="header-dropdown dropdown">
+                            
+                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another Action</a></li>
+                                    <li><a href="javascript:void(0);">Something else</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div> -->
+                    <div class="body">
+                        <div class="table-responsive">
+                            <table class="table table-hover js-basic-example dataTable table-custom spacing5">
+                                <thead>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Card Number</th>
+                                        <th>Gender</th>
+                                        <!-- <th>Date of Birth</th> -->
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <!-- <tfoot>
+                                    <tr>
+                                        <th>S/N</th>
+                                        <th>Image</th>
+                                        <th>Name</th>
+                                        <th>Card Number</th>
+                                        <th>Gender</th>
+                                        <th>Date of Birth</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot> -->
+                                <tbody>
+                                    <tr  *ngFor="let p of pat | paginate: {itemsPerPage:100, currentPage: p}; let r = index">
+                                        <td> {{r+1}}</td>
+                                        <td class="w60">
+                                                <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{p.patient_image}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 rounded">
+                                            </td>
+                                        <td>
+                                            <a href="javascript:void(0);" title="" [routerLink]="['/Admin', {outlets: {side: ['patient_profile',p.id]}}]">{{p.name}}</a>
+                                            <p class="mb-0">{{p.othername}}</p>
+                                        </td>
+                                        <td class="text-center">{{p.card_number}}</td>  
+                                        <td>{{p.gender}}</td>   
+                                        <!-- <td>{{p.d_o_b}}</td> -->
+                                        <td>
+                                                <span class="badge badge-success" *ngIf ="p.status=== 'active'">Active</span>
+                                                  <span class="badge badge-danger" *ngIf ="p.status=== 'suspend'">Suspend</span>                                   
+                                            </td> 
+                                        <td>
+                                            <a href="javascript:void(0);" class="btn btn-primary btn-round" (click)= "appointment(p.id)" data-toggle="modal" data-target=".new-project-modal">Make Appointment</a>
+                                        </td>
+                                    </tr>  
+                                    <div *ngIf="!pat">
+                                        <div class="spinner-grow text-primary" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>
+                                <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+                                      </div> 
+                                    <!-- <button type="button" class="btn btn-round btn-primary" data-toggle="modal" data-target=".new-project-modal">Setup New Project</button> -->
+<!-- Setup New Project -->
+                            <div class="modal fade new-project-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Department</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmitApp(ap)" #ap="ngForm"> 
+                                        <div class="modal-body">
+                                                <div class="input-group-prepend">
+                                                        <label class="input-group-text" for="inputGroupSelect01">Select Department</label>
+                                                    </div> 
+                                                    <select class="custom-select"  id="inputGroupSelect01"  ngModel name="dept_id">
+                                                        <option *ngFor="let d of department" [value]="d.id">{{d.name}}</option>                                       
+                                                    </select>                                           
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-round btn-default" data-dismiss="modal">Close</button>
+                                            <button type="submit" class="btn btn-round btn-success" >Appoint</button>
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>                                
+                                </tbody>
+                            </table>
+                            <!-- <button class="btn btn-danger" (click)="prev(d.last_page)">Prev</button>
+                            <button class="btn btn-success" (click)="next(d.)">Next</button> -->
+                            <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>  
+                        </div>
+                    </div>
+                </div>
+            </div>          
+        </div>
+    </div>
+</div>
+
+
+
+<!-- Default Size -->
+<div class="modal fade" id="AddPatients" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title h4" id="myLargeModalLabel">Add Patient</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                  </button>
+              </div>
+              <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmit(fm)" #fm="ngForm"> 
+              <div class="modal-body">             
+                  <div class="row clearfix">
+                      <div class="col-md-8">
+                          <div class="form-group">
+                              <input type="text" class="form-control" placeholder=" Patient Firstname" ngModel name="name" required>
+                          </div>
+                      </div>             
+                  </div>
+              </div>
+              <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Patient Other Name" ngModel name="othername" required>
+                        </div>
+                    </div>             
+                </div>
+            </div>
+            <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                    <label class="fancy-radio custom-color-green"><input name="gender" ngModel name="gender" value="Male" type="radio" checked><span><i></i>Male</span></label>
+                                    <label class="fancy-radio custom-color-green"><input name="gender" ngModel name="gender" value="Female" type="radio"><span><i></i>Female</span></label>
+                              </div>
+                        </div>             
+                    </div>
+                </div>
+            <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="email" class="form-control" placeholder="Patient Email Address if available" ngModel name="email">
+                            </div>
+                        </div>             
+                    </div>
+                </div>
+            <div class="modal-body">             
+              <div class="row clearfix">
+                  <div class="col-md-8">
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Patient Contact Number" ngModel name="mobile_number" required>
+                      </div>
+                  </div>             
+              </div>
+          </div>
+          <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Patient Address" ngModel name="address" required>
+                    </div>
+                </div>             
+            </div>
+        </div>
+        <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Patient City" ngModel name="city" required>
+                        </div>
+                    </div>             
+                </div>
+            </div>
+            <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="Patient State" ngModel name="state" required>
+                            </div>
+                        </div>             
+                    </div>
+                </div>
+                <div class="modal-body">             
+                        <div class="row clearfix">
+                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" placeholder="Patient Country" ngModel name="country" required>
+                                </div>
+                            </div>              
+                        </div>
+                    </div>
+                    <div class="modal-body">             
+                            <div class="row clearfix">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                            <input type="date" class="form-control" placeholder="Patient Date of Birth" ngModel name="d_o_b" required>
+                                        </div>
+                                </div>              
+                            </div>
+                        </div>
+                    <div class="modal-body">             
+                            <div class="row clearfix">
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Patient Card Number" ngModel name="card_number" required>
+                                    </div>
+                                </div>             
+                            </div>
+                        </div>
+                        <div class="modal-body">             
+                                <div class="row clearfix">
+                                    <div class="col-md-8">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Patient NHIS" ngModel name="n_h_i_s" required>
+                                        </div>
+                                    </div>             
+                                </div>
+                            </div>
+                            <div class="modal-body">             
+                                    <div class="row clearfix">
+                                        <div class="col-md-8">
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" placeholder="Patient Allergy" ngModel name="allergy" required>
+                                            </div>
+                                        </div>             
+                                    </div>
+                                </div>
+                                <div class="modal-body">             
+                                        <div class="row clearfix">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="About Patient" ngModel name="about" required>
+                                                </div>
+                                            </div>             
+                                        </div>
+                                    </div>
+              <div class="modal-body">             
+                  <div class="row clearfix">
+                      <div class="col-md-8">
+                          <div class="form-group">
+                              <select class="form-control show-tick" ngModel name="status">
+                                  <option value="">-- Select Status --</option>
+                                  <option value="active">Active</option>
+                                  <option value="suspend">Suspend</option>                                
+                              </select>                  
+                            </div>
+                      </div>             
+                  </div>
+              </div>      
+              <div class="modal-footer">
+                  <button type="submit" class="btn btn-round btn-primary">Add<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+                  <button type="button" class="btn btn-round btn-default" data-toggle="modal">Close</button>
+              </div>
+              </form>
+          </div>
+        </div>
+        </div>

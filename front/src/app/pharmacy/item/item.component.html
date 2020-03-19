@@ -1,0 +1,227 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h2>Item Profile</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">All Items</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Item Profile</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-primary btn-round" title="">Item Profile</a>
+                </div> -->
+            </div>
+        </div>
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card social">
+                    <div class="profile-header d-flex justify-content-between justify-content-center">
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{typeimg}}" class="rounded" alt="">
+                            </div>
+                            <div class="details">
+                                <h5 class="mb-0">Item Type:</h5>
+                                <span class="text-light">{{resitem.type_name }}</span>
+                                <!-- <p class="mb-0"><span>Posts: <strong>321</strong></span> <span>Followers: <strong>4,230</strong></span> <span>Following: <strong>560</strong></span></p> -->
+                            </div>                                
+                        </div>
+                        <div>
+                            <!-- <button class="btn btn-primary btn-sm">Add to Cart</button> -->
+                             <!-- <button class="btn btn-success btn-sm">Message</button> -->
+                        </div> 
+                    </div>
+                </div>                    
+            </div>
+
+            <div class="col-xl-4 col-lg-4 col-md-5">
+                <div class="card">
+                    <div class="header">
+                        <h2>Info</h2>
+                        <ul class="header-dropdown dropdown">                                
+                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another Action</a></li>
+                                    <li><a href="javascript:void(0);">Something else</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <a class="card" href="javascript:void(0)">
+                            <div class="body text-center">
+                                <img class="img-thumbnail rounded-circle" src="http://{{ imgLink}}/backend/public/upload/uploads/{{itemimg}}" alt="">
+                                <h6 class="mt-3">{{resitem.generic_name}}</h6>
+                                <div class="text-center text-muted">{{resitem.manuf_name}}</div>
+                            </div>
+                            <div class="card-footer text-center">
+                                <div class="row clearfix">
+                                    <div class="col-md-6">
+                                        <label>Purchasing Price</label><br>
+                                        <i class="fa fa-money text-danger font-22"></i>
+                                        <div><span class="text-muted">{{resitem.purchasing_price}}</span></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label>Selling Price</label><br>
+                                        <i class="fa fa-money font-22"></i>
+                                        <div><span class="text-muted">{{resitem.purchasing_price*resitem.markup_price}}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                        <small class="text-muted">Class: </small>
+                        <p>{{resitem.cat_name}}</p>                            
+                        <hr>
+                        <!-- <small class="text-muted">Unit: </small>
+                        <p class="mb-0"><span>Name: <strong>{{resitem.unit_name}}</strong></span></p>
+                        <p class="mb-0"><span>Box Size: <strong>{{resitem.box_size}}</strong></span></p>
+                        <p class="mb-0"><span>Unit Value: <strong>{{resitem.value}}</strong></span></p>
+                        <hr> -->
+                        <small class="text-muted">Type: </small>
+                        <p class="m-b-0">{{resitem.type_name}}</p>
+                        <hr>
+                        <small class="text-muted">Brand/Manufacturer Details: </small>
+                        <p class="mb-0"><span>Brand Name: <strong>{{resitem.manuf_name}}</strong></span></p>
+                        <p class="mb-0"><span>Address: <strong>{{resitem.address}}</strong></span></p>
+                        <p class="mb-0"><span>Contact Number: <strong>{{resitem.contact_number}}</strong></span></p>      
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-8 col-lg-8 col-md-7">
+                <div class="card">
+                    <div class="header">
+                        <h2>Basic Information</h2>
+                        <ul class="header-dropdown dropdown">                                
+                            <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                            <li class="dropdown">
+                                <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="javascript:void(0);">Action</a></li>
+                                    <li><a href="javascript:void(0);">Another Action</a></li>
+                                    <li><a href="javascript:void(0);">Something else</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="body">
+                        <form [formGroup]="submissionForm" >
+                        <div class="row clearfix">
+                            <div class="col-lg-12 col-md-12">
+                                <label>Generic Name</label>
+                                <div class="form-group">                                                
+                                    <input type="text" class="form-control" formControlName="generic_name">
+                                </div>
+                            </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label>Brand</label>
+                                    <div class="form-group">                                                
+                                        <input type="text" class="form-control" formControlName="manuf_name" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label>Change Brand</label>
+                                    <select class="form-control" formControlName="manufacturer_id">
+                                        <option value="">-- Choose Brand --</option>
+                                        <option *ngFor="let m of manuf" [value]="m.id">{{m.name}}</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label>Class</label>
+                                    <div class="form-group">                                                
+                                        <input type="text" class="form-control" formControlName="cat_name" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label>Change Class</label>
+                                    <select class="form-control" formControlName="item_category_id">
+                                        <option value="">-- Choose Class --</option>
+                                        <option  *ngFor="let c of cat" [value]="c.id">{{c.cat_name}}</option>                                      
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label>Type</label>
+                                    <div class="form-group">                                                
+                                        <input type="text" class="form-control" formControlName="type_name" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-12">
+                                    <label>Change Type</label>
+                                    <select class="form-control"formControlName="item_type_id">
+                                        <option value="">-- Choose Type --</option>
+                                        <option *ngFor="let t of typ" [value]="t.id">{{t.type_name}}</option>                                      
+                                    </select>
+                                </div>
+                            <!-- </div> -->
+                            <div class="col-lg-4 col-md-12">
+                                <label>Purchasing Price</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"  formControlName="purchasing_price">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <label>Markup price</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" formControlName="markup_price" placeholder="Markup price">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-12">
+                                <label>General Selling Price</label>
+                                <div class="form-group">                                                
+                                    <input type="text" class="form-control"  formControlName="selling_price">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <label>GORAH Price</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"  formControlName="price_2">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <label>NHIS Price</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control"  formControlName="price_3">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <label>Manufacture date</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="date" class="form-control" formControlName="manufacture_date" placeholder="Manufacture date">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-12">
+                                <label>Expiring date</label>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                    
+                                        <input type="date" class="form-control" formControlName="expiring_date" placeholder="Expiring date">
+                                    </div>
+                                </div>
+                            </div>                                
+                            <div class="col-lg-4 col-md-12">
+                                <div class="form-group">
+                              <label>Change Item Image</label><br>
+                              <input type="file" name="file"  (change)="uploadFile($event)">
+                              </div>
+                              </div>
+                        </div>
+                        <button type="button" (click)="onSubmitItem()" class="btn btn-round btn-primary">Update</button> &nbsp;&nbsp;
+                        <button type="button" class="btn btn-round btn-default">Cancel</button>
+                    </form>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

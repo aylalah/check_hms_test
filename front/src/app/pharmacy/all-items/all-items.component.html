@@ -1,0 +1,933 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h2>Item List of {{name}}</h2>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Dashboard &nbsp;</a></li>
+                        <span *ngIf ="4004 > uPos" > 
+                            <span *ngIf = "uDept == '1' || uDept == '10'">
+                                <li class="breadcrumb-item" *ngFor="let br of bran" (click) ="allItem($event)"><a href="#" [routerLink]="">{{br.name}}</a></li>
+                            </span>
+                        </span>
+                        <span *ngIf ="uPos > '3003' && uDept == '1'">
+                            / <li *ngFor="let br of bran" (click) ="allItem($event)"><a *ngIf ="br.id == uBranch" href="#" [routerLink]="">{{br.name}}</a></li>
+                        </span>
+                        <li class="breadcrumb-item active" aria-current="page">&nbsp;/ All Items</li>
+                        </ol>
+                    </nav>
+                </div> 
+            </div>
+        </div>
+
+
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center" *ngIf="items">
+                            <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-shopping-cart"></i></div>
+                            <div class="ml-4">
+                                <span>Total Sales</span>
+                                <h4 class="mb-0 font-weight-medium">{{soldItem}}</h4>
+                      
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center" *ngIf="!items">
+                        <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center" *ngIf="items">
+                            <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-credit-card"></i></div>
+                            <div class="ml-4">
+                                <span>Total Added</span>
+                                <h4 class="mb-0 font-weight-medium">{{addedItem}}</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="!items">
+                            <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center" *ngIf="items">
+                            <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-users"></i></div>
+                            <div class="ml-4">
+                                <span>Total Transfer</span>
+                                <h4 class="mb-0 font-weight-medium">{{transferredItem}}</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="!items">
+                            <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center" *ngIf="items">
+                            <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-life-ring"></i></div>
+                            <div class="ml-4">
+                                <span>Total Variance</span>
+                                <h4 class="mb-0 font-weight-medium">{{varianced}}</h4>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center" *ngIf="!items">
+                            <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body top_counter" *ngIf="items">
+                        <div class="icon bg-warning text-white"><i class="fa fa-building"></i> </div>
+                        <div class="content">
+                            <span>Open Balance</span>
+                            <h5 class="number mb-0">{{openBal}}</h5>
+                        </div>
+                    </div> 
+                    <div class="d-flex align-items-center" *ngIf="!items">
+                        <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>                       
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body top_counter" *ngIf="items">
+                        <div class="icon bg-success text-white"><i class="fa fa-area-chart"></i> </div>
+                        <div class="content">
+                            <span>Close Balance</span>
+                            <h5 class="number mb-0">{{totala}}</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center" *ngIf="!items">
+                        <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body top_counter" *ngIf="items">
+                        <div class="icon bg-info text-white"><i class="fa fa-shopping-cart"></i> </div>
+                        <div class="content">                            
+                            <span>Physical Balance</span>
+                            <h5 class="number mb-0">{{physBal}}</h5>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center" *ngIf="!items">
+                        <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body top_counter" *ngIf="items">
+                        <div class="icon bg-danger text-white"><i class="fa fa-tag"></i> </div>
+                        <div class="content">                            
+                            <span>Daily Revenue</span>
+                            <h4 class="mb-0 font-weight-medium text-danger">{{itemAmount | currency:'NGN':'symbol-narrow'}}</h4>
+                        </div>
+                    </div>
+                    <div class="d-flex align-items-center" *ngIf="!items">
+                        <div class="spinner-grow text-primary" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- <div class="row clearfix">
+            <div class="col-lg-2 col-md-6"></div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card bg-success">
+                    <div class="body text-white">
+                        <div class="card-value float-right">58%</div>
+                        <h3 class="mb-1">6251</h3>
+                        <div>New Orders</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="card bg-success">
+                    <div class="body text-white">
+                        <div class="card-value float-right">58%</div>
+                        <h3 class="mb-1">6251</h3>
+                        <div>New Orders</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-6"></div>
+        </div> -->
+
+        <div class="row clearfix">
+            <div class="col-lg-12">
+                <div class="card">
+                    <ul class="nav nav-tabs">
+                        <li class="nav-item"><a class="nav-link active show" data-toggle="tab" href="#items" (click)="get()">All Items</a></li>
+                        <ng-container *ngIf ="4004 > uPos">
+                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#add_item" (click)="get()">Add Item</a></li>
+                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#add_stock" (click)="get()">Add Stock</a></li>
+                            <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#trans_stock" (click)="get()">Transfer Stock</a></li>
+                        </ng-container>
+                        <li class="nav-item"><a class="nav-link " data-toggle="tab" href="#variance" (click)="get()">Variance</a></li>
+                    </ul>
+                    <div class="tab-content mt-0">
+                        <div class="tab-pane active show" id="items">
+                            <input [(ngModel)]="filterString" placeholder="Search..." (ngModelChange)="onFilterChange()" class="form-control"/>
+                            <div
+                            class="search-results"
+                            infiniteScroll
+                            [infiniteScrollDistance]="2"
+                            [infiniteScrollThrottle]="50"
+                            (scrolled)="onScroll()"
+                          >
+                            <div class="table-responsiv">
+
+                                <table class="table table-hover table-custom spacing8">
+                                    <thead>
+                                        <tr>
+                                            <th>S/N</th>
+                                            <th>Image</th>
+                                            <th class="w60">Item Name</th>
+                                            <th>Category</th>
+                                            <th>Opening Balance</th>
+                                            <th>Add</th>
+                                            <th>Transfer</th>
+                                            <th>Sales</th>
+                                            <th>Total Balance</th>
+                                            <th>Closeing Balance</th>
+                                            <th>Variance</th>
+                                            <th>Physical Balance</th>
+                                            <th>General Price</th>
+                                            <th>GORAH Price</th>
+                                            <th>NHIS Price</th>
+                                            <th>Total Price in Sumation</th>
+                                            <th>% Remaining</th>
+                                            <!-- <th>Role</th>
+                                            <th class="w100">Action</th> -->
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                  <tr *ngFor="let item of itemsitem;  let r = index">
+
+                                   <td>{{r+1}}</td>
+                                            <td class="width45">
+                                                <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{item.item_img}}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar Name">
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" [routerLink]="['/Admin', {outlets: {side: ['item_profile', item.item_id]}}]" title=""><h6 class="mb-0">{{item.generic_name}}</h6></a>
+                                                <span>{{item.name}}</span>
+                                            </td>                                            
+                                            <td><span class="badge badge-warning">{{item.cat_name}}</span></td>
+                                            <td class="text text-success">{{item.open_stock}}</td>
+                                            <td class="text text-primary">{{item.receive}}</td>
+                                            <td class="text text-warning">{{item.transfer}}</td>
+                                            <td class="text text-danger">{{item.sales}}</td>
+                                            <td class="text text-info">{{item.balance}}</td>
+                                            <td>
+                                                    <div class="avtar-pic w35 bg-success" data-toggle="tooltip" data-placement="top" title="Current in Stock" data-original-title="Avatar Name"><span>{{item.total_remain}}</span></div>
+                                            </td>
+                                            <td>
+                                                <div class="avtar-pic w35 bg-secondary" data-toggle="tooltip" data-placement="top" title="Damaged, Expire" data-original-title="Avatar Name"><span>{{item.variance}}</span></div>
+                                            </td>
+                                            <td>
+                                                <div class="avtar-pic w35 bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Avatar Name"><span>{{item.physical_balance}}</span></div>
+                                            </td>
+                                           <!--  <td> --> 
+                                                    <!-- <div class="progress progress-xxs progress-transparent custom-color-green mb-0 mt-0">  
+                                                        <div class="progress-bar" data-transitiongoal="88" aria-valuenow="88" style="width: 0%;">{{100 | currency:'NGN'}}</div>
+                                                    </div> -->
+                                                    <td>
+                                                        <span class="badge badge-success" *ngIf ="item.markup_price != '0'">{{item.purchasing_price*item.markup_price | currency:'NGN':'symbol-narrow'}}</span>
+                                                        <span class="badge badge-success" *ngIf ="item.markup_price == '0'">{{item.purchasing_price | currency:'NGN':'symbol-narrow'}}</span>    
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success">{{item.price_2 | currency:'NGN':'symbol-narrow'}}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success">{{item.price_3 | currency:'NGN':'symbol-narrow'}}</span>
+                                                    </td>
+                                                    <td>
+                                                        <span class="badge badge-success" *ngIf ="item.markup_price != '0'">{{item.purchasing_price*item.markup_price*item.total_remain | currency:'NGN':'symbol-narrow'}}</span>
+                                                        <span class="badge badge-success" *ngIf ="item.markup_price == '0'">{{item.purchasing_price*item.total_remain | currency:'NGN':'symbol-narrow'}}</span>
+                                                    </td>
+                                                <td>
+                                                    <span class="badge badge-success" *ngIf ="item.total_remain != '0'">{{math.round(100-(item.sales/item.total_remain*100))}}%</span>
+                                                    <span class="badge badge-success"  *ngIf ="item.total_remain == '0'">{{0}}%</span>
+                                                </td>
+
+                                        </tr> 
+                                         <div *ngIf="!itemsitem">
+                                            <div class="spinner-grow text-primary" role="status">
+                                            <span class="sr-only">Loading...</span>
+                                        </div>
+                                    <div class="spinner-grow text-secondary" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+                <div class="spinner-grow text-success" role="status">
+                <span class="sr-only">Loading...</span>
+                </div>
+                                          </div>                                                           
+
+                                    </tbody>
+                                </table>   
+                                <!-- <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls> -->
+                            </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="add_item">
+                            <div class="body mt-2">
+                                <div class="row clearfix">
+                                        <div class="col-sm-12">
+                                                <div class="card">
+                                                    <div class="body">
+                                                        <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onClickSubmit(itemdetail)" #itemdetail="ngForm">                                                                    
+                                                        
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Generic Name.</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <input type="text" class="form-control" id="inputEmail3" placeholder="Enter Generic Name." ngModel name="generic_name" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Select Brand</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <select class="form-control input-height" ngModel name="manufacturer_id">
+                                                                        <option value="">-- Select Brand --</option>
+                                                                        <option *ngFor="let m of manuf" [value]="m.id">{{m.name}}</option>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Select Type</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <select class="form-control input-height" ngModel name="item_type_id">
+                                                                        <option value="">-- Select Type --</option>
+                                                                        <option *ngFor="let t of type" [value]="t.id">{{t.type_name}}</option>                                      
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Select Class</label>
+                                                                    <div class="col-md-6 col-sm-10">
+                                                                        <select class="form-control" ngModel name="item_category_id">
+                                                                            <option value="">-- Select Class --</option>
+                                                                            <option  *ngFor="let c of cat" [value]="c.id">{{c.cat_name}}</option>                                      
+                                                                        </select>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                        <label class="col-sm-2 col-form-label">Select Unit</label>
+                                                                        <div class="col-md-6 col-sm-10">
+                                                                            <select class="form-control" ngModel name="item_unit_id">
+                                                                                <option value="">-- Select Unit --</option>
+                                                                                <option *ngFor="let u of unit" [value]="u.id">{{u.name}}</option>                                      
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="form-group row">
+                                                                            <label class="col-sm-2 col-form-label">Select Shelve</label>
+                                                                            <div class="col-md-6 col-sm-10">
+                                                                                <select class="form-control" ngModel name="shelve_id">
+                                                                                    <option value="">-- Select Shelve --</option>
+                                                                                    <option *ngFor="let s of shelve" [value]="s.id">{{s.name}} Point {{s.point}}</option>                                      
+                                                                                </select>
+                                                                            </div>
+                                                                        </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Cost Price</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <input type="text" class="form-control" id="inputEmail3"(blur)="sellPrice($event)" placeholder="Enter Cost Price" ngModel name="purchasing_price" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Mark Up</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <input type="text" class="form-control" id="inputEmail3" (keyup)="sellPrice2($event)" placeholder="Enter Mark Up Price" ngModel name="markup_price" required>
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">General Selling Price</label>
+                                                                    <div class="col-md-6 col-sm-10">
+                                                                        <input type="text" class="form-control" id="inputEmail3" [(ngModel)]="selling_price"  ngModel name="selling_price"disabled="true">
+                                                                        <input type="hidden" class="form-control" id="inputEmail3" [(ngModel)]="selling_price"  ngModel name="selling_price">
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Price 2 (GORAH Scheme)</label>
+                                                                    <div class="col-md-6 col-sm-10">
+                                                                        <input type="text" class="form-control" id="inputEmail3" [(ngModel)]="price_2"  ngModel name="price_2" placeholder="Enter Price two" required>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group row">
+                                                                    <label class="col-sm-2 col-form-label">Price 3 (NHIS Scheme)</label>
+                                                                    <div class="col-md-6 col-sm-10">
+                                                                        <input type="text" class="form-control" id="inputEmail3" [(ngModel)]="price_3"  ngModel name="price_3" placeholder="Enter Price three" required>
+                                                                    </div>
+                                                                </div>
+                                                           /
+                                                                <!-- <div class="form-group row">
+                                                                        <label class="col-sm-2 col-form-label">Discount</label>
+                                                                        <div class="col-md-6 col-sm-10">
+                                                                            <select class="form-control input-height" ngModel name="discount_id">
+                                                                                <option value="">-- Select Discount --</option>
+                                                                                <option [value]="0">0</option>
+                                                                                <option [value]="10">10</option>
+                                                                                <option [value]="20">20</option>
+                                                                                
+                                                                            </select>
+                                                                        </div>
+                                                                    </div> -->
+                                                                    <div class="form-group row">
+                                                                        <label class="col-sm-2 col-form-label">Status</label>
+                                                                        <div class="col-md-6 col-sm-10">
+                                                                            <select class="form-control input-height" ngModel name="status">
+                                                                                <option value="">-- Select Status--</option>
+                                                                                <option value='active'>Active</option>
+                                                                                <option value='inactive'>Inactive</option>
+                                                                                
+                                                                            </select>
+                                                                        </div>
+                                                                    </div>
+                                                            <!-- <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Manufactured Date</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <input type="text" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Manufactured Date" ngModel name="manufacture_date">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Expiring Date</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <input type="text" data-provide="datepicker" data-date-autoclose="true" class="form-control" placeholder="Expiring Date" ngModel name="expiring_date">
+                                                                </div>
+                                                            </div> -->
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label">Item Image (if available)</label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                        <input type="file" name="file"  (change)="uploadFile($event)">
+                                                                </div>
+                                                            </div>
+                                                            <div class="form-group row">
+                                                                <label class="col-sm-2 col-form-label"></label>
+                                                                <div class="col-md-6 col-sm-10">
+                                                                    <button type="submit" name="form1" class="btn btn-primary">Submit</button>
+                                                                    <button type="button" class="btn btn-default">Cancel</button>
+                                                                </div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="add_stock">
+                            <div class="body mt-2">
+                                <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmitAdd(fm)" #fm="ngForm"> 
+                                    <div class="col-12">
+                                        <h6>Stock Input</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/N</th>
+                                                        <th>Item</th>
+                                                        <th>Brand</th>        
+                                                        <th>Instock</th>                                                       
+                                                        <th>Qty</th>
+                                                        <th>New Stock</th>
+                                                        <td>Add Row</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let added of itemAdded | paginate: {itemsPerPage:100, currentPage: p}; let r = index">
+                                                        <td>{{r+1}}</td>
+                                                        <td><img src="http://{{ imgLink}}/backend/public/upload/uploads/{{added.item_img}}" alt="Avatar" class="w30 rounded-circle mr-2"> <span>{{added.generic_name}}</span></td>
+                                                        <td><span class="badge badge-warning">{{added.manuf_name}}</span></td>   
+                                                        <td><span class="badge badge-warning">{{added.instock}}</span></td>                                                
+                                                        <td><span class="text-success">{{added.quantity}}</span></td>
+                                                        <td><span class="badge badge-warning">{{added.newstock}}</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditAdd" (click)="editAdd(added.aID)"><i class="fa fa-pencil"></i></button>
+                                                            <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteAdd(added.aID)"><i class="fa fa-trash-o"></i></button>
+                                                        </td>
+                                                    </tr> 
+                                                    <br>
+
+
+                                              
+                                                <div class="modal fade" id="EditAdd" tabindex="1" role="dialog">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title h4" id="myLargeModalLabel">Edit Added Item</h5>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                                </button>
+                                                            </div>
+                                                            <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onUpdateAdd(add)" #add="ngForm">
+                                                            <div class="modal-body">             
+                                                                <div class="row clearfix">
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group">   
+                                                                            <input type="text" class="form-control" placeholder="" [(ngModel)]="addName" ngModel name="addName" disabled="true">           
+                                                                        </div>
+                                                                    </div>             
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-body">             
+                                                                <div class="modal-body">             
+                                                                    <div class="row clearfix">
+                                                                        <div class="col-md-8">
+                                                                            <div class="form-group">
+                                                                                <input type="text" class="form-control" placeholder="" [(ngModel)]="addQuantity" ngModel name="addQuantity">
+                                                                            </div>
+                                                                        </div>             
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-round btn-primary">Update</button>
+                                                                <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+                                                            </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-group">
+                                                                <select class="form-control" (change)="onSelectItem($event)" ngModel name="item">
+                                                                <option value="">Select...</option>
+                                                                <option  *ngFor="let itdet of itemDet" value="{{itdet.id}}" [ngValue]="itdet.id">{{itdet.generic_name}} {{itdet.manuf_name}}</option>
+                                                                </select> 
+                                                            </div>
+                                                        </td>
+                                                        <!-- <td>                                                            
+                                                            <div class="form-group">
+                                                                <select ngModel name="" class="custom-select" id="inputGroupSelect02" (change)="onSelect($event)" formControlName="cityName">
+                                                                        <option  *ngFor="let br of bran" [ngValue]="br.id">{{br.name}}</option>      
+                                                                    </select> 
+                                                            </div>                                                            
+                                                        </td> -->
+                                                        <td><span class="badge badge-warning">{{total_remain}}</span></td>
+                                                        <td>                                                           
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" placeholder="Input Quantity" ngModel name="quantity">
+                                                            </div>                                                        
+                                                        </td><!-- 
+                                                        <td></td>
+                                                        <td></td> -->
+                                                        <td><button class="btn btn-primary btn-block" type="submit">Save</button></td>
+                                                    </tr>                                                    
+                                                </tbody>
+                                            </table>
+                                            <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>  
+
+                                        </div>
+                                        <button type="button" (click)="onSaveAdd()" class="btn btn-primary">Add</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+
+                        <div class="tab-pane" id="trans_stock">
+                            <div class="body mt-2"> 
+                                <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmitTrans(trans)" #trans="ngForm">      
+                                    <div class="col-12">
+                                        <h6>Stock Input</h6>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/N</th>
+                                                        <th>Item</th>                                                       
+                                                        <th>From Branch</th>                                                       
+                                                        <th>Instock</th>
+                                                        <th>Qty Transfer</th> 
+                                                        <th>To Branch</th>
+                                                        <th>Instock</th>
+                                                        <th>New Stock</th>                                                                                                              
+                                                        <td>Action</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let trans of itemTransferred | paginate: {itemsPerPage:10, currentPage: p}; let r = index">
+                                                        <td>{{r+1}}</td>
+                                                        <td><img src="http://{{ imgLink}}/backend/public/upload/uploads/{{trans.item_img}}" alt="Avatar" class="w30 rounded-circle mr-2"> <span>{{trans.generic_name}}</span></td>
+                                                        <td><h6 class="badge badge-success">{{trans.quantity_from}}</h6></td>
+                                                        <td><span class="badge badge-warning">{{trans.remain_from}}</span></td>
+                                                        <td><span class="text-success">{{trans.total_quantity}}</span></td>     
+                                                        <td><h6 class="badge badge-success">{{trans.quantity_to}}</h6></td>
+                                                        <td><span class="badge badge-warning">{{trans.remain_to}}</span></td>
+                                                        <td><span class="badge badge-warning">{{trans.newstock}}</span></td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTrans" (click)="editTrans(trans.tID)"><i class="fa fa-pencil"></i></button>
+                                                            <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(trans.tID)"><i class="fa fa-trash-o"></i></button>
+                                                        </td>
+                                                    </tr> 
+                                                    <br>
+
+
+                                                    <div class="modal fade" id="EditTrans" tabindex="1" role="dialog">
+                                                        <div class="modal-dialog" role="document">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h5 class="modal-title h4" id="myLargeModalLabel">Edit Transferred Item</h5>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">×</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onUpdate(edttrans)" #edttrans="ngForm"> 
+                                                                <div class="modal-body">             
+                                                                    <div class="modal-body">             
+                                                                        <div class="row clearfix">
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group">
+                                                                                    <input type="text" class="form-control" placeholder="From" [(ngModel)]="transFrom" ngModel name="transFrom" disabled="true">
+                                                                                    
+                                                                                </div>
+                                                                            </div>             
+                                                                        </div>
+                                                                    </div>
+                                                                <div class="modal-body">             
+                                                                <div class="row clearfix">
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group">
+                                                                            <input type="text" class="form-control" placeholder="To" [(ngModel)]="transTo" ngModel name="transTo"  disabled="true">
+                                                                            <input type="hidden" [(ngModel)]="transTo" ngModel name="transToo">
+                                                                        </div>
+                                                                    </div>             
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal-body">             
+                                                                <div class="row clearfix">
+                                                                    <div class="col-md-8">
+                                                                        <div class="form-group">
+                                                                            <div class="form-group">
+                                                                                <input type="textarea" class="form-control" placeholder="To" [(ngModel)]="transQuantity" ngModel name="transQuantity">
+                                                                            </div>                
+                                                                        </div>
+                                                                    </div>             
+                                                                </div>
+                                                            </div>
+                                                           
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" class="btn btn-round btn-primary">Update</button>
+                                                                    <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <div class="form-group"> 
+                                                                <select class="form-control input-height" (change)="onSelectItem2($event)" ngModel name="item2"> 
+                                                                    <option value="">Select Item...</option>     
+                                                                    <option  *ngFor="let itdet of itemDet" value="{{itdet.id}}" [ngValue]="itdet.id">{{itdet.generic_name+ ' '+ itdet.manuf_name}}</option>
+                                                                </select> 
+                                                            </div>
+                                                        
+                                                        </td>                                                  
+                                                        <td>                                                            
+                                                            <div class="form-group">
+                                                                <select class="form-control"  (change)="onSelectFrom($event)" ngModel name="from">
+                                                                        <option value="">-- From --</option>
+                                                                        <option  *ngFor="let br of bran" value="{{br.br_name}}" [ngValue]="br.br_name">{{br.name}}</option>                                       
+                                                                </select> 
+                                                            </div>                                                            
+                                                        </td>
+                                                        <td><span class="badge badge-warning">{{total_remain2}}</span></td>
+                                                        <td>                                                            
+                                                            <div class="form-group">
+                                                                <select class="form-control" (change)="onSelectTo($event)" ngModel name="to">                           
+                                                                        <option value="">To...</option>
+                                                                        <option  *ngFor="let br of bran" value="{{br.br_name}}" [ngValue]="br.br_name">{{br.name}}</option>                          
+                                                                    </select> 
+                                                            </div>                                                            
+                                                        </td>
+                                                        <td><span class="badge badge-warning">{{total_remain_To}}</span></td>
+                                                        <td>                                                           
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" (keyup)="restrict($event)" ngModel name="quantity" placeholder="Quantity *">
+
+                                                            </div>                                                        
+                                                        </td>
+                                                        
+                                                        <td><button class="btn btn-primary btn-block" type="submit">Save</button></td>
+                                                    </tr>                                                    
+                                                </tbody>
+                                            </table>
+                                            <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>
+
+                                        </div>
+                                        <button type="button" (click)="onSaveTrans()" class="btn btn-primary">Add</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                                    </div>
+                                    </form>
+                                </div>
+                            </div> 
+
+
+                            <div class="tab-pane" id="variance">
+                                <div class="body mt-2">
+                                    <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmitVariance(variance)" #variance="ngForm">        
+                                        <div class="col-12">
+                                            <h6>Variance Input</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>S/N</th>
+                                                            <th>Item</th>                                                            
+                                                            <th>Branch</th>                                                       
+                                                            <th>Instock</th>
+                                                            <th>Quantity</th> 
+                                                            <th>Physical</th>                                                             
+                                                            <th>Purpose</th>     
+                                                            <th>Details</th>                                                
+                                                            <td>Action</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr *ngFor="let vadded of varianceAdded; let v = index">
+                                                            <td>{{v+1}}</td>
+                                                            <td><img src="http://{{ imgLink}}/backend/public/upload/uploads/{{vadded.item_img}}" alt="Avatar" class="w30 rounded-circle mr-2"> <span>{{vadded.generic_name}}</span></td>
+                                                            <td><span class="badge badge-warning">{{vadded.manuf_name}}</span></td>   
+                                                            <td><span class="badge badge-warning">{{vadded.instock}}</span></td>                                                
+                                                            <td><span class="text-success">{{vadded.quantity}}</span></td>
+                                                            <td><span class="badge badge-warning">{{vadded.newstock}}</span></td>
+                                                            <td><span class="badge badge-warning">{{vadded.purpose}}</span></td>
+                                                            <td><span class="badge badge-warning">{{vadded.detail}}</span></td>
+                                                            <!-- <td><span class="badge badge-primary">100%</span></td> -->
+                                                            <td>
+                                                                <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditVariance" (click)="editVariance(vadded.vID)"><i class="fa fa-pencil"></i></button>
+                                                                <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteVariance(vadded.vID)"><i class="fa fa-trash-o"></i></button>
+                                                            </td>
+                                                        </tr> 
+                                                        <br>
+
+                                                        <div class="modal fade" id="EditVariance" tabindex="1" role="dialog">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title h4" id="myLargeModalLabel">Edit Variance Item</h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">×</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onUpdateVariance(edtvar)" #edtvar="ngForm"> 
+                                                                        <div class="modal-body">             
+                                                                            <div class="modal-body">             
+                                                                                <div class="row clearfix">
+                                                                                    <div class="col-md-8">
+                                                                                        <div class="form-group">
+                                                                                            <input type="text" class="form-control" placeholder="Item" [(ngModel)]="varName" ngModel name="varName" disabled="true">
+                                                                                            
+                                                                                        </div>
+                                                                                    </div>             
+                                                                                </div>
+                                                                            </div>
+                                                                        <div class="modal-body">             
+                                                                        <div class="row clearfix">
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group">
+                                                                                    <input type="text" class="form-control" placeholder="To" [(ngModel)]="varQuantity" ngModel name="varQuantity">
+                                                                                </div>
+                                                                            </div>             
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-body">             
+                                                                        <div class="row clearfix">
+                                                                            <div class="col-md-8">
+                                                                                <div class="form-group">
+                                                                                    <div class="form-group">
+                                                                                        <input type="textarea" class="form-control" placeholder="To" [(ngModel)]="varDetails" ngModel name="varDetails">
+                                                                                    </div>                
+                                                                                </div>
+                                                                            </div>             
+                                                                        </div>
+                                                                    </div>
+                                                                   
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="submit" class="btn btn-round btn-primary">Update</button>
+                                                                            <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+                                                                        </div>
+                                                                        </form>
+                                                                    </div>
+                                                                </div>
+                                                                </div>
+
+                                                        <tr>
+                                                                <td>
+                                                                    <div class="form-group"> 
+                                                                        <select class="form-control input-height" (change)="onSelectItem2($event)" ngModel name="item3"> 
+                                                                            <option value="">Select Item...</option>     
+                                                                            <option  *ngFor="let itdet of itemDet" value="{{itdet.id}}" [ngValue]="itdet.id">{{itdet.generic_name+ ' '+ itdet.manuf_name}}</option>
+                                                                        </select> 
+                                                                    </div>
+                                                                
+                                                                </td>                                                  
+                                                                <td>                                                            
+                                                                    <div class="form-group">
+                                                                        <select class="form-control" (change)="onSelectFrom($event)" ngModel name="from">
+                                                                                <option value="">-- From --</option>
+                                                                                <option  *ngFor="let br of bran" value="{{br.br_name}}" [ngValue]="br.br_name">{{br.name}}</option>                                       
+                                                                        </select> 
+                                                                    </div>                                                            
+                                                                </td>
+                                                                <td><span class="badge badge-warning">{{total_remain2}}</span></td>                                                    
+                                                                <td>                                                           
+                                                                    <div class="form-group">
+                                                                        <input type="text" class="form-control"  (keyup)="restrictVariance($event)" ngModel name="quantity" placeholder="Quantity *">        
+                                                                    </div>                                                        
+                                                                </td>
+                                                                <td><span class="badge badge-warning">{{total_remain_To}}</span></td>
+                                                                <td>                                                            
+                                                                    <div class="form-group">
+                                                                        <select class="form-control" ngModel name="purpose">
+                                                                                <option value="">-- Select Purpose --</option>
+                                                                                <option value="damaged">Damaged</option>
+                                                                                <option value="expire">Expire</option>
+                                                                                <option value="misplace">Misplace</option>
+                                                                                <option value="uncreadit">Uncredit</option>
+                                                                                <option value="not found">Not Found</option>       
+                                                                                <option value="others">Others</option>                                
+                                                                        </select> 
+                                                                    </div>                                                            
+                                                                </td>
+                                                                <td>                                                           
+                                                                    <div class="form-group">
+                                                                        <textarea row="4" class="form-control" ngModel name="detail" placeholder="Detail"></textarea>
+
+                                                                    </div>                                                        
+                                                                </td>
+                                                                <td><button class="btn btn-primary btn-block" type="submit">Save</button></td>
+                                                            </tr>                                                    
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                                <button type="button" (click)="onSaveVariance()" class="btn btn-primary">Add</button>
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                                            </div>
+                                            </form>
+                                    </div>
+                                </div>
+
+
+                            <div class="tab-pane" id="stock_request">
+                                <div class="body mt-2">       
+                                        <div class="col-12">
+                                            <h6>Variance Input</h6>
+                                            <div class="table-responsive">
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Item</th>
+                                                            <th>Unit</th>                                                                                                                  
+                                                            <th>Instock</th>                                                                                                                        
+                                                            <th>R Qty</th>     
+                                                            <th>Priority</th>                                                
+                                                            <td>Action</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td><img src="../assets/images/xs/avatar1.jpg" alt="Avatar" class="w30 rounded-circle mr-2"> <span>Isidore Dilao</span></td>
+                                                            <td><h6 class="mb-0">Unit</h6></td>                                                         
+                                                            <td><span class="text-danger">0</span></td>
+                                                            <td><span class="text-danger">290</span></td>                                                           
+                                                            <td><span class="badge badge-warning">High</span></td>                                                                                                                                                                        
+                                                            <td>
+                                                                <button type="button" class="btn btn-round btn-primary">Update</button> &nbsp;&nbsp;
+                                                                <button type="button" class="btn btn-round btn-default">Cancel</button>
+                                                            </td>
+                                                        </tr> 
+                                                        <br>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="form-group">
+                                                                    <select class="custom-select" id="inputGroupSelect02" >                            
+                                                                        <option ></option>                           
+                                                                    </select> 
+                                                                </div>
+                                                            </td>
+                                                            <td>                                                            
+                                                                <div class="form-group">
+                                                                    <select class="custom-select" id="inputGroupSelect02">                            
+                                                                            <option  *ngFor="let br of bran"></option>                           
+                                                                        </select> 
+                                                                </div>                                                            
+                                                            </td>                                                           
+                                                            <td><span class="badge badge-warning">290</span></td>
+                                                            <td>                                                           
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" placeholder="First Name *">
+                                                                </div>                                                        
+                                                            </td>
+                                                            <td>                                                            
+                                                                <div class="form-group">
+                                                                    <select class="custom-select" id="inputGroupSelect02" >                            
+                                                                            <option ></option>                           
+                                                                        </select> 
+                                                                </div>                                                            
+                                                            </td>                                              
+                                                            
+                                                            
+                                                            <td><button class="btn btn-primary btn-block" type="button">Save</button></td>
+                                                        </tr>                                                    
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <button type="button" class="btn btn-primary">Add</button>
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">CLOSE</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                        </div>
+                    </div>            
+                </div>
+            </div>
+    </div>
+</div>

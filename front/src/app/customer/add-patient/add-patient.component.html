@@ -1,0 +1,203 @@
+
+    <div id="main-content">
+      <div class="container-fluid">
+          <div class="block-header">
+              <div class="row clearfix">
+                  <div class="col-md-6 col-sm-12">
+                      <h1>Add Patient</h1>
+                      <nav aria-label="breadcrumb">
+                          <ol class="breadcrumb">
+                          <li class="breadcrumb-item"><a href="../html/index.html" [routerLink]="['/home']">Dashboard</a></li>
+                          <!-- <li class="breadcrumb-item"><a href="index.html">Hospital</a></li> -->
+                          <li class="breadcrumb-item active" aria-current="page"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]"></a>Add Patient</li>
+                          </ol>
+                      </nav>
+                  </div>            
+                  <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                      <button class="btn btn-sm btn-primary" title="">Add</button>
+                      <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a>
+                  </div> -->
+              </div>
+          </div>
+
+          <div class="row clearfix">
+              <div class="col-sm-12">
+                  <div class="card">
+                      <div class="body">
+                          <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmit(fm)" #fm="ngForm">
+                              <div class="form-group row">
+                                  <label class="col-lg-2 col-md-2 col-sm-4 col-form-label">Patient Basic Information</label>
+                                  <div class="col-lg-10 col-md-10 col-sm-8">
+                                      <div class="row clearfix">
+
+                                            <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group"> 
+                                                        <label class="fancy-radio custom-color-green">Patient First Name</label>  
+                                                        <input type="text" class="form-control" ngModel name="name" placeholder="Firstname">                                             
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">  
+                                                        <label class="fancy-radio custom-color-green">Patient Other Name</label> 
+                                                        <input type="text" class="form-control"ngModel name="othername" placeholder="Othername">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Gender</label><br>
+                                                        <label class="fancy-radio custom-color-green"><input name="gender" ngModel name="gender" value="Male" type="radio" checked><span><i></i>Male</span></label>
+                                                        <label class="fancy-radio custom-color-green"><input name="gender" ngModel name="gender" value="Female" type="radio"><span><i></i>Female</span></label>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Email Address</label> 
+                                                      <input type="text" class="form-control" ngModel name="email" placeholder="Email Address">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Mobile Number</label> 
+                                                          <input type="text" class="form-control" ngModel name="mobile_number" placeholder="Mobile Number">
+                                                        </div>
+                                                    </div>
+                                                </div>                               
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Hospital/Card Number</label>
+                                                      <input type="text" class="form-control" ngModel name="card_number" placeholder="Card Number">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-3 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Category Scheme</label>
+                                                            <select class="form-control show-tick" ngModel name="cust_category_id">
+                                                                <option value="">-- Select Category --</option>
+                                                                <option *ngFor="let c of custCat" [value]="c.id">{{c.category_name}}</option>                                 
+                                                            </select>                  
+                                                        </div>
+                                                    </div> 
+                                                <div class="col-lg-3 col-md-12">
+                                                    <div class="form-group">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Scheme ID</label> 
+                                                            <input type="text" class="form-control" ngModel name="n_h_i_s" placeholder="Scheme ID">  
+                                                        </div>
+                                                    </div>
+                                                </div> 
+                                                <div class="col-lg-3 col-md-12">
+                                                  <div class="form-group">
+                                                    <label class="fancy-radio custom-color-green">Patient Date of Birth</label>
+                                                    <input type="date" class="form-control" ngModel name="d_o_b" placeholder="Date of Birth">
+                                                  </div>
+                                              </div>
+                                                <div class="col-lg-3 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Age</label>
+                                                        <input type="text" class="form-control" ngModel name="age" placeholder="Age">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Type</label>
+                                                        <input type="text" class="form-control" ngModel name="type" placeholder="Type">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Occupation</label>
+                                                        <input type="text" class="form-control" ngModel name="occupation" placeholder="Occupation">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Marital Status</label>
+                                                        <input type="text" class="form-control" ngModel name="marital_status" placeholder="Marital Status">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-8 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Religion</label>
+                                                        <input type="text" class="form-control" ngModel name="religion" placeholder="Religion">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Status</label>
+                                                        <select class="form-control show-tick" ngModel name="status">
+                                                            <option value="">-- Select Status --</option>
+                                                            <option value="active">Active</option>
+                                                            <option value="suspend">Suspend</option>                                
+                                                        </select>                  
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient City</label>
+                                                        <input type="text" class="form-control" ngModel name="city" placeholder="City">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient State</label>
+                                                        <input type="text" class="form-control" ngModel name="state" placeholder="State">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Country</label>
+                                                        <input type="text" class="form-control" ngModel name="country" placeholder="Country">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">      
+                                                        <label class="fancy-radio custom-color-green">Patient Home Address</label>                                          
+                                                        <textarea rows="4" type="text" class="form-control"  ngModel name="address" placeholder="Address"></textarea>
+                                                    </div>
+                                                </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="form-group row mt-5">
+                                  <label class="col-lg-2 col-md-2 col-sm-4 col-form-label">Patient Next of Kin Information</label>
+                                  <div class="col-lg-10 col-md-10 col-sm-10">
+                                      <div class="row clearfix">
+                                            <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Next of Kin Name</label>
+                                                        <input type="text" class="form-control" ngModel name="next_of_kin_name" placeholder="Next of Kin Name">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Relationship to Next of Kin</label>
+                                                        <input type="text" class="form-control" ngModel name="kin_relationship" placeholder="Next of Kin Relationship">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-4 col-md-12">
+                                                    <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Next of Kin Mobile Number</label>
+                                                        <input type="text" class="form-control" ngModel name="next_of_kin_mobile" placeholder="Next of Kin Mobile Number">
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">      
+                                                        <label class="fancy-radio custom-color-green">Patient Next of Kin Address</label>                                          
+                                                        <textarea rows="4" type="text" class="form-control" ngModel name="next_of_kin_address" placeholder="Next of Kin Address"></textarea>
+                                                    </div>
+                                                </div>
+                                          <div class="col-sm-12">
+                                              <button type="submit" class="btn btn-primary">Submit</button>
+                                              <!-- <button type="submit" class="btn btn-outline-secondary">Cancel</button> -->
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>

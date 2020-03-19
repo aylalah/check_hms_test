@@ -1,0 +1,197 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h1>Doctor Home</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Home</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Doctor </a>
+                    <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-wheelchair"></i></div>
+                            <div class="ml-4">
+                                <span>Total Patient</span>
+                                <h4 class="mb-0 font-weight-medium">{{count[0].open}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-medkit"></i></div>
+                            <div class="ml-4">
+                                <span>Total in Lab</span>
+                                <h4 class="mb-0 font-weight-medium">{{count[0].pending}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-user-md"></i></div>
+                            <div class="ml-4">
+                                <span>Total Success</span>
+                                <h4 class="mb-0 font-weight-medium">{{count[0].success}}</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6">
+                <div class="card">
+                    <div class="body">
+                        <div class="d-flex align-items-center">
+                            <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-hospital-o"></i></div>
+                            <div class="ml-4">
+                                <span>Total Prescrition</span>
+                                <h4 class="mb-0 font-weight-medium">51</h4>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row clearfix">               
+                
+            <div class="col-lg-8 col-md-12">                   
+                <div class="table-responsive">
+                        <div class="header">
+                                <h2>Patient Appointment Table</h2>
+                            </div>
+                    <table class="table table-hover table-custom spacing5">
+                        <thead>
+                            <tr> 
+                                    <th  style="width: 50px;">Image</th>
+                                    <th  style="width: 50px;">Patient ID</th>
+                                    <th  style="width: 50px;">Depertment</th>
+                                    <th  style="width: 50px;">Lab</th>
+                                    <th  style="width: 50px;">Treatment</th>
+                                    <th  style="width: 50px;">Prescription</th>
+                                    <th  style="width: 50px;">Date</th>
+                                    <th  style="width: 50px;">Time</th>
+                                    <th  style="width: 50px;">Progress</th>
+                                <!-- <th style="width: 20px;">#</th>
+                                <th>Client</th>
+                                <th style="width: 50px;">Amount</th>
+                                <th style="width: 50px;">Status</th>
+                                <th style="width: 110px;">Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                                <tr *ngFor="let a of appoints; let r = index" >
+                                        <!-- <td> {{r+1}} </td> -->
+                                        <td class="w60">
+                                            <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{a.patient_image}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 rounded">
+                                        </td>
+                                        <td>
+                                            <a href="#" [routerLink]="['/Admin', {outlets: {side: ['treatment', a.cust_id]}}]" title="">{{a.card_number}}</a>
+                                            <p class="mb-0">{{a.pat_name}}</p>
+                                        </td>
+                                        <td>{{a.dept_name}}</td>
+                                        <td>
+                                            <span class="badge badge-danger" *ngIf ="a.lab=== 'close'">Close</span>
+                                            <span class="badge badge-success" *ngIf ="a.lab=== 'open'">Open</span> 
+                                            <span class="badge badge-warning" *ngIf ="a.lab=== 'pending'">Pending</span> 
+                                            <span class="badge badge-primary" *ngIf ="a.lab=== 'success'">Succcess</span>                                                                          
+                                        </td>
+                                        <td>
+                                                <span class="badge badge-danger" *ngIf ="a.treatment=== 'close'">Close</span>
+                                                <span class="badge badge-success" *ngIf ="a.treatment=== 'open'">Open</span> 
+                                                <span class="badge badge-warning" *ngIf ="a.treatment=== 'pending'">Pending</span> 
+                                                <span class="badge badge-primary" *ngIf ="a.treatment=== 'success'">Succcess</span>                                                                            
+                                        </td>
+                                        <td>
+                                                <span class="badge badge-danger" *ngIf ="a.prescription=== 'close'">Close</span>
+                                                <span class="badge badge-success" *ngIf ="a.prescription=== 'open'">Open</span> 
+                                                <span class="badge badge-warning" *ngIf ="a.prescription=== 'pending'">Pending</span> 
+                                                <span class="badge badge-primary" *ngIf ="a.prescription=== 'success'">Succcess</span>                                                                              
+                                        </td>                              
+                                        <td>{{a.date}}</td> 
+                                        <td>{{a.time}}</td>                                
+                                        <td><span class="badge badge-primary">70%</span>
+                                        </td>
+                                    </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div> 
+            <div class="col-lg-4 col-md-12">
+                    <div class="card">
+                            <div class="header">
+                                <h2>By Gender</h2>
+                            </div>
+                            <div class="body">
+                                <div class="d-flex bd-highlight mb-3 text-center">
+                                    <div class="flex-fill bd-highlight">
+                                        <label class="mb-0 text-muted">Male</label>
+                                        <h5>6,000</h5>
+                                    </div>
+                                    <div class="flex-fill bd-highlight">
+                                        <label class="mb-0 text-muted">Female</label>
+                                        <h5>4,000</h5>
+                                    </div>
+                                </div>
+                                <div id="chart-donut" style="height: 300px"></div>
+                            </div>
+                        </div>
+                <div class="card">
+                    <div class="body">
+                        <div class="card-text">
+                            <div class="mt-0">
+                                <small class="float-right text-muted">10/200 GB</small>
+                                <span>Memory</span>
+                                <div class="progress progress-xxs">
+                                    <div style="width: 60%;" class="progress-bar"></div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <small class="float-right text-muted">40 MB</small>
+                                <span>Bandwidth</span>
+                                <div class="progress progress-xxs">
+                                    <div style="width: 50%;" class="progress-bar"></div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <small class="float-right text-muted">73%</small>
+                                <span>Activity</span>
+                                <div class="progress progress-xxs">
+                                    <div style="width: 40%;" class="progress-bar"></div>
+                                </div>
+                            </div>
+                            <div class="mt-4">
+                                <small class="float-right text-muted">400 GB</small>
+                                <span>FTP</span>
+                                <div class="progress progress-xxs mb-0">
+                                    <div style="width: 80%;" class="progress-bar bg-danger"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>                    
+            </div>
+        </div>
+
+    </div>
+</div>    

@@ -1,0 +1,436 @@
+<div id="main-content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <div class="row clearfix">
+              <div class="col-md-6 col-sm-12">
+                  <h2>Voucher</h2>
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]">Home</a></li>
+                      <li class="breadcrumb-item"><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Phamarcy Log</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">Voucher</li>
+                      </ol>
+                  </nav>
+              </div>            
+          </div>
+      </div>
+      <div class="row clearfix">
+          <div class="col-md-12">
+              <div class="card social">
+                  <div class="profile-header d-flex justify-content-between justify-content-center">
+                      <div class="d-flex">
+                          <div class="mr-3">
+                              <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{pat[0].patient_image}}" class="rounded" alt="Patient_Photo">
+                          </div>
+                         <div class="details">
+                                <h4 class="mb-0">Card Number : {{pat[0].card_number}}</h4>
+                                <span class="text-light"><b>Name : </b>{{pat[0].name + " " + pat[0].othername}}</span>
+                                <div><b>Mobile: </b>{{pat[0].mobile_number}}</div>
+                          </div>                                 
+                      </div>
+                      <div class="col text-center">
+                        <div class="m-0"><b>Customer Category: </b>{{schemeCat}}</div>
+                        <div class="m-0"><b>Scheme ID: </b>{{schemeId}}</div>
+                        <div class="m-0"><b>Percentage: </b>{{schemePercentToView}}%</div>
+                        <div href="#" style="color: blue;" title="click to change the customer category" data-toggle="modal" data-target="#category">Change Category</div>
+                      </div>
+                       <div class="col text-right">
+                          <div class="small text-light">Prescription Number</div>
+                          <div class="h4 m-0">RX#: {{voucherId}}</div>
+                        </div>
+                  </div>
+              </div>                    
+          </div>
+      </div>
+
+
+      
+<!-- Default Size -->
+<div class="modal fade" id="category" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+              <h5 class="modal-title h4" id="myLargeModalLabel">Customer Category</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+              </button>
+          </div>
+          <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmit_cat(fm)" #fm="ngForm"> 
+          <div class="modal-body">             
+              <div class="row clearfix">
+                  <!-- <div class="col-md-8">
+                      <div class="form-group">
+                          <input type="text" class="form-control" placeholder="Item Name" ngModel name="name" required>
+                      </div>
+                  </div>
+                  <div class="col-md-4">
+                      <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Box size" ngModel name="box_size" required>
+                      </div>
+                  </div> -->
+                  <!-- <div class="col-lg-12">
+                      <input type="file" class="dropify">
+                  </div> -->
+                  <div class="col-sm-12">
+                    <div class="form-group">
+                        <label><span class="hidden-xs">Customer Category</span> </label>
+                        <div class="form-inline">
+                            <select class="form-control" style="width:80%" ngModel name="category_name" >                               
+                                <option *ngFor="let c of cust_cat" value="{{c.id}}" >{{c.category_name}}</option>                                
+                            </select>                                                  
+                        </div>
+                        
+                    </div>
+                  </div>
+                  <!-- <div class="col-sm-12">
+                      <button type="submit" class="btn btn-primary">Add</button>
+                      <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                  </div> -->
+              </div>
+              <!-- <input type="text" value="{{patID}}" ngModel name="cust_id" required>  -->
+          </div>
+          <div class="modal-footer">
+              <button type="submit" class="btn btn-round btn-primary">Submit<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+              <button type="button" class="btn btn-round btn-default" data-dismiss="modal" data-toggle="modal">Close</button>
+          </div>
+          </form>
+      </div>
+    </div>
+    </div>
+    
+
+    <div class="row clearfix">
+        <div class="col-12">
+                <div class="card">
+                    <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmitAdd(data)" #data="ngForm"> 
+                    <div class="header">
+                        <h2>Prescription</h2>
+                    </div>
+                    <div class="body">
+                        <div class="row clearfix">
+                            <div class="col-lg-3 col-md-12">                                            
+                                <div class="form-group">   
+                                        <label>Item</label>                                             
+                                    <input type="text" class="form-control" value="{{generic_name}} {{total_name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <div class="form-group">
+                                        <label>Class</label>
+                                    <input type="text" class="form-control" value="{{cat_name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <div class="form-group">
+                                        <label>Type</label> 
+                                    <input type="text" class="form-control" value="{{type_name}}" disabled>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <div class="form-group">
+                                        <label>Total Remain</label>
+                                    <input type="text" disabled class="form-control" value="{{total_remain}}">
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-md-12">
+                                <div class="form-group">
+                                    <label>Shelf</label>
+                                    <input type="text" class="form-control" value="{{shelve_name}} {{shelve_point}}" disabled>
+                                </div>
+                            </div> 
+                            <div class="col-lg-1 col-md-12">
+                                    <div class="form-group">
+                                            <label>Price</label>
+                                        <input type="text" class="form-control" value="{{selling_price | currency:'NGN':'symbol-narrow'}}" disabled>
+                                    </div>
+                                </div>                               
+                            <div class="col-lg-12 col-md-12">
+                                <hr>
+
+                                <div class="row">
+                                    <div class="col-lg-4 col-md-4 col-sm-6">
+                                        <label>Item</label>
+                                        <div class="form-group">
+                                            <select class="form-control" (change)="onSelectItem($event)" ngModel name="item_id">
+                                                <option value="">Select Item</option>
+                                                <option  *ngFor="let itdet of itemDet" value="{{itdet.id}}">{{itdet.generic_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>                                             
+                                    <div class="col-lg-2 col-md-2 col-sm-6">
+                                        <label>{{type_name}} Number</label>
+                                        <div class="form-group">
+                                            <select class="form-control" (change)="onSelectAmount($event)" ngModel name="instruction">
+                                                <option value="">Select Instruction</option>
+                                                <option  *ngFor="let dura of duration" value="{{dura.id}}">{{dura.duration_name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>                                            
+                                    <div class="col-lg-2 col-md-2 col-sm-6">
+                                        <label>Daily Supply</label>
+                                        <div class="form-group">
+                                            <select class="form-control" (change)="onSelectDailySup($event)" ngModel name="day_supply">
+                                                <option value="">Select Daily Supply</option>
+                                                <option  *ngFor="let inst of instruct" value="{{inst.id}}">{{inst.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-2 col-md-2 col-sm-6">
+                                        <label>Day(s)</label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" (keyup)="putQty($event)" placeholder="Input Number of Day(s)">
+                                        </div>
+                                    </div> 
+                                    <div class="col-lg-2 col-md-2 col-sm-6">
+                                        <label>Dispensable Period</label>
+                                        <div class="form-group">
+                                            <input type="number" class="form-control" (keyup)="onRefill($event)" placeholder="0" ngModel name="dispense">
+                                        </div>
+                                    </div> 
+                                </div>
+                            <div class="row">
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                        <label>Present Dispensable Amount</label>
+                                        <div class="form-group">
+                                            <input type="number" min="1" value="{{math.round(quantity)}}" class="form-control" (keyup)="apartTablet($event)" placeholder="Disp Amount" ngModel name="quantity">
+                                        </div>  
+                                    </div>
+                                    <div class="col-lg-4 col-md-6 col-sm-6">
+                                            <label>Total Quantity</label>
+                                            <div class="form-group">
+                                                <input type="number" value="{{math.round(tQuantity)}}" class="form-control" disabled placeholder="Total Amount" ngModel name="original_qty">
+                                            </div>  
+                                        </div>
+                                <div class="col-lg-4 col-md-6 col-sm-6">
+                                    <label>Use for Day(s)</label>
+                                    <div class="form-group">
+                                        <input type="number" class="form-control" value="{{math.round(useFor)}}" ngModel name="days" disabled placeholder="Days">
+                                    </div>  
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <h5>Total Cost: 
+                                        <small class="badge badge-success" *ngIf = "quant == 'undefined'">{{0*selling_price | currency:'NGN':'symbol-narrow'}}</small>
+                                        <small class="badge badge-success">{{math.round(quant)*selling_price | currency:'NGN':'symbol-narrow'}}</small>
+                                    </h5>
+                                </div>
+                            </div>
+                                <label>Pre Caution</label>
+                                <div class="form-group">
+                                    <textarea rows="4" class="form-control" ngModel name="caution" placeholder="Input pre-cautions here (if any)..."></textarea>
+                                </div>
+                                <label>Physician Name</label>
+                                <div class="form-group">
+                                    <input type="text" class="form-control" ngModel name="doctor_id" placeholder="Input physician name here...">
+                                </div>                                        
+                            </div>
+                        </div>
+                        <button type="submit" *ngIf = "prescription == 'open' " class="btn btn-round btn-primary">Save<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button> &nbsp;&nbsp;
+                        <button type="button" disabled *ngIf = "prescription != 'open' " class="btn btn-round btn-primary">Save</button> &nbsp;&nbsp;
+                        <a type="button" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]" class="btn btn-round btn-default">Cancel</a>
+                    </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Voucher</h2>
+                    <ul class="header-dropdown dropdown">                                
+                        <li><a href="javascript:void(0);" class="full-screen"><i class="icon-frame"></i></a></li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="javascript:void(0);">Action</a></li>
+                                <li><a href="javascript:void(0);">Another Action</a></li>
+                                <li><a href="javascript:void(0);">Something else</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+        <div class="body">
+            <div class="table-responsive">
+                <table class="table table-hover table-custom spacing8">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Image</th>
+                            <th>Item</th>
+                            <th>Category</th>
+                            <th>Original Quantity</th>
+                            <th>Quantity</th>                                                                            
+                            <th>Refill</th>  
+                            <th>Remain</th>                           
+                         
+                            <th>Cost</th>
+                            <th>Amount</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let r of prescriptionsList; let i =index">
+                           <td>{{i+1}}</td>                                                                                     
+                           <td class="w60">
+                            <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{r.item_img}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 rounded">
+                        </td>
+                        <td>
+                            <a href="javascript:void(0);" title="">{{r.generic_name}}</a>
+                            <p class="mb-0">{{r.name}}</p>
+                        </td>
+                        <td><span class="badge badge-warning">{{r.cat_name}}</span></td>
+                        <td>{{r.original_qty}}</td>
+                        <td>{{r.quantity}}</td>                                                                          
+                        <td>{{r.refill}}</td>
+                        <td>{{r.remain}}</td>
+                     
+                        <td>{{r.amount | currency:'NGN':'symbol-narrow'}}</td>
+                        <td>{{r.amount_paid | currency:'NGN':'symbol-narrow'}}</td>
+                        <td>
+                          <!-- <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button> -->
+                          <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
+                      </td>                     
+                        </tr>
+                        <div *ngIf="!prescriptionsList">
+                            
+                            <div class="spinner-grow text-primary" role="status">
+                            <span class="sr-only">Loading...</span>
+                        </div>
+                    <div class="spinner-grow text-secondary" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+            <div class="spinner-grow text-success" role="status">
+            <span class="sr-only">Loading...</span>
+            </div>
+                          </div>                                                    
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <th><strong>SUB TOTAL</strong></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>                                      
+                            <th></th>
+
+                            <th></th>
+                            <th></th>                                      
+                            <th></th>
+
+                            <!-- <th>{{tquant}}</th>
+                            <th>{{refill}}</th> 
+                            <th>{{remain}}</th>     -->
+                            <th></th>                             
+                            <th>{{tcost | currency:'NGN':'symbol-narrow'}}</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th><strong>DISCOUNT %</strong></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>                                      
+                            <th></th>
+                            <th></th>
+                            <th></th> 
+                            <th></th>    
+                            <th></th>                             
+                            <th>{{schemePercentToView}}%</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th><strong>Service Charge</strong></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>                                      
+                            <th></th>
+                            <th></th>
+                            <th></th> 
+                            <th></th>    
+                            <th></th>                             
+                            <th>{{'50' | currency:'NGN':'symbol-narrow'}}</th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <th><strong>TOTAL</strong></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>                                      
+                            <th></th>
+                            <th></th>
+                            <th></th> 
+                            <th></th>    
+                            <th></th>        
+                            <th>{{afterPercentCost | currency:'NGN':'symbol-narrow'}}</th>
+                            <th></th>
+                        </tr>
+                    </tfoot>
+                </table>
+                <div>
+                    <button type="button" *ngIf = "voucher != 'open' " disabled class="btn btn-round btn-primary">Checkout</button> &nbsp;&nbsp;
+                    <button type="button" (click)="saveTovoucher()" *ngIf = "voucher == 'open'" class="btn btn-round btn-primary">Checkout<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button> &nbsp;
+                    <button type="button" *ngIf = "invoice == 'unpaid'" class="btn btn-round btn-secondary"><a class="p-1 text-white" style="text-decoration:none" href="#" [routerLink]="['/Admin', {outlets: {side: ['invoice',appId]}}]">Invoice</a></button> &nbsp;&nbsp;
+                    <button type="button" *ngIf ="invoice == 'paid'" [routerLink]="['/Admin', {outlets: {side: ['invoice',appId]}}]" class="btn btn-round btn-secondary">Invoice</button> &nbsp;&nbsp;
+                    <a type="button" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]" class="btn btn-round btn-default">Cancel</a>
+                </div><br>              
+                </div>
+                </div>
+                </div>
+
+
+                <!-- Default Size -->
+<div class="modal fade" id="EditTra" tabindex="1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Add Departments</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onUpdate(ed)" #ed="ngForm"> 
+            <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                          <!-- <label>{{deptName}}</label> -->
+                            <input type="text" class="form-control" [value]="unitName" ngModel name="name" >
+                            <input hidden="true" [value]="unitid" ngModel name="id">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <!-- <label>{{posid}}</label> -->
+                            <input type="text" class="form-control" [value]="unitDescrip" ngModel name="box_size" >
+                        </div>
+                    </div>
+                    <!-- <div class="col-lg-12">
+                        <input type="file" class="dropify">
+                    </div> -->
+                    <div class="col-sm-12">
+                        <div class="form-group mt-3">                            
+                          <input type="text" class="form-control" [value]="unitValue" ngModel name="value" >
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-round btn-primary">Update<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+                <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,428 @@
+<div id="main-content">
+  <div class="container-fluid">
+      <div class="block-header">
+          <div class="row clearfix">
+              <div class="col-md-6 col-sm-12">
+                  <h1>Pharmacy Dashboard (Pharmacist)</h1>
+                  <nav aria-label="breadcrumb">
+                      <ol class="breadcrumb">
+                      <li class="breadcrumb-item"><a href="#">Lock Page</a></li>
+                      <li class="breadcrumb-item active" aria-current="page">My Page</li>
+                      </ol>
+                  </nav>
+              </div>            
+              <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                  <a href="javascript:void(0);" class="btn btn-sm btn-primary" title="">Create Campaign</a>
+                  <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a>
+              </div> -->
+          </div>
+      </div>
+
+      <div class="row clearfix">
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card">
+                <div class="body ribbon">
+                    <div class="ribbon-box green">  </div>
+                    <a href="#" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]" class="my_sort_cut text-muted">
+                        <i class="icon-users"></i>
+                        <span>Users</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card">
+                <div class="body">
+                    <a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]" class="my_sort_cut text-muted">
+                        <i class="icon-like"></i>
+                        <span>Pharmacy Log</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card">
+                <div class="body ribbon">
+                    <div class="ribbon-box orange"></div>
+                    <a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]" class="my_sort_cut text-muted">
+                        <i class="icon-calendar"></i>
+                        <span>Refill</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card">
+                <div class="body">
+                    <a href="payroll.html" [routerLink]="['/Admin', {outlets: {side: ['items']}}]" class="my_sort_cut text-muted">
+                        <i class="icon-credit-card"></i>
+                        <span>Inventory</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card">
+                <div class="body">
+                    <a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]" class="my_sort_cut text-muted">
+                        <i class="icon-calculator"></i>
+                        <span>Accounts</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 col-md-4 col-xl-2">
+            <div class="card">
+                <div class="body">
+                    <a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]" class="my_sort_cut text-muted">
+                        <i class="icon-pie-chart"></i>
+                        <span>Report</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+      <div class="row clearfix">
+          <div class="col-lg-4 col-md-6">
+              <div class="card">
+                  <div class="body">
+                      <div class="d-flex align-items-center">
+                          <div class="icon-in-bg bg-indigo text-white rounded-circle"><i class="fa fa-briefcase"></i></div>
+                          <div class="ml-4">
+                              <span>Today Total Income</span>
+                              <h4 class="mb-0 font-weight-medium">{{tIncome | currency:'NGN':'symbol-narrow'}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+              <div class="card">
+                  <div class="body">
+                      <div class="d-flex align-items-center">
+                          <div class="icon-in-bg bg-azura text-white rounded-circle"><i class="fa fa-credit-card"></i></div>
+                          <div class="ml-4">
+                              <span>Total Quantity</span>
+                              <h4 class="mb-0 font-weight-medium">{{tQuantity}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="col-lg-4 col-md-6">
+              <div class="card">
+                  <div class="body">
+                      <div class="d-flex align-items-center">
+                          <div class="icon-in-bg bg-orange text-white rounded-circle"><i class="fa fa-users"></i></div>
+                          <div class="ml-4">
+                              <span>Total Patients</span>
+                              <h4 class="mb-0 font-weight-medium">{{tPatient}}</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="col-lg-3 col-md-6">
+              <div class="card">
+                  <div class="body">
+                      <div class="d-flex align-items-center">
+                          <div class="icon-in-bg bg-pink text-white rounded-circle"><i class="fa fa-users"></i></div>
+                          <div class="ml-4">
+                              <span>New Patients</span>
+                              <h4 class="mb-0 font-weight-medium">$13,651</h4>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div> -->
+      </div>
+
+<!-- 
+      <div class="row clearfix">
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="body">
+                    <div>Total Income</div>
+                    <div class="py-4 m-0 text-center h1 text-success">$9,452</div>
+                    <div class="d-flex">
+                        <small class="text-muted">Previous Month</small>
+                        <div class="ml-auto"><i class="fa fa-caret-up text-success"></i>4.00%</div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="body">
+                    <div>Total Expenses</div>
+                    <div class="py-4 m-0 text-center h1 text-info">$12,258</div>
+                    <div class="d-flex">
+                        <small class="text-muted">Previous Month</small>
+                        <div class="ml-auto">0.67%</div>
+                    </div>
+                </div>
+            </div>
+        </div>                
+        <div class="col-lg-3 col-md-6">
+            <div class="card">
+                <div class="body">
+                    <div>Gross Profit Margin</div>
+                    <div class="mt-4 text-center">
+                        <input type="text" class="knob" value="34" data-width="147" data-height="147" data-thickness="0.07" data-bgColor="#383b40" data-fgColor="#9367B4">
+                    </div>
+                    <h3 class="mb-0 mt-3 font300">24,301 <span class="text-green font-15">+3.7%</span></h3>
+                    <small>Lorem Ipsum is simply dummy text <br> <a href="#">Read more</a> </small>
+                    <div class="mt-4 text-center">
+                        <span class="chart_3">2,5,8,3,6,9,4,5,6,3</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <div class="row clearfix">
+                <div class="col-lg-6 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <div class="card-value float-right text-blue">+15%</div>
+                            <h4 class="mb-1">$5,021.00</h4>
+                            <div class="text-muted">Your Balance</div>
+                        </div>
+                        <div class="card-chart-bg">
+                            <span id="linecustom">6,7,5,9,7,8,4,7,6,9,11,16,10,8,9,12</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="body top_counter">
+                            <div class="icon bg-success text-white"><i class="fa fa-area-chart"></i> </div>
+                            <div class="content">
+                                <span>Growth</span>
+                                <h5 class="number mb-0">62%</h5>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="body top_counter">
+                            <div class="icon bg-warning text-white"><i class="fa fa-building"></i> </div>
+                            <div class="content">
+                                <span>Properties</span>
+                                <h5 class="number mb-0">53,251</h5>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6">
+                    <div class="card">
+                        <div class="body">
+                            <div class="media">
+                                <img class="rounded mr-3" src="../assets/images/xs/avatar7.jpg" alt="">
+                                <div class="media-body">
+                                    <h5 class="m-0">Betty Torres</h5>
+                                    <p class="text-muted mb-0">Account Holder</p>
+                                </div>
+                            </div>
+                            <small class="text-muted">Account Number:- </small>
+                            <p>2154 - 1245 - 2185 - 5858</p>
+                            <small class="text-muted">Number:- </small>
+                            <p>+ 264-625-7262</p>
+                            <small class="text-muted">Account:- </small>
+                            <p>HDFC Bank</p>
+                            <small class="text-muted">Address:- </small>
+                            <p>Magnolia St. Orlando, FL 32806</p>                                    
+                            <small class="text-muted">Account Type:- </small>
+                            <p class="mb-0">Current</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="row clearfix">
+        <div class="col-lg-12 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Income Analysis</h2>
+                </div>
+                <div class="body">
+                    <div id="chart-bar" style="height: 350px"></div>
+                </div>
+            </div>
+        </div>
+        <!-- <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="header">
+                    <h2>Short Term Assets</h2>
+                </div>
+                <div class="body">
+                    <div id="chart-Short-Term-Assets" style="height: 350px"></div>
+                </div>
+            </div>
+        </div> -->
+    </div>
+
+    
+
+      <div class="row clearfix">
+          <div class="col-lg-4 col-md-12">
+              <div class="card">
+                  <div class="header">
+                      <h2>Appointments Analysis</h2>
+                  </div>
+                  <div class="body">
+                      <div class="row text-center">
+                          <div class="col-6 border-right pb-4 pt-4">
+                              <label class="mb-0">Total Appointments</label>
+                              <h4 class="font-30 font-weight-bold text-col-blue">{{totalAppt}}</h4>
+                          </div>
+                          <div class="col-6 pb-4 pt-4">
+                              <label class="mb-0">Today's Appointments</label>
+                              <h4 class="font-30 font-weight-bold text-col-blue">{{todayAppt}}</h4>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="body">
+                      <div class="form-group">
+                          <label class="d-block">Today's Open Appointments<span class="float-right">{{todayAppt == 0 ? 0 : math.round(100-(openAppt/todayAppt*100))}}%</span></label>
+                          <div class="progress progress-xxs">
+                              <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="d-block">Today's Closed Appointments<span class="float-right">{{todayAppt == 0 ? 0 : math.round(100-(closedAppt/todayAppt*100))}}%</span></label>
+                          <div class="progress progress-xxs">
+                              <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          </div>
+                      </div>
+                      <div class="form-group">
+                          <label class="d-block">Today's Terminated Appointments<span class="float-right">{{todayAppt == 0 ? 0 : math.round(100-(terminatedAppt/todayAppt*100))}}%</span></label>
+                          <div class="progress progress-xxs">
+                              <div class="progress-bar progress-bar-danger" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%;"></div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- <div class="col-lg-8 col-md-12">
+              <div class="card user_statistics">
+                  <div class="header">
+                      <h2>Earning Report</h2>
+                  </div>
+                  <div class="body">                            
+                      <div id="chart-bar" style="height: 302px"></div>
+                  </div>
+              </div>
+          </div>     -->
+
+          <div class="col-lg-8 col-md-12">
+            <div class="header">
+                <h4>Today's Appointments</h4>
+            </div>
+                <div class="table-responsive">
+                    <table class="table table-hover table-custom spacing5">
+                        <thead>
+                            <tr> 
+                                <th style="width: 20px;">#</th>
+                                <th>Patient Details</th>
+                                <th style="width: 50px;">RX</th>
+                                <th style="width: 50px;">Invoice Status</th>
+                                <th style="width: 50px;">Voucher Status</th>
+                                <th style="width: 150px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody> 
+                            <tr *ngFor="let apt of appointments; let i = index">
+                                <td>{{i+1}}</td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <img class="w30 rounded-circle mr-2" src="http://{{ imgLink}}/backend/public/upload/uploads/{{apt.patient_image}}" alt="Patient Image">
+                                        <div class="ml-3">
+                                            <a href="javascript:void(0);" title="" [routerLink]="['/Admin', {outlets: {side: ['patient_profile',apt.cust_id]}}]">{{apt.pat_name+ ' ' +apt.othername}}</a>
+                                            <p class="mb-0">{{apt.card_number}}</p>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>{{apt.voucher_id}}</td>
+                                <td>
+                                    <span class="badge badge-primary" *ngIf ="apt.invoice=== 'open'">{{apt.invoice}}</span>
+                                    <span class="badge badge-warning" *ngIf ="apt.invoice=== 'unpaid'">{{apt.invoice}}</span>
+                                    <span class="badge badge-success" *ngIf ="apt.invoice=== 'paid'">{{apt.invoice}}</span>
+                                </td>
+                                <td>
+                                    <span class="badge badge-primary" *ngIf ="apt.voucher=== 'open'">{{apt.voucher}}</span>
+                                    <span class="badge badge-success" *ngIf ="apt.voucher=== 'checkout'">{{apt.voucher}}</span>
+                                    <span class="badge badge-success" *ngIf ="apt.voucher=== 'success'">{{apt.voucher}}</span>
+                                    <span class="badge badge-secondary" *ngIf ="apt.voucher=== 'refill'">{{apt.voucher}}</span>
+                                </td>
+                              <td>
+                                  <button type="button" class="btn btn-sm btn-default" title="Goto Invoice" data-toggle="tooltip" data-placement="top"><a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['invoice', apt.id]}}]">Invoice</a></button>
+                                  <button type="button" class="btn btn-sm btn-default " title="Goto Voucher" data-toggle="tooltip" data-placement="top"><a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['voucher', apt.id]}}]">Voucher</a></button>
+                              </td>
+                             </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+                    <div class="col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                            <div class="header">
+                                <h2>Stock Items</h2>
+                                <ul class="header-dropdown dropdown">
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0);" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="javascript:void(0);">Print</a></li>
+                                            <li><a href="javascript:void(0);">Copy</a></li>
+                                            <li><a href="javascript:void(0);">Export</a></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table table-hover js-basic-example dataTable table-custom spacing5 mb-0">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Image</th>
+                                            <th>Item Detail</th>
+                                            <th>Category</th>
+                                            <th>Type</th>
+                                            <th>Shelf</th>
+                                            <th>Total Quantity</th>
+                                            <th>Last Added</th>
+                                            <th>Cost</th>
+                                            <th>Total Cost</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let item of stockItem | paginate: {itemsPerPage:10, currentPage: p}; let r = index">
+                                            <td>{{r+1}}</td>
+                                            <td class="width45">
+                                                <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{item.item_img}}" data-toggle="tooltip" data-placement="top" title="" alt="Avatar" class="w35 h35 rounded" data-original-title="Avatar   Name">
+                                            </td>
+                                            <td>
+                                                <a href="javascript:void(0);" [routerLink]="['/Admin', {outlets: {side: ['item_profile', item.item_id]}}]" title=""><h6 class="mb-0">{{item.generic_name}}</h6></a>
+                                                <span>{{item.name}}</span>
+                                            </td>
+                                            <td><span class="badge badge-warning">{{item.cat_name}}</span></td>
+                                            <td><span class="badge badge-warning">{{item.type_name}}</span></td>
+                                            <td><span class="badge badge-warning">{{item.shelf_name}}-{{item.shelf_point}}</span></td>
+                                            <td><span class="text text-success">{{stockTotal[r]}}</span></td>
+                                            <td><span class="text text-info">0</span></td>
+                                            <td>
+                                                <span class="badge badge-success" *ngIf ="item.markup_price != '0'">{{item.purchasing_price*item.markup_price | currency:'NGN':'symbol-narrow'}}</span>
+                                                <span class="badge badge-success" *ngIf ="item.markup_price == '0'">{{item.purchasing_price | currency:'NGN':'symbol-narrow'}}</span>                                                    </td>
+                                            <td>
+                                                <span class="badge badge-success" *ngIf ="item.markup_price != '0'">{{item.purchasing_price*item.markup_price*stockTotal[r] | currency:'NGN':'symbol-narrow'}}</span>
+                                                <span class="badge badge-success" *ngIf ="item.markup_price == '0'">{{item.purchasing_price*stockTotal[r] | currency:'NGN':'symbol-narrow'}}</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>  
+                            </div>
+                        </div>
+                    </div>
+
+        </div>
+    </div>
+</div>   

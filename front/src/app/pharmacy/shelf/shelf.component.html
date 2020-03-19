@@ -1,0 +1,182 @@
+    <div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h1>Drug Shelve Points</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="../html/index.html">Dashboard</a></li>
+                        <!-- <li class="breadcrumb-item"><a href="index.html">Hospital</a></li> -->
+                        <li class="breadcrumb-item active" aria-current="page">shelves</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <button class="btn btn-sm btn-primary" title="" data-toggle="modal" data-target="#AddDepartments">Add</button>
+                    <!-- <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a> -->
+                </div>
+            </div>
+        </div>
+  
+        <div class="row clearfix">
+            <div class="col-sm-12">
+                <div class="table-responsive">
+                    <table class="table table-hover table-custom spacing8">
+                        <thead>
+                            <tr> 
+                                <th>#</th>
+                                <th>Name</th>
+                                <th>Point</th>                                
+                                <th>Branch</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let c of shelv  | paginate: {itemsPerPage:10, currentPage: p}; let r = index">
+                                <td>
+                                    {{r+1}}
+                                </td>                              
+                                <td style="color: #17C2D7;">{{c.name}}</td>
+                                <td style="color: #17C2D7;">{{c.point}}</td>
+                                <td style="color: #17C2D7;">{{c.br_name}}</td>                                
+                                <td>
+                                    <span class="badge badge-success" *ngIf ="c.status=== 'active'">Active</span>
+                                      <span class="badge badge-danger" *ngIf ="c.status=== 'suspend'">Suspend</span>                                   
+                                </td>                          
+                                <td>
+                                    <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditDepartments" (click)="editdept(c.id)"><i class="fa fa-pencil"></i></button>
+                                    <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="onDelete(c.id)"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>  
+                            <div *ngIf="!shelv">
+                                <div class="spinner-grow text-primary" role="status">
+                                <span class="sr-only">Loading...</span>
+                            </div>
+                        <div class="spinner-grow text-secondary" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>
+    <div class="spinner-grow text-success" role="status">
+    <span class="sr-only">Loading...</span>
+    </div>
+                              </div>                                                 
+                        </tbody>
+                    </table>
+                    <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div> 
+  <!-- Default Size -->
+  <div class="modal fade" id="AddDepartments" tabindex="-1" role="dialog">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title h4" id="myLargeModalLabel">Add Shelve Point</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+            </button>
+        </div>
+        <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onSubmit(fm)" #fm="ngForm"> 
+        <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Shelve Name" ngModel name="name" required>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control show-tick" ngModel name="status">
+                            <option value="active">Active</option>
+                            <option value="suspend">Suspend</option>                                
+                        </select>                  
+                      </div>
+                </div>            
+            </div>
+        </div>
+        <div class="modal-body">             
+            <div class="row clearfix">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Shelve Point" ngModel name="point" required>
+                    </div>
+                </div> 
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <select class="form-control show-tick" ngModel name="branch_id">
+                            <option value="">- Select Team -</option>
+                            <option *ngFor="let b of branch" [value]="b.id">{{b.br_name}}</option>                                
+                        </select>
+                    </div>
+                </div>                               
+            </div>
+        </div>       
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-round btn-primary">Add<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+            <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+        </div>
+        </form>
+    </div>
+  </div>
+  </div>
+  
+  
+  <!-- Default Size -->
+  <div class="modal fade" id="EditDepartments" tabindex="1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Update Shelve Point</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <form class="form-auth-small m-t-20" role="form" (ngSubmit)="onUpdate(ed)" #ed="ngForm"> 
+                <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [value]="shelvName" placeholder="Shelve Name" ngModel name="name" required>
+                                <input type="hidden" [value]= "shelvid" ngModel name="id">
+                              </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" ngModel name="status">
+                                    <option>Select Status</option>
+                                    <option value="active">Active</option>
+                                    <option value="suspend">Suspend</option>                                
+                                </select>                  
+                              </div>
+                        </div>            
+                    </div>
+                </div>
+                <div class="modal-body">             
+                    <div class="row clearfix">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <input type="text" class="form-control" [value]= "shelvPoint" placeholder="Shelve Point" ngModel name="point" required>
+                            </div>
+                        </div> 
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <select class="form-control show-tick" ngModel name="branch_id">
+                                    <option value="">- Select Branch -</option>
+                                    <option *ngFor="let b of branch" [value]="b.id">{{b.name}}</option>                                
+                                </select>
+                            </div>
+                        </div>                               
+                    </div>
+                </div> 
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-round btn-primary">Update<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+                <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+            </form>
+        </div>
+    </div>
+    </div>
+  

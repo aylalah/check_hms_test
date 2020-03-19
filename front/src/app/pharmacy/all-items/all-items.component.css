@@ -1,0 +1,13 @@
+
+/* .my-pagination{
+    font-size: 12px;
+}
+
+.my-pagination /deep/ .ngx-pagination .current{
+    background: green;
+
+} */
+.search-results {
+    height: 42rem;
+    overflow: scroll;
+  }

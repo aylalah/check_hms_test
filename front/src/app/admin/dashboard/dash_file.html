@@ -1,0 +1,549 @@
+<!-- Theme Setting -->
+<div class="themesetting">
+    <a href="javascript:void(0);" class="theme_btn"><i class="icon-magic-wand"></i></a>
+    <div class="card theme_color">
+        <div class="header">
+            <h2>Theme Color</h2>
+        </div>
+        <ul class="choose-skin list-unstyled mb-0">
+            <li data-theme="green"><div class="green"></div></li>
+            <li data-theme="orange"><div class="orange"></div></li>
+            <li data-theme="blush"><div class="blush"></div></li>
+            <li data-theme="cyan" class="active"><div class="cyan"></div></li>
+            <li data-theme="indigo"><div class="indigo"></div></li>
+            <li data-theme="red"><div class="red"></div></li>
+        </ul>
+    </div>
+    <div class="card font_setting">
+        <div class="header">
+            <h2>Font Settings</h2>
+        </div>
+        <div>
+            <div class="fancy-radio mb-2">
+                <label><input name="font" value="font-krub" type="radio"><span><i></i>Krub Google font</span></label>
+            </div>
+            <div class="fancy-radio mb-2">
+                <label><input name="font" value="font-montserrat" type="radio" checked><span><i></i>Montserrat Google font</span></label>
+            </div>
+            <div class="fancy-radio">
+                <label><input name="font" value="font-roboto" type="radio"><span><i></i>Robot Google font</span></label>
+            </div>
+        </div>
+    </div>
+    <div class="card setting_switch">
+        <div class="header">
+            <h2>Settings</h2>
+        </div>
+        <ul class="list-group">
+            <li class="list-group-item">
+                Light Version
+                <div class="float-right">
+                    <label class="switch">
+                        <input type="checkbox" class="lv-btn">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item">
+                RTL Version
+                <div class="float-right">
+                    <label class="switch">
+                        <input type="checkbox" class="rtl-btn">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item">
+                Horizontal Henu
+                <div class="float-right">
+                    <label class="switch">
+                        <input type="checkbox" class="hmenu-btn" >
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </li>
+            <li class="list-group-item">
+                Mini Sidebar
+                <div class="float-right">
+                    <label class="switch">
+                        <input type="checkbox" class="mini-sidebar-btn">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </li>
+        </ul>
+    </div>   
+    <div class="card">
+        <div class="form-group">
+            <label class="d-block">Traffic this Month <span class="float-right">77%</span></label>
+            <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="d-block">Server Load <span class="float-right">50%</span></label>
+            <div class="progress progress-xxs">
+                <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Overlay For Sidebars -->
+<div class="overlay"></div>
+
+<div id="wrapper">
+
+    <nav class="navbar top-navbar">
+        <div class="container-fluid">
+ 
+            <div class="navbar-left">                 
+                
+            </div> 
+            
+            <div class="navbar-right">
+                <div id="navbar-menu">
+                    <ul class="nav navbar-nav">
+                        <li><a href="javascript:void(0);" class="search_toggle icon-menu" title="Search Result"><i class="icon-magnifier"></i></a></li>                        
+                        <li><a href="javascript:void(0);" class="right_toggle icon-menu" title="Right Menu"><i class="icon-bubbles"></i><span class="notification-dot bg-pink">0</span></a></li>
+                        <li><a href="" (click)="logout($event)" class="icon-menu" title="Log Out"><i class="icon-power"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="progress-container"><div class="progress-bar" id="myBar"></div></div>
+    </nav>
+   
+    <div id="left-sidebar" class="sidebar">
+        <div class="navbar-brand">
+            <a href="#" [routerLink]="['/Admin', {outlets: {side: ['home']}}]"><img src="../assets/images/icon.svg" alt="Check Logo" class="img-fluid logo"><span>Check HMS</span></a>
+            <button type="button" class="btn-toggle-offcanvas btn btn-sm float-right"><i class="lnr lnr-menu icon-close"></i></button>
+        </div>
+        <div class="scroll">
+            <div class="user-account">
+                <div class="user_div">
+                    <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{image}}" class="user-photo" alt="User Profile Picture">
+                </div>
+                <div class="dropdown">
+                    <span>Welcome,</span>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{fname}} {{lname}}</strong></a>
+                    <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['admin-profile']}}]"><i class="icon-user"></i> My Profile</a></li>
+                        <li><a href="javascript:void(0);"><i class="icon-envelope-open"></i>Messages</a></li>
+                        <li><a href="javascript:void(0);"><i class="icon-settings"></i>Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a (click)="logout($event)"><i class="icon-power"></i>Logout</a></li>
+                    </ul>
+                </div>                
+            </div> 
+            
+
+            <div *ngIf = "hms.status == 'active'">
+
+                <!-- <div *ngIf = "role == super">
+
+                </div>
+
+                <div *ngIf = "role == global">
+
+                </div>
+
+                <div *ngIf = "role == center">
+
+                </div>
+
+                <div *ngIf = "role == user">
+
+                </div> -->
+
+                <nav id="left-sidebar-nav" class="sidebar-nav">
+                    <ul id="main-menu" class="metismenu">
+                        <li class="header">Admin</li>
+                        <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['home']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                            <ul>
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]">Admin Dashboard</a></li> 
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-user-dashboard']}}]">User Dashboard</a></li>                    
+                                
+                            </ul>
+                        </li>
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['taskboard']}}]"><i class="icon-diamond"></i><span>Patient Taskboard</span></a></li>
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['department']}}]"><i class="icon-grid"></i><span>Departments</span></a></li>
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Staffs By Dept</span></a></li>
+                        
+                        <li class="header">Depertments</li>
+                        <li >
+                            <span>
+                                <a class="has-arrow"><i class="icon-user-follow"></i><span>Patient</span></a>
+                                <ul>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]">Patient</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]">Make Appointment</a></li>
+                                </ul>
+                            </span>
+                            </li>
+                            
+                        <li>
+                            <span>
+                            <a href="javascript:void(0);" class="has-arrow"><i class="fa fa-user-md"></i><span>Doctors</span></a>
+                            <ul>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['doctor_log']}}]">Medical Log</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['treatment', 0]}}]">Terapy</a></li> 
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]">History</a></li>                               
+                                
+                            </ul>   
+                        </span>                     
+                        </li>
+                        <li >
+                            <span>
+                                <a class="has-arrow"><i class="fa fa-hospital-o"></i><span>Laboratory</span></a>
+                                <ul>                                    
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['lab_log']}}]">Lab Log</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['test']}}]">Test</a></li>
+                                    <li class="header">Setting</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['set_lab_test']}}]">Set Lab Test</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['set_lab_department']}}]">Set Lab Department</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['lab_esther']}}]">History</a></li>
+                                </ul>
+                            </span>
+                            </li>
+                        
+                        <li>
+                                <span>
+                            <a href="javascript:void(0);" class="has-arrow"><i class="icon-like"></i><span>Pharmacy</span></a>
+                            <ul> 
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Pharmacy Log</a></li>                          
+                                <!-- <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['voucher']}}]">Voucher</a></li> -->
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]">Refills</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]">History</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]">Report</a></li>
+                                <li class="header">Inventory</li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">All Items</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_category']}}]">Class</a></li>
+                                <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['unit']}}]">Unit</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_type']}}]">Type</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['manufacturer']}}]">Brand</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['shelves']}}]">Shelf</a></li>
+
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['duration']}}]">Prescription Instruction Settings</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['instruction']}}]">Daily Supply Settings </a></li>
+                                
+                                <!-- <li><a href="#">History</a></li> -->
+                            </ul>
+                            </span>
+                        </li>
+                        <li>
+                                <span>
+                            <a class="has-arrow"><i class="icon-credit-card"></i><span>Payments</span></a>
+                            <ul>
+                                <li class="#">Payment</li>
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['payment_log']}}]">Log</a></li>                    
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['payment']}}]">Invoice</a></li>
+
+                                <li class="header">Account</li>
+                                <li><a href="#">Income</a></li>
+                                <li><a href="#">Expences</a></li>
+                                <li><a href="#">Savings</a></li>
+                            </ul>
+                            </span>
+                        </li>                 
+                        <li class="header">Settings</li>
+                        
+                        <li *ngIf="admin == pos"><a [routerLink]="['/Admin', {outlets: {side: ['staffs']}}]"><i class="icon-envelope"></i><span>All Staffs</span></a></li>
+                        <li *ngIf="admin == pos"><a [routerLink]="['/Admin', {outlets: {side: ['set_branch']}}]"><i class="icon-layers"></i><span>Our Centers</span></a></li>
+                        <li>
+                                <span>
+                            <a class="has-arrow"><i class="icon-user"></i><span>Other Settings</span></a>
+                            <ul>
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['set_department']}}]">Set Departments</a></li>                               
+                                <li><a href="#">General Settings</a></li>
+                                
+                            </ul> 
+                            </span>                       
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+            <div *ngIf = "pharmacy.status == 'active'">
+
+                <div *ngIf = "role == super">
+
+                    <nav id="left-sidebar-nav" class="sidebar-nav">
+                        <ul id="main-menu" class="metismenu">
+                            <li class="header">Admin</li>
+                            <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                                <ul>
+                                    <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]">Admin Dashboard</a></li> 
+                                    <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-user-dashboard']}}]">User Dashboard</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]">Patient</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]">Make Appointment</a></li>  
+                                    
+                                </ul>
+                            </li>                         
+                            <li class="header">Depertments</li>                              
+                            <li>
+                                <span>
+                                <a href="javascript:void(0);" class="has-arrow"><i class="icon-like"></i><span>Pharmacy</span></a>
+                                <ul> 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Pharmacy Log</a></li>                             
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]">Refills</a></li>                                        
+                                    <li class="header">Inventory</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">All Items</a></li>                                        
+                                    <li class="header">Audit Trail</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]">History</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]">Report</a></li>
+                                </ul>
+                                </span>
+                            </li>
+                           
+                            <li class="header">Settings</li>                                
+                            <!-- <li><a [routerLink]="['/Admin', {outlets: {side: ['staffs']}}]"><i class="icon-envelope"></i><span>All Staffs</span></a></li> -->
+                            <!-- <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['department']}}]"><i class="icon-grid"></i><span>Departments</span></a></li> -->
+                            <li><a [routerLink]="['/Admin', {outlets: {side: ['set_department']}}]"><i class="icon-grid"></i><span>Set Departments</span></a></li> 
+                            <li><a [routerLink]="['/Admin', {outlets: {side: ['set_branch']}}]"><i class="icon-pointer"></i><span>Our Centers</span></a></li>                                
+                            <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Set Staff</span></a></li> 
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['duration']}}]"><i class="fa fa-sort-numeric-asc"></i><span>Prescription Settings</span></a></li>
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['instruction']}}]"><i class="fa fa-sort-alpha-desc"></i><span>Instruction Settings</span></a></li>                                
+                            <li>
+                            <span>
+                                <a class="has-arrow"><i class="fa fa-list"></i><span>Other Settings</span></a>
+                                <ul>      
+                                    <li class="header">Item Settings</li>                                 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_category']}}]">Class</a></li>
+                                    <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['unit']}}]">Unit</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_type']}}]">Type</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['manufacturer']}}]">Brand</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['shelves']}}]">Shelf</a></li>                                       
+                                </ul> 
+                            </span>                                                      
+                            </li>
+                            <li><a href="#"><i class="icon-settings"></i><span>General Settings</span></a></li> 
+                        </ul>
+                    </nav>
+                </div>
+
+                <div *ngIf = "role == global">
+
+                    <nav id="left-sidebar-nav" class="sidebar-nav">
+                        <ul id="main-menu" class="metismenu">
+                            <li class="header">Admin</li>
+                            <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                                <ul>
+                                    <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]">Admin Dashboard</a></li> 
+                                    <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-user-dashboard']}}]">User Dashboard</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]">Patient</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]">Make Appointment</a></li>  
+                                    
+                                </ul>
+                            </li>                         
+                            <li class="header">Depertments</li>                              
+                            <li>
+                                <span>
+                                <a href="javascript:void(0);" class="has-arrow"><i class="icon-like"></i><span>Pharmacy</span></a>
+                                <ul> 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Pharmacy Log</a></li>                             
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]">Refills</a></li>                                        
+                                    <li class="header">Inventory</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">All Items</a></li>                                        
+                                    <li class="header">Audit Trail</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]">History</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]">Report</a></li>
+                                </ul>
+                                </span>
+                            </li>
+                           
+                            <li class="header">Settings</li>                                
+                            <!-- <li><a [routerLink]="['/Admin', {outlets: {side: ['staffs']}}]"><i class="icon-envelope"></i><span>All Staffs</span></a></li> -->
+                            <!-- <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['department']}}]"><i class="icon-grid"></i><span>Departments</span></a></li> -->
+                            <li><a [routerLink]="['/Admin', {outlets: {side: ['set_department']}}]"><i class="fa fa-sitemap"></i><span>Set Departments</span></a></li> 
+                            <li><a [routerLink]="['/Admin', {outlets: {side: ['set_branch']}}]"><i class="icon-layers"></i><span>Our Centers</span></a></li>                                
+                            <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Set Staff</span></a></li> 
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['duration']}}]"><i class="fa fa-sort-numeric-asc"></i><span>Prescription Settings</span></a></li>
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['instruction']}}]"><i class="fa fa-sort-alpha-desc"></i><span>Instruction Settings</span></a></li>                                
+                            <li>
+                            <span>
+                                <a class="has-arrow"><i class="fa fa-list"></i><span>Other Settings</span></a>
+                                <ul>      
+                                    <li class="header">Item Settings</li>                                 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_category']}}]">Class</a></li>
+                                    <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['unit']}}]">Unit</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_type']}}]">Type</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['manufacturer']}}]">Brand</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['shelves']}}]">Shelf</a></li>                                       
+                                </ul> 
+                            </span>                                                      
+                            </li>
+                            <li><a href="#"><i class="icon-settings"></i><span>General Settings</span></a></li> 
+                        </ul>
+                    </nav>
+
+                </div>
+
+                <div *ngIf = "role == center">
+
+                    <nav id="left-sidebar-nav" class="sidebar-nav">
+                        <ul id="main-menu" class="metismenu">
+                            <li class="header">Admin</li>
+                            <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                                <ul>
+                                    <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]">Admin Dashboard</a></li>                                        
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]">Patient</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]">Make Appointment</a></li>  
+                                    
+                                </ul>
+                            </li>                         
+                            <li class="header">Depertments</li>                              
+                            <li>
+                                <span>
+                                <a href="javascript:void(0);" class="has-arrow"><i class="icon-like"></i><span>Pharmacy</span></a>
+                                <ul> 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Pharmacy Log</a></li>                             
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]">Refills</a></li>                                        
+                                    <li class="header">Inventory</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">All Items</a></li>                                        
+                                    <li class="header">Audit Trail</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]">History</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]">Report</a></li>
+                                </ul>
+                                </span>
+                            </li>
+                           
+                            <li class="header">Settings</li>                                                      
+                            <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Set Staff</span></a></li> 
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['duration']}}]"><i class="fa fa-sort-numeric-asc"></i><span>Prescription Settings</span></a></li>
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['instruction']}}]"><i class="fa fa-sort-alpha-desc"></i><span>Instruction Settings</span></a></li>                                
+                            <li>
+                            <span>
+                                <a class="has-arrow"><i class="fa fa-list"></i><span>Other Settings</span></a>
+                                <ul>      
+                                    <li class="header">Item Settings</li>                                 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_category']}}]">Class</a></li>
+                                    <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['unit']}}]">Unit</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_type']}}]">Type</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['manufacturer']}}]">Brand</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['shelves']}}]">Shelf</a></li>                                       
+                                </ul> 
+                            </span>                                                      
+                            </li>                                 
+                        </ul>
+                    </nav>
+
+                </div>
+
+                <div *ngIf = "role == user">
+                    <nav id="left-sidebar-nav" class="sidebar-nav">
+                        <ul id="main-menu" class="metismenu">
+                            <li class="header">Admin</li>
+                            <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-user-dashboard']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                                <ul>                              
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]">Patient</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]">Make Appointment</a></li>  
+                                    
+                                </ul>
+                            </li>                         
+                            <li class="header">Depertments</li>                              
+                            <li>
+                                <span>
+                                <a href="javascript:void(0);" class="has-arrow"><i class="icon-like"></i><span>Pharmacy</span></a>
+                                <ul> 
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]">Pharmacy Log</a></li>                             
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]">Refills</a></li>                                        
+                                    <li class="header">Inventory</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]">All Items</a></li>                                        
+                                    <li class="header">Audit Trail</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]">History</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]">Report</a></li>
+                                </ul>
+                                </span>
+                            </li>
+                           
+                            <li class="header">Settings</li>                                                                
+                            <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Staffs</span></a></li> 
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['duration']}}]"><i class="fa fa-sort-numeric-asc"></i><span>Prescription Settings</span></a></li>
+                            <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['instruction']}}]"><i class="fa fa-sort-alpha-desc"></i><span>Instruction Settings</span></a></li>                                
+                            
+                        </ul>
+                    </nav>
+
+                </div>
+
+                
+            </div>
+
+            <div *ngIf = "laboratory.status == 'active'">
+
+                <nav id="left-sidebar-nav" class="sidebar-nav">
+                    <ul id="main-menu" class="metismenu">
+                        <li class="header">Admin</li>
+                        <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['home']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a>
+                            <ul>
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]">Admin Dashboard</a></li> 
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-user-dashboard']}}]">User Dashboard</a></li>                    
+                                
+                            </ul>
+                        </li>
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['taskboard']}}]"><i class="icon-diamond"></i><span>Patient Taskboard</span></a></li>
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['department']}}]"><i class="icon-grid"></i><span>Departments</span></a></li>
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Staffs By Dept</span></a></li>
+                        
+                        <li class="header">Depertments</li>
+                        
+                        <li >
+                            <span>
+                                <a class="has-arrow"><i class="fa fa-hospital-o"></i><span>Laboratory</span></a>
+                                <ul>                                    
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['lab_log']}}]">Lab Log</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['test']}}]">Test</a></li>
+                                    <li class="header">Setting</li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['set_lab_test']}}]">Set Lab Test</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['set_lab_department']}}]">Set Lab Department</a></li>
+                                    <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['lab_esther']}}]">History</a></li>
+                                </ul>
+                            </span>
+                            </li>
+                        
+                        <li>
+                                <span>
+                            <a class="has-arrow"><i class="icon-credit-card"></i><span>Payments</span></a>
+                            <ul>
+                                <li class="#">Payment</li>
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['payment_log']}}]">Log</a></li>                    
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['payment']}}]">Invoice</a></li>
+
+                                <li class="header">Account</li>
+                                <li><a href="#">Income</a></li>
+                                <li><a href="#">Expences</a></li>
+                                <li><a href="#">Savings</a></li>
+                            </ul>
+                            </span>
+                        </li>                 
+                        <li class="header">Settings</li>
+                        
+                        <li *ngIf="admin == pos"><a [routerLink]="['/Admin', {outlets: {side: ['staffs']}}]"><i class="icon-envelope"></i><span>All Staffs</span></a></li>
+                        <li *ngIf="admin == pos"><a [routerLink]="['/Admin', {outlets: {side: ['set_branch']}}]"><i class="icon-layers"></i><span>Our Centers</span></a></li>
+                        <li>
+                                <span>
+                            <a class="has-arrow"><i class="icon-user"></i><span>Other Settings</span></a>
+                            <ul>
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['set_department']}}]">Set Departments</a></li>                               
+                                <li><a href="#">General Settings</a></li>
+                                
+                            </ul> 
+                            </span>                       
+                        </li>
+                    </ul>
+                </nav>
+
+            </div>
+
+            <div *ngIf = "radiology.status == 'active'"></div>
+
+            <div *ngIf = "doctor.status == 'active'"></div>
+        </div>
+    </div>
+
+    <div >
+            <router-outlet name="side"></router-outlet>
+      </div>
+    
+</div>

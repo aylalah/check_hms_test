@@ -1,0 +1,30 @@
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+/* @import "~@angular/material/prebuilt-themes/indigo-pink.css"​; */
+ 
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+body::-webkit-scrollbar {
+    width: .4em;
+    height: .3em
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: grey
+}
+body::-webkit-scrollbar-thumb:hover {
+    background-color: blueviolet
+}
+
+body::-webkit-scrollbar-corner {
+    border: 1px solid blue
+}
+
+
+
+

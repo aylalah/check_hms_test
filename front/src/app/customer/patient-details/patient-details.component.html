@@ -1,0 +1,676 @@
+<div id="main-content">
+    <div class="container-fluid">
+        <div class="block-header">
+            <div class="row clearfix">
+                <div class="col-md-6 col-sm-12">
+                    <h1>Patient Profile</h1>
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+
+                        <li class="breadcrumb-item"><a href="">Dashboard/ </a></li>
+                        <li class="#" ><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]"> Patient/ </a></li>
+         
+
+                        <li class="breadcrumb-item active" aria-current="page"> Patient Profile</li>
+                        </ol>
+                    </nav>
+                </div>            
+                <!-- <div class="col-md-6 col-sm-12 text-right hidden-xs">
+                    <button class="btn btn-sm btn-primary" title="">Add</button>
+                    <a href="https://themeforest.net/item/oculux-bootstrap-4x-admin-dashboard-clean-modern-ui-kit/23091507" class="btn btn-sm btn-success" title="Themeforest"><i class="icon-basket"></i> Buy Now</a>
+                </div> -->
+            </div>
+        </div>
+
+        <div class="row clearfix">
+            <div class="col-md-12">
+                <div class="card social">
+                    <div class="profile-header d-flex justify-content-between justify-content-center">
+                        <div class="d-flex">
+                            <div class="mr-3">
+                                <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{pat[0].patient_image}}" class="rounded" alt="">
+                            </div>
+                            <div class="details">
+                                <label>Card Number: </label> <span class="mb-0"> {{card_number}}</span><br>
+                                <label>Name: </label><span class="text-light"> {{name }} {{othername}}</span><br>
+                                <label>Gender: </label> <span> {{gender}}</span><br>
+                                <label>Mobile: </label><span> {{mobile_no}}</span>
+                            </div>                                
+                        </div>
+                        <!-- <div class="col text-right">
+                                <div class="small text-light">Wallet</div>
+                                <div class="h4 m-0">N0</div>
+                            </div> -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-5">
+                <div class="card">
+                    <div class="body">
+                        <small class="text-muted">Full Name: </small>
+                        <p>{{name}} {{othername}}</p>
+                        <hr>
+                        <small class="text-muted">Address: </small>
+                        <p>{{address}}</p>
+                        <hr>
+                        <small class="text-muted">Email address: </small>
+                        <p>{{email}}</p>                            
+                        <hr>
+                        <small class="text-muted">Mobile: </small>
+                        <p>{{mobile_no}}</p>
+                        <hr>
+                        <small class="text-muted">Birth Date: </small>
+                        <p class="m-b-0">{{d_o_b}}</p>
+                        <hr>
+                        <small class="text-muted">Gender: </small>
+                        <p class="m-b-0">{{gender}}</p>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="header">
+                        <h2>Blood Report</h2>
+                    </div>
+                    <div class="body">
+                        <table class="table table-hover table-striped mb-0">
+                            <tbody>
+                                <tr>
+                                    <td>Blood Group</td>
+                                    <td>{{blood_group}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Genotype</td>
+                                    <td>{{genotype}}</td>
+                                </tr>
+                                <!-- <tr>
+                                    <td>Weigth </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td>Hight</td>
+                                    <td>0.0%</td>
+                                </tr>
+                                <tr>
+                                    <td>Landfowl</td>
+                                    <td>0.1%</td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td>100.0%</td>
+                                </tr> -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="col-xl-8 col-lg-8 col-md-7"> -->
+                    <div class="col-lg-8 col-md-12">
+                            <div class="card">
+                                <div class="body">
+                                    <ul class="nav nav-tabs">
+                                        <li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#Basic">Basic Information</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#Account">Appointment</a></li>
+                                        <!-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#test">Lab Tests</a></li> -->
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#prescription"> Prescriptions</a></li>
+                                        <!-- <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#voucher">Vouchers</a></li>
+                                        <li class="nav-item"><a class="nav-link" data-toggle="tab" href="#invoice">Invoices</a></li> -->
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- <div class="card">
+                                <div class="row profile_state">
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="body">
+                                            <div class="form-group">
+                                                <label class="d-block">OPD <span class="float-right">77%</span></label>
+                                                <div class="progress progress-xxs">
+                                                    <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: 77%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="body">
+                                            <div class="form-group">
+                                                <label class="d-block">Operations <span class="float-right">50%</span></label>
+                                                <div class="progress progress-xxs">
+                                                    <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-4 col-md-12">
+                                        <div class="body">
+                                            <div class="form-group">
+                                                <label class="d-block">Patient visit <span class="float-right">23%</span></label>
+                                                <div class="progress progress-xxs">
+                                                    <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="23" aria-valuemin="0" aria-valuemax="100" style="width: 23%;"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+            
+                            <div class="tab-content padding-0">
+                                <div class="tab-pane active" id="Basic">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h2>Patient Basic Information</h2>
+                                        </div>
+                                        <div class="body">
+                                            <form [formGroup]="submissionForm" >
+                                                <div class="row clearfix">
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="form-group"> 
+                                                            <label class="fancy-radio custom-color-green">Patient First Name</label>  
+                                                            <input type="text" class="form-control" formControlName="fname">                                             
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-12">
+                                                        <div class="form-group">  
+                                                            <label class="fancy-radio custom-color-green">Patient Other Name</label> 
+                                                            <input type="text" class="form-control" formControlName="oname">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Email Address</label> 
+                                                          <input type="text" class="form-control" formControlName="email">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label class="fancy-radio custom-color-green">Patient Mobile Number</label> 
+                                                              <input type="text" class="form-control" formControlName="mobile_number" placeholder="Mobile Number">
+                                                            </div>
+                                                        </div>
+                                                    </div>                               
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Hospital/Card Number</label>
+                                                          <input type="text" class="form-control" formControlName="card_number" placeholder="Card Number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <div class="form-group">
+                                                                <label class="fancy-radio custom-color-green">Patient Scheme ID</label> 
+                                                                <input type="text" class="form-control" formControlName="n_h_i_s" placeholder="Scheme ID">  
+                                                            </div>
+                                                        </div>
+                                                    </div> 
+                                                    <div class="col-lg-4 col-md-12">
+                                                      <div class="form-group">
+                                                        <label class="fancy-radio custom-color-green">Patient Date of Birth</label>
+                                                        <input type="date" class="form-control" formControlName="d_o_b" placeholder="Date of Birth">
+                                                      </div>
+                                                  </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Age</label>
+                                                            <input type="text" class="form-control" formControlName="age" placeholder="Age">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Type</label>
+                                                            <input type="text" class="form-control" formControlName="type" placeholder="Type">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Occupation</label>
+                                                            <input type="text" class="form-control" formControlName="occupation" placeholder="Occupation">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Marital Status</label>
+                                                            <input type="text" class="form-control" formControlName="marital_status" placeholder="Marital Status">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Religion</label>
+                                                            <input type="text" class="form-control" formControlName="religion" placeholder="Religion">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient City</label>
+                                                            <input type="text" class="form-control" formControlName="city" placeholder="City">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient State</label>
+                                                            <input type="text" class="form-control" formControlName="state" placeholder="State">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Country</label>
+                                                            <input type="text" class="form-control" formControlName="country" placeholder="Country">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="form-group">      
+                                                            <label class="fancy-radio custom-color-green">Patient Home Address</label>                                          
+                                                            <textarea rows="4" type="text" class="form-control" formControlName="address" placeholder="Address"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <h4>Patient Next of Kin Information</h4>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Next of Kin Name</label>
+                                                            <input type="text" class="form-control" formControlName="next_of_kin_name" placeholder="Next of Kin Name">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Relationship to Next of Kin</label>
+                                                            <input type="text" class="form-control" formControlName="kin_relationship" placeholder="Next of Kin Relationship">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                            <label class="fancy-radio custom-color-green">Patient Next of Kin Mobile Number</label>
+                                                            <input type="text" class="form-control" formControlName="next_of_kin_mobile" placeholder="Next of Kin Mobile Number">
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-12 col-md-12">
+                                                        <div class="form-group">      
+                                                            <label class="fancy-radio custom-color-green">Patient Next of Kin Address</label>                                          
+                                                            <textarea rows="4" type="text" class="form-control" formControlName="next_of_kin_address" placeholder="Next of Kin Address"></textarea>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-lg-4 col-md-12">
+                                                        <div class="form-group">
+                                                      <label>Change Patient Image</label><br>
+                                                      <input type="file" name="file"  (change)="uploadFile($event)">
+                                                      </div>
+                                                      </div>
+                                                </div>
+                                                <button type="button" (click)="onSubmitprofile()" class="btn btn-round btn-primary">Update</button> &nbsp;&nbsp;
+                                                <button type="button" class="btn btn-round btn-default">Cancel</button>
+                                                </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="prescription">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h2>Account Data</h2>
+                                        </div>
+                                        <div class="table-responsive">
+                                            <table class="table table-striped table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>S/N</th>
+                                                        <th>Item</th>
+                                                        <th>Original Qty</th>
+                                                        <th>Quantity</th>
+                                                        <th>Refill</th>
+                                                        <th>Refill Range</th>
+                                                        <th>Remain</th>
+                                                        <th>Instock</th>
+                                                        <th>Total Amount</th>                                
+                                                        <th>Patient Name</th>
+                                                        <th>Pharmacist Name</th>
+                                                        <th>Branch</th>
+                                                        <th>Physician Name</th>
+                                                        <th>Date</th>
+                                                        <th>Time</th>
+                                                    </tr>
+                                                </thead>
+                                                    <tr *ngFor="let pres of prescription; let r = index">
+                                                        <td>{{r+1}}</td>
+                                                        <td><img src="http://{{ imgLink}}/backend/public/upload/uploads/{{pres.item_img}}" alt="Avatar" class="w30 rounded-circle mr-2"> <span>{{pres.generic_name}}</span></td>
+                                                        <td>{{pres.original_qty}}</td>
+                                                        <td>{{pres.quantity}}</td>
+                                                        <td>{{pres.refill}}</td>
+                                                        <td>{{pres.refill_range}}</td>
+                                                        <th>{{pres.remain}}</th>
+                                                        <th>{{pres.instock}}</th>
+                                                        <th>{{pres.amount_paid}}</th>
+                                                        <th>{{pres.cname}} {{pres.coname}}</th>
+                                                        <th>{{pres.firstname}} {{pres.lastname}}</th>
+                                                        <th>{{pres.branch_name}}</th>
+                                                        <th>{{pres.doctor_id}}</th>
+                                                        <th>{{pres.p_date}}</th>
+                                                        <th>{{pres.p_time}}</th>
+                                                    </tr>                            
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane" id="Account">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h2>Appointment Data</h2>
+                                        </div>
+                                        <div class="body ">
+                                            <div class="row clearfix">
+                                                <div class="col-12">
+                                                    <div class="table-responsive">
+                                                        <table class="table header-border table-hover table-custom spacing5">
+                                                            <thead>
+                                                                <tr>
+                                                                    <!-- <th>S/N</th> -->
+                                                                    <!-- <th>Image</th> -->
+                                                                    <!-- <th>Patient ID</th> -->
+                                                                    <th>Depertment</th>
+                                                                    <th>Lab</th>
+                                                                    <th>Treatment</th>
+                                                                    <th>Prescription</th>
+                                                                    <th>Invoice</th>
+                                                                    <th>Voucher</th>
+                                                                   
+                                                                    <th>Status</th>
+                                                                    <th>Date</th>
+                                                                    <th>Time</th>
+                                                                    <!-- <th>Progress</th> -->
+                                                                    <th>Action</th>
+                                                                </tr>
+                                                            </thead>
+                                                <tbody>
+                                                    <tr *ngFor="let a of appointment; let n =index">
+                                                        <td>{{a.dept_name}}</td>
+                                                        <td>
+                                    
+                                                            <span class="badge badge-danger" *ngIf ="a.lab=== 'terminated'">Terminated</span>
+                                                                <span class="badge badge-success" *ngIf ="a.lab=== 'success'">Success</span> 
+                                                                <span class="badge badge-warning" *ngIf ="a.lab=== 'invoice'">Invoice</span> 
+                                                                <span class="badge badge-primary" *ngIf ="a.lab=== 'open'">Open</span>  
+                                                                <span class="badge badge-warning" *ngIf ="a.lab=== 'close'">close</span>                                                                               
+                                                        </td>
+                                                        <td>
+                                                                <span class="badge badge-danger" *ngIf ="a.treatment=== 'terminated'">Terminated</span>
+                                                                <span class="badge badge-success" *ngIf ="a.treatment=== 'success'">Success</span> 
+                                                                <!-- <span class="badge badge-warning" *ngIf ="a.treatment=== 'invoice'">Invoice</span>  -->
+                                                                <span class="badge badge-primary" *ngIf ="a.treatment=== 'open'">Open</span> 
+                                                                <span class="badge badge-warning" *ngIf ="a.treatment=== 'close'">close</span>                                                                           
+                                                        </td>
+                                                        <td>                                      
+                                                                <span class="badge badge-danger" *ngIf ="a.prescription=== 'terminated'">Terminated</span>
+                                                                <span class="badge badge-success" *ngIf ="a.prescription=== 'success'">Success</span> 
+                                                                <span class="badge badge-warning" *ngIf ="a.prescription=== 'checkout'">Checkout</span> 
+                                                                <span class="badge badge-primary" *ngIf ="a.prescription=== 'open'">Open</span>     
+                                                                <span class="badge badge-warning" *ngIf ="a.prescription=== 'close'">close</span>                                                                         
+                                                        </td>
+                                                        <td>
+                                                            <span class="badge badge-danger" *ngIf ="a.invoice=== 'terminated'">Terminated</span>
+                                                            <span class="badge badge-success" *ngIf ="a.invoice=== 'paid'">Paid</span> 
+                                                            <span class="badge badge-warning" *ngIf ="a.invoice=== 'unpaid'">Unpaid</span> 
+                                                            <span class="badge badge-primary" *ngIf ="a.invoice=== 'open'">Open</span>    
+                                                            <span class="badge badge-warning" *ngIf ="a.invoice=== 'close'">close</span>                                                                            
+                                                    </td>
+                                                        <td>                                        
+                                                                <span class="badge badge-danger" *ngIf ="a.voucher=== 'terminated'">Terminated</span>
+                                                                <span class="badge badge-success" *ngIf ="a.voucher=== 'success'">Success</span> 
+                                                                <span class="badge badge-warning" *ngIf ="a.voucher=== 'checkout'">Checkout</span> 
+                                                                <span class="badge badge-secondary" *ngIf ="a.voucher=== 'refill'">Refill</span> 
+                                                                <span class="badge badge-primary" *ngIf ="a.voucher=== 'open'">Open</span>
+                                                                <span class="badge badge-warning" *ngIf ="a.voucher=== 'close'">close</span>                                                                               
+                                                        </td>
+                                                        <td>
+                                                                <span class="badge badge-success" *ngIf ="a.status=== 'active'">Active</span>
+                                                                <span class="badge badge-danger" *ngIf ="a.status=== 'terminated'">Terminated</span>
+                                                                <span class="badge badge-success" *ngIf ="a.status=== 'close'">Close</span>                                                                               
+                                                        </td>                            
+                                                        <!-- <td>{{i.lab}}</td>
+                                                        <td>{{i.treatment}}</td>                                  
+                                                        <td>{{i.prescription}}</td>
+                                                        <td>{{i.invoice}}</td>
+                                                        <td>{{i.voucher}}</td>
+                                                        <td>{{i.status}}</td> -->
+                                                        <td>{{a.date}}</td>
+                                                        <td>{{a.time}}</td>
+                                                        
+                                                        <td><a class="p-1" href="#" [routerLink]="['/Admin', {outlets: {side: ['invoice', a.id]}}]">Invoice</a></td>
+                                                    </tr>
+                                                   
+                                                </tbody>
+                                            </table>
+                                           </div>
+                                           </div>
+                                           </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="tab-pane" id="test">
+                                    <div class="card">
+                                        <div class="header">
+                                            <h2>General Information</h2>
+                                        </div>
+                                        <div class="body">
+                                            <div class="row">
+                                                <div class="col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" placeholder="Phone Number">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select class="form-control">
+                                                            <option>--Select Language</option>
+                                                            <option value="en_US" lang="en">English (United States)</option>                                                           
+                                                            <option value="zh_CN" lang="zh">简体中文</option>
+                                                            <option value="zh_TW" lang="zh">繁體中文</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <select class="form-control">
+                                                            <option>--TimeZone--</option>
+                                                            <optgroup label="Africa">
+                                                                <option value="Africa/Abidjan">Abidjan</option>
+                                                                <option value="Africa/Accra">Accra</option>
+                                                                <option value="Africa/Addis_Ababa">Addis Ababa</option>                                                               
+                                                                <option value="Africa/Tripoli">Tripoli</option>
+                                                                <option value="Africa/Tunis">Tunis</option>
+                                                                <option value="Africa/Windhoek">Windhoek</option>
+                                                            </optgroup>
+                                                            <optgroup label="America">
+                                                                <option value="America/Adak">Adak</option>
+                                                                <option value="America/Anchorage">Anchorage</option>                                                               
+                                                                <option value="America/Whitehorse">Whitehorse</option>
+                                                                <option value="America/Winnipeg">Winnipeg</option>
+                                                                <option value="America/Yakutat">Yakutat</option>
+                                                                <option value="America/Yellowknife">Yellowknife</option>
+                                                            </optgroup>
+                                                            <optgroup label="Antarctica">
+                                                                <option value="Antarctica/Casey">Casey</option>                                                             
+                                                                <option value="Antarctica/Troll">Troll</option>
+                                                                <option value="Antarctica/Vostok">Vostok</option>
+                                                            </optgroup>
+                                                            <optgroup label="Arctic">
+                                                                <option value="Arctic/Longyearbyen">Longyearbyen</option>
+                                                            </optgroup>
+                                                            <optgroup label="Asia">
+                                                                <option value="Asia/Aden">Aden</option>
+                                                                <option value="Asia/Almaty">Almaty</option>
+                                                                <option value="Asia/Amman">Amman</option>
+                                                                /option>
+                                                                <option value="Asia/Vladivostok">Vladivostok</option>
+                                                                <option value="Asia/Yakutsk">Yakutsk</option>
+                                                                <option value="Asia/Yekaterinburg">Yekaterinburg</option>
+                                                                <option value="Asia/Yerevan">Yerevan</option>
+                                                            </optgroup>
+                                                            <optgroup label="Atlantic">
+                                                                <option value="Atlantic/Azores">Azores</option>
+                                                                <option value="Atlantic/Bermuda">Bermuda</option>
+                                                                <option value="Atlantic/Canary">Canary</option>                                                                
+                                                                <option value="Atlantic/St_Helena">St Helena</option>
+                                                            </optgroup>
+                                                            <optgroup label="Australia">
+                                                                <option value="Australia/Adelaide">Adelaide</option>
+                                                                <option value="Australia/Brisbane">Brisbane</option>
+                                                                <option value="Australia/Broken_Hill">Broken Hill</option>
+                                                                <option value="Australia/Currie">Currie</option>
+                                                               
+                                                                <option value="Australia/Sydney">Sydney</option>
+                                                            </optgroup>
+                                                            <optgroup label="Europe">
+                                                                <option value="Europe/Amsterdam">Amsterdam</option>
+                                                                <option value="Europe/Andorra">Andorra</option>
+                                                                <option value="Europe/Athens">Athens</option>
+                                                               
+                                                                <option value="Europe/Zurich">Zurich</option>
+                                                            </optgroup>
+                                                            <optgroup label="Indian">
+                                                                <option value="Indian/Antananarivo">Antananarivo</option>
+                                                                <option value="Indian/Chagos">Chagos</option>
+                                                                <option value="Indian/Christmas">Christmas</option>
+                                                                
+                                                                <option value="Indian/Reunion">Reunion</option>
+                                                            </optgroup>
+                                                            <optgroup label="Pacific">
+                                                                <option value="Pacific/Apia">Apia</option>
+                                                                <option value="Pacific/Auckland">Auckland</option>
+                                                                <option value="Pacific/Chatham">Chatham</option>
+                                                                <option value="Pacific/Chuuk">Chuuk</option>
+                                                                
+                                                                <option value="Pacific/Wake">Wake</option>
+                                                                <option value="Pacific/Wallis">Wallis</option>
+                                                            </optgroup>
+                                                            <optgroup label="UTC">
+                                                                <option value="UTC">UTC</option>
+                                                            </optgroup>
+                                                            <optgroup label="Manual Offsets">
+                                                                <option value="UTC-12">UTC-12</option>
+                                                                <option value="UTC-11.5">UTC-11:30</option>
+                                                                <option value="UTC-11">UTC-11</option>
+                                                                <option value="UTC-10.5">UTC-10:30</option>
+                                                                <option value="UTC-10">UTC-10</option>
+                                                                
+                                                                <option value="UTC+12">UTC+12</option>
+                                                                <option value="UTC+12.75">UTC+12:45</option>
+                                                                <option value="UTC+13">UTC+13</option>
+                                                                <option value="UTC+13.75">UTC+13:45</option>
+                                                                <option value="UTC+14">UTC+14</option>
+                                                            </optgroup>
+                                                        </select>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label>Date Format</label>
+                                                        <div class="fancy-radio">
+                                                            <label><input name="dateFormat" value="" type="radio"><span><i></i>May 18, 2018</span></label>&nbsp;&nbsp;
+                                                            <label><input name="dateFormat" value="" type="radio"><span><i></i>2018, May, 18</span></label>&nbsp;&nbsp;
+                                                            <label><input name="dateFormat" value="" type="radio" checked><span><i></i>2018-03-10</span></label>&nbsp;&nbsp;
+                                                            <label><input name="dateFormat" value="" type="radio"><span><i></i>02/09/2018</span></label>&nbsp;&nbsp;
+                                                            <label><input name="dateFormat" value="" type="radio"><span><i></i>10/05/2018</span></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-12 col-md-12">
+                                                    <h6>Email from Lucid</h6>
+                                                    <p>I'd like to receive the following emails:</p>
+                                                    <ul class="list-unstyled list-email-received">
+                                                        <li>
+                                                            <label class="fancy-checkbox">
+                                                                <input type="checkbox" checked><span>Weekly account summary</span></label>
+                                                        </li>
+                                                        <li>
+                                                            <label class="fancy-checkbox">
+                                                                <input type="checkbox"><span>Campaign reports</span></label>
+                                                        </li>
+                                                        <li>
+                                                            <label class="fancy-checkbox">
+                                                                <input type="checkbox" checked><span>Promotional news such as offers or discounts</span></label>
+                                                        </li>
+                                                        <li>
+                                                            <label class="fancy-checkbox">
+                                                                <input type="checkbox" checked><span>Tips for campaign setup, growth and client success stories</span></label>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <button type="button" class="btn btn-primary">Update</button> &nbsp;&nbsp;
+                                            <button class="btn btn-default">Cancel</button>
+                                        </div>
+                                    </div>
+                                </div> -->
+                              
+                                    <!-- <div class="tab-pane" id="voucher">
+                                            <div class="card">
+                                                <div class="header">
+                                                    <h2>Account Data</h2>
+                                                </div>
+                                                <div class="body">
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <div class="form-group">                                                
+                                                                <input type="text" class="form-control" value="ChandlerBing" disabled placeholder="Username">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="email" class="form-control" value="Chandler.info@yourdomain.com" placeholder="Email">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="text" class="form-control" placeholder="Phone Number">
+                                                            </div>
+                                                        </div>
+                    
+                                                        <div class="col-lg-12 col-md-12">
+                                                            <h6>Change Password</h6>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control" placeholder="Current Password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control" placeholder="New Password">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <input type="password" class="form-control" placeholder="Confirm New Password">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-primary">Update</button> &nbsp;&nbsp;
+                                                    <button class="btn btn-default">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="invoice">
+                                                <div class="card">
+                                                    <div class="header">
+                                                        <h2>Account Data</h2>
+                                                    </div>
+                                                    <div class="body">
+                                                        <div class="row clearfix">
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <div class="form-group">                                                
+                                                                    <input type="text" class="form-control" value="ChandlerBing" disabled placeholder="Username">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="email" class="form-control" value="Chandler.info@yourdomain.com" placeholder="Email">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="text" class="form-control" placeholder="Phone Number">
+                                                                </div>
+                                                            </div>
+                        
+                                                            <div class="col-lg-12 col-md-12">
+                                                                <h6>Change Password</h6>
+                                                                <div class="form-group">
+                                                                    <input type="password" class="form-control" placeholder="Current Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="password" class="form-control" placeholder="New Password">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <input type="password" class="form-control" placeholder="Confirm New Password">
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <button type="button" class="btn btn-primary">Update</button> &nbsp;&nbsp;
+                                                        <button class="btn btn-default">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div> -->
+                            </div>
+                            
+                        </div>
+        </div>
+    </div>
+</div>

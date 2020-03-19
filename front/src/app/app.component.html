@@ -1,0 +1,16 @@
+ <div *ngIf = "statu == 'key'">
+     <app-key></app-key>
+ </div>
+
+ <div *ngIf = "statu == 'locked'">
+    <app-lock></app-lock>
+</div>
+
+<div *ngIf = "statu == 'registerd'">
+    <app-register></app-register>
+</div>
+ 
+ <div *ngIf = "statu == 'activated'">
+    <router-outlet></router-outlet>
+</div>
+        
