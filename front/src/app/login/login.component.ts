@@ -79,7 +79,6 @@ export class LoginComponent implements OnInit {
   handleResponse(data) {
     let pos =data.details[0].dept_name+'-'+ data.details[0].role_name ;
 
-    alert(pos);
     let snackBarRef = this.snackBar.open("Login successfully", 'Dismiss', {
       duration: 2000
     })   
