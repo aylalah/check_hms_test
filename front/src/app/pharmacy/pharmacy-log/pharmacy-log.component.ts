@@ -8,6 +8,7 @@ import { NgForm } from '@angular/forms';
 import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
+
 @Component({
   selector: 'app-pharmacy-log',
   templateUrl: './pharmacy-log.component.html',
@@ -45,6 +46,7 @@ export class PharmacyLogComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
     this.Jarwis. generalSettings().subscribe(
       data=>{
       this.response = data;      
@@ -144,6 +146,7 @@ export class PharmacyLogComponent implements OnInit {
     
   }
 
+
   handleError(error) {
     this.error = error.error.errors;
     let snackBarRef = this.snackBar.open("This patient is already appointed", 'Dismiss', {
@@ -189,6 +192,7 @@ export class PharmacyLogComponent implements OnInit {
     })
     
   }
+
   getInput(i){
     this.logUser = i.target.value
   }

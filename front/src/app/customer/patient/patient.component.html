@@ -39,6 +39,14 @@
                         </ul>
                     </div> -->
                     <div class="body">
+                        <div class="row">
+                            <div class="col-lg-10 col-md-10 col-sm-6">
+                                <label>Search User</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" id="patient_data" placeholder="Search..."  [formControl]="control">
+                                    
+                                </div>
+                            </div>  
                         <div class="table-responsive">
                             <table class="table table-hover js-basic-example dataTable table-custom spacing5">
                                 <thead>
@@ -66,7 +74,7 @@
                                     </tr>
                                 </tfoot> -->
                                 <tbody>
-                                    <tr  *ngFor="let p of pat | paginate: {itemsPerPage:100, currentPage: p}; let r = index">
+                                    <tr  *ngFor="let p of pat; let r = index">
                                         <td> {{r+1}}</td>
                                         <td class="w60">
                                                 <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{p.patient_image}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 rounded">
@@ -129,7 +137,7 @@
                             </table>
                             <!-- <button class="btn btn-danger" (click)="prev(d.last_page)">Prev</button>
                             <button class="btn btn-success" (click)="next(d.)">Next</button> -->
-                            <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>  
+                            <!-- <pagination-controls style="background: blue;" (pageChange)="p = $event" class="my-pagination"></pagination-controls>   -->
                         </div>
                     </div>
                 </div>

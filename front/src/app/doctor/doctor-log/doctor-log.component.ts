@@ -18,6 +18,8 @@ export class DoctorLogComponent implements OnInit {
   imgLink: any;
   dept_name: any;
   patient_data: any;
+  patient_search: any;
+  manual_search: any;
   
   constructor(
     private Jarwis: JarwisService,
