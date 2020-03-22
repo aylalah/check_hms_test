@@ -898,10 +898,9 @@
                     <ul id="main-menu" class="metismenu"  *ngIf = "pos == '3'">
                         <li class="header">Doctor Admin</li>
                         <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: [home]}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>                        
-                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['add_patient']}}]"><i class="icon-user"></i><span>Add Patient</span></a></li>
-                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]"><i class="icon-user"></i><span>Patients</span></a></li>
-                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient_category']}}]"><i class="icon-user"></i><span>Patients Category</span></a></li>
-                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]"><i class="fa fa-sitemap"></i><span>Appointment</span></a></li>      
+                        {side: ['doctor_log']}}]"><i class="icon-user"></i><span>All Appointments</span></a></li>
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['open-appointments']}}]"><i class="icon-user"></i><span>Open Appointments</span></a></li>
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['success-appointments']}}]"><i class="icon-user"></i><span>Successful Appointments</span></a></li>   
                                 
                         <li class="header">Module</li>
                         <!-- <li>
@@ -990,7 +989,7 @@
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['doctor_log']}}]"><i class="icon-user"></i><span>All Appointments</span></a></li>
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['open-appointments']}}]"><i class="icon-user"></i><span>Open Appointments</span></a></li>
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['success-appointments']}}]"><i class="icon-user"></i><span>Successful Appointments</span></a></li>
-                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]"><i class="fa fa-sitemap"></i><span>Appointment</span></a></li>      
+                        
                         <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Staff</span></a></li>    
                         <li class="header">Module</li>
                         <!-- <li>
