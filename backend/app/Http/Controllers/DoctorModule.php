@@ -34,6 +34,35 @@ class DoctorModule extends Controller
         return response()->json($sqlStatement);
     }
 
+    public function displayOpenAppointment(){
+        $deptId= Auth()->user()->dept_id;
+        $branchId= Auth()->user()->branch_id;
+        
+        return Appointments::orderBy('id')->join('departments','appointments.department_id','=','departments.id')
+                ->join('customers','appointments.customer_id','=','customers.id')
+                ->select('appointments.*','departments.name as dept_name', 'customers.name as pat_name', 'customers.id as cust_id', 'customers.othername', 'customers.card_number', 'customers.patient_image', 'customers.blood_group', 'customers.genotype')               
+                ->where('appointments.department_id','=',$deptId)
+                ->where('appointments.branch_id','=',$branchId)
+                ->where('appointments.status','!=','terminated')
+                ->where('appointments.status','!=','close')
+                ->where('treatment','=','open')
+                ->get();
+    }
+
+    public function displaySuccessAppointment(){
+        $deptId= Auth()->user()->dept_id;
+        $branchId= Auth()->user()->branch_id;
+        
+        return Appointments::orderBy('id')->join('departments','appointments.department_id','=','departments.id')
+                ->join('customers','appointments.customer_id','=','customers.id')
+                ->select('appointments.*','departments.name as dept_name', 'customers.name as pat_name', 'customers.id as cust_id', 'customers.othername', 'customers.card_number', 'customers.patient_image', 'customers.blood_group', 'customers.genotype')               
+                ->where('appointments.department_id','=',$deptId)
+                ->where('appointments.branch_id','=',$branchId)
+                ->where('appointments.status','!=','terminated')
+                ->where('appointments.status','!=','close')
+                ->where('treatment','=','success')
+                ->get();
+    }
     public function displayAppointment(){
         $deptId= Auth()->user()->dept_id;
         $branchId= Auth()->user()->branch_id;

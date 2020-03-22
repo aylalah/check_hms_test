@@ -22,5 +22,23 @@ export class DoctorJarwisService {
       Authorization:`Bearer ${localStorage.token}`
     }})
   }
+
+  displayOpenAppointment() {
+    return this.http.get(`${this.baseUrl}/displayOpenAppointment`,{headers:{
+      Authorization:`Bearer ${localStorage.token}`
+    }})
+  }
+
+  displaySuccessAppointment() {
+    return this.http.get(`${this.baseUrl}/displaySuccessAppointment`,{headers:{
+      Authorization:`Bearer ${localStorage.token}`
+    }})
+  }
+
+  profile() {
+    return this.http.get(`${this.baseUrl}/me`,{headers:{
+      Authorization:`Bearer ${localStorage.token}`
+    }})
+  }
   
 }

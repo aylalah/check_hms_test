@@ -103,6 +103,9 @@ import { ExportAsModule } from 'ngx-export-as';
 import { CustomerCategoryComponent } from './customer/customer-category/customer-category.component';
 import { DoctorAdminComponent } from './dashboard/doctor-admin/doctor-admin.component';
 import { PatDetailComponent } from './doctor/pat-detail/pat-detail.component';
+import { AllPatientLogComponent } from './doctor/all-patient-log/all-patient-log.component';
+import { OpenAppointmentsComponent } from './doctor/open-appointments/open-appointments.component';
+import { SuccessAppointmentsComponent } from './success-appointments/success-appointments.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -238,7 +241,13 @@ import { PatDetailComponent } from './doctor/pat-detail/pat-detail.component';
   
     DoctorAdminComponent,
   
-    PatDetailComponent
+    PatDetailComponent,
+  
+    AllPatientLogComponent,
+  
+    OpenAppointmentsComponent,
+  
+    SuccessAppointmentsComponent
   ],
   imports: [
     BrowserModule,

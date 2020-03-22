@@ -292,4 +292,6 @@ Route::post('addGeneralset', 'AddController@GeneralSet');
 // DOctor Module
 Route::get('patient-data/{id}', 'DoctorModule@patientData');
 Route::get('displayAppointment','DoctorModule@displayAppointment');
+Route::get('displayOpenAppointment','DoctorModule@displayOpenAppointment');
+Route::get('displaySuccessAppointment','DoctorModule@displayOpenAppointment');
 

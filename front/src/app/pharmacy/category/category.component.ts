@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 
 @Component({
   selector: 'app-category',
@@ -34,23 +35,35 @@ export class CategoryComponent implements OnInit {
   p:any;
   disabled = false;
   onScroll:any;
+  public _res;
+
   constructor( 
     private Jarwis: JarwisService,
     private Token: TokenService,
     private router: Router,
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
+    private DocJarwis: DoctorJarwisService
   ) { }
 
   ngOnInit() {
-    this.Jarwis.displayCategories().subscribe(
+    this.DocJarwis.profile().subscribe(
       data=>{
-      this.response = data;      
-      this.cat = this.response   
+      this._res = data;
+      (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
     })
-    this.onFilterChange();
   
 }
+
+public _continue():void {
+  this.Jarwis.displayCategories().subscribe(
+    data=>{
+    this.response = data;      
+    this.cat = this.response   
+  })
+  this.onFilterChange();
+}
+
 onFilterChange() {
   this.Jarwis.displayCategories().subscribe(
     data=>{

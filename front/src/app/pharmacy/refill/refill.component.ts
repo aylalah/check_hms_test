@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 
 @Component({
   selector: 'app-refill',
@@ -15,6 +16,7 @@ import { NgForm } from '@angular/forms';
 export class RefillComponent implements OnInit {
   response: Object;
   refill: Object;
+  public _res;
 
   constructor(
     private http: HttpClient,
@@ -24,9 +26,19 @@ export class RefillComponent implements OnInit {
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
     public actRoute: ActivatedRoute,
+    private DocJarwis: DoctorJarwisService
   ) { }
 
   ngOnInit() {
+    //checking if router is  pharmacy
+    this.DocJarwis.profile().subscribe(
+     data=>{
+     this._res = data;
+     (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+   })  
+ }
+
+  public _continue():void {
     this.Jarwis.displayRefill().subscribe(
       data=>{
       this.response = data;      
