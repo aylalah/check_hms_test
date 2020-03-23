@@ -225,6 +225,15 @@ class DisplayController extends Controller
                 ->where('id', '=', $id)             
                 ->get();
     }
+    public function editVoucher(Request $request){
+        $id=$request[0];
+        return $request;
+
+    }
+    public function voucherData(Request $request){
+       $id=$request[0];
+       return $details =Doctor_prescriptions::where('id',$id)->get();
+    }
 
     public function edtduration($id)
     {
@@ -519,8 +528,18 @@ class DisplayController extends Controller
                 ->select('appointments.treatment','customers.name as pat_name', 'customers.othername','customers.card_number','appointments.lab','appointments.prescription','appointments.invoice','appointments.voucher','appointments.status','appointments.updated_at','appointments.created_at','appointments.date','appointments.time','appointments.customer_id','appointments.department_id','appointments.voucher_id','appointments.branch_id','departments.name as dept_name','customers.patient_image')               
                 ->get();
     }
+    public function cancelPharmLog(Request $request){
+        $id = $request[0];
+        $cancel = DB::table("appointments")->where('id',$id)->delete();
+         if($cancel){
+             return response()->json("You have successfully calceled");
+         }
+    }
     public function displayDeptAppointment()
     {
+        $currentDate= carbon::now()->toDateTimeString('Y-m-d');
+        $currentDate.slice(0,6);
+        return $currentDate;
         $deptId= Auth()->user()->dept_id;
         $branchId= Auth()->user()->branch_id;
         return Appointments::orderBy('id', 'DESC')->join('departments','appointments.department_id','=','departments.id')

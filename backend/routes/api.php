@@ -9,8 +9,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::group([
     'middleware' => 'api',
 ], function () {
-
-//Settings
+    
+    //Settings
 Route::get('setupStatus', 'SetupController@setupStatus');
 Route::get('generalSettings', 'SetupController@generalSettings');
 
@@ -128,6 +128,9 @@ Route::post('addItemType', 'AddController@addItemType');
 Route::post('updateDuration', 'AddController@updateDuration');
 Route::get('edtduration/{id}','DisplayController@edtduration');
 Route::post('deleteDuration', 'AddController@deleteDuration');
+Route::post('editvoucher','DisplayController@editVoucher');
+Route::post('voucherdata','DisplayController@voucherData');
+
 
 Route::get('displayInstruction','DisplayController@displayInstruction');
 Route::get('idInstruction/{id}','DisplayController@idInstruction');
@@ -190,6 +193,7 @@ Route::post('deleteCustCategories', 'AddController@deleteCustCategories');
 
 // Appointments 
 Route::get('displayAllappointment','DisplayController@displayAllappointment');
+Route::post('cancelPharmLog','DisplayController@cancelPharmLog');
 Route::post('makeAppointment2','AddController@makeAppointment2');
 Route::get('displayDeptAppointment','DisplayController@displayDeptAppointment');
 Route::get('displayPharmStaffDashAppointment','DisplayController@displayPharmStaffDashAppointment');

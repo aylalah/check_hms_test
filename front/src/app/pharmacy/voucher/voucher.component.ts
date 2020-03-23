@@ -78,6 +78,13 @@ export class VoucherComponent implements OnInit {
   Instructionresponse_id: any;
   amt_value: any;
   sup_id: any;
+  editvoucher_id;
+  editvoucher_day;
+  editvoucher_desPe;
+  editvoucher_preDisAmo;
+  editvoucher_tatalQuant;
+  editvoucher_UseForDays;
+  editvoucher_totalCost;
 
   constructor(
     private Jarwis: JarwisService,
@@ -89,7 +96,6 @@ export class VoucherComponent implements OnInit {
   ) { }
 
   ngOnInit() { 
-
 	this.actRoute.paramMap.subscribe((params => {
 	    let id = params.get('id');
 	    this.appId= id;
@@ -205,10 +211,21 @@ export class VoucherComponent implements OnInit {
     })
      
   }
+  editVoucher(){
+    this.Jarwis.editVoucher(this.editvoucher_id).subscribe(data=>{
+    
 
-  editTrans(hh){
+    })
+  }
 
-    alert(hh);
+  editTrans(id){
+    this.editvoucher_id=id;
+    this.Jarwis.voucherData(id).subscribe(data=>{
+      console.log(data[0])
+      this.editvoucher_day=data[0].days;
+      this.editvoucher_desPe = data[0].dispense;
+      this.editvoucher_preDisAmo = data[0].quantity;
+    })
     // this.amt_value = a.target.value;
     // this.Jarwis.idDurationForV(this.amt_value).subscribe(
     //   data=>{
