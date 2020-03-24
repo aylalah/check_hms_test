@@ -100,14 +100,16 @@ export class AllItemsComponent implements OnInit {
   varQuantity: any;
   varDetails: any;
   varId2: any;
-
+  public itemss:any;
   constructor( 
     private Jarwis: JarwisService,
     private Token: TokenService,
     private router: Router,
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
-  ) { }
+  ) { 
+    
+  }
 
   ngOnInit() {
     
@@ -118,6 +120,24 @@ export class AllItemsComponent implements OnInit {
       this.uBranchName= this.response.det[0].br_name
       this.uPos= this.response.det[0].role_id
       this.uDept= this.response.det[0].dept_id
+     
+    })
+    this.Jarwis.displayItem(this.uBranch).subscribe(
+      data=>{
+      this.response = data;      
+      this.items = this.response;
+      this.itemsitem=this.items.item;
+      console.log(this.items.item)
+      this.name=this.items.bran.name
+      this.soldItem=this.items.soldItem
+      this.transferredItem=this.items.transferredItem
+      this.varianced=this.items.varianced
+      this.openBal=this.items.openBal
+      this.totala=this.items.total
+      this.physBal=this.items.physBal
+      this.itemAmount=this.items.itemAmount
+      this.addedItem=this.items.addedItem
+      
     })
 
     this.Jarwis.setupStatus().subscribe(data=>{}) 
@@ -133,23 +153,7 @@ export class AllItemsComponent implements OnInit {
       this.response = data;      
       this.branch = this.response
       })
-
-    this.Jarwis.displayItem(this.uBranch).subscribe(
-      data=>{
-      this.response = data;      
-      this.items = this.response;
-      this.itemsitem=this.items.item;
-      this.name=this.items.bran.name
-      this.soldItem=this.items.soldItem
-    this.transferredItem=this.items.transferredItem
-    this.varianced=this.items.varianced
-    this.openBal=this.items.openBal
-    this.totala=this.items.total
-    this.physBal=this.items.physBal
-  this.itemAmount=this.items.itemAmount
-        this.addedItem=this.items.addedItem
-
-    })
+      console.log(this.uBranch)
 
     this.Jarwis.displayBranch().subscribe(
       data=>{
@@ -225,6 +229,9 @@ export class AllItemsComponent implements OnInit {
     })
     this.onFilterChange()
 }
+prevIt(){
+
+}
 onFilterChange() {
   // console.log(event)
   // const filterValue=(event.target as HTMLInputElement).value;
@@ -233,6 +240,7 @@ onFilterChange() {
   console.log(this.itemsitem)
   this.Jarwis.displayItem(this.uBranch).subscribe(
     data=>{
+      console.log(data.data)
     this.response = data;      
     this.items = this.response;
     this.soldItem=this.items.soldItem
