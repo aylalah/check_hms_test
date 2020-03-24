@@ -289,8 +289,13 @@
                         <td>{{r.amount | currency:'NGN':'symbol-narrow'}}</td>
                         <td>{{r.amount_paid | currency:'NGN':'symbol-narrow'}}</td>
                         <td>
+<<<<<<< HEAD
                           <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button>
                           <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
+=======
+                          <!-- <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button> -->
+                          <button type="button" *ngIf = "prescription == 'open' " class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
+>>>>>>> e4ef18116f822c6f5be4c200ed0e5ab2d1c325ae
                       </td>                     
                         </tr>
                         <div *ngIf="!prescriptionsList">
@@ -376,6 +381,7 @@
                 </div>
                 </div>
                 </div>
+<<<<<<< HEAD
 
 
                 <!-- Default Size -->
@@ -444,6 +450,8 @@
 
 
 
+=======
+>>>>>>> e4ef18116f822c6f5be4c200ed0e5ab2d1c325ae
             </div>
         </div>
     </div>
