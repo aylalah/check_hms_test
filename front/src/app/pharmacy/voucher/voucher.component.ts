@@ -78,13 +78,20 @@ export class VoucherComponent implements OnInit {
   Instructionresponse_id: any;
   amt_value: any;
   sup_id: any;
-  editvoucher_id;
-  editvoucher_day;
-  editvoucher_desPe;
-  editvoucher_preDisAmo;
-  editvoucher_tatalQuant;
-  editvoucher_UseForDays;
-  editvoucher_totalCost;
+  editvoucher_id:any;
+  editvoucher_day:any;
+  editvoucher_desPe:any;
+  editvoucher_preDisAmo:any;
+  editvoucher_totalQuant:any;
+  editvoucher_UseForDays:any;
+  editvoucher_totalCost:any;
+  editvoucher_id1:any;
+  editvoucher_day1:any;
+  editvoucher_desPe1:any;
+  editvoucher_preDisAmo1:any;
+  editvoucher_totalQuant1:any;
+  editvoucher_UseForDays1:any;
+  editvoucher_totalCost1:any;
 
   constructor(
     private Jarwis: JarwisService,
@@ -212,19 +219,52 @@ export class VoucherComponent implements OnInit {
      
   }
   editVoucher(){
-    this.Jarwis.editVoucher(this.editvoucher_id).subscribe(data=>{
-    
-
+    console.log("something")
+    this.Jarwis.editVoucher({
+        id:this.editvoucher_id,
+        days:this.editvoucher_UseForDays,
+        dispense:this.editvoucher_desPe,
+        quantity:this.editvoucher_preDisAmo,
+        refill:this.editvoucher_desPe-1,
+        remain:this.editvoucher_totalQuant-this.editvoucher_preDisAmo,
+        refill_range:this.editvoucher_preDisAmo,
+        amount_paid:this.editvoucher_totalCost,
+      }).subscribe(data=>{
+        console.log(data)
     })
+  }
+  editVou(des){
+    if(this.editvoucher_preDisAmo==this.editvoucher_totalQuant && des.target.value>0){
+      console.log(des.target.value)
+      this.editvoucher_preDisAmo =  this.editvoucher_preDisAmo1/ des.target.value;
+      this.editvoucher_UseForDays =this.math.floor(this.editvoucher_UseForDays1/des.target.value);
+      this.editvoucher_totalCost = this.editvoucher_totalCost1/des.target.value;
+    }
+   else if( this.editvoucher_preDisAmo<this.editvoucher_totalQuant && des.target.value>0){
+      // console.log(des.target.value)
+      this.editvoucher_preDisAmo =  this.editvoucher_preDisAmo1*des.target.value;
+      this.editvoucher_UseForDays =this.math.floor(this.editvoucher_UseForDays1*des.target.value);
+      this.editvoucher_totalCost = this.editvoucher_totalCost1*des.target.value;
+    }
   }
 
   editTrans(id){
     this.editvoucher_id=id;
     this.Jarwis.voucherData(id).subscribe(data=>{
-      console.log(data[0])
-      this.editvoucher_day=data[0].days;
-      this.editvoucher_desPe = data[0].dispense;
-      this.editvoucher_preDisAmo = data[0].quantity;
+      console.log(data)
+      // this.editvoucher_day=data[0].day_supply;
+      this.editvoucher_desPe1 = data[0].dispense;
+      this.editvoucher_preDisAmo1 = data[0].quantity;
+      this.editvoucher_totalQuant1=data[0].original_qty;
+      this.editvoucher_UseForDays1=data[0].days;
+      this.editvoucher_totalCost1=data[0].amount_paid; 
+
+      this.editvoucher_desPe = this.editvoucher_desPe1;
+      this.editvoucher_preDisAmo = this.editvoucher_preDisAmo1;
+      this.editvoucher_totalQuant=this.editvoucher_totalQuant1;
+      this.editvoucher_UseForDays=this.math.floor( this.editvoucher_UseForDays1);
+      this.editvoucher_totalCost= this.editvoucher_totalCost1; 
+
     })
     // this.amt_value = a.target.value;
     // this.Jarwis.idDurationForV(this.amt_value).subscribe(

@@ -204,7 +204,7 @@
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <label>Use for Day(s)</label>
                                     <div class="form-group">
-                                        <input type="number" class="form-control" value="{{math.round(useFor)}}" ngModel name="days" disabled placeholder="Days">
+                                        <input type="number" class="form-control" value="{{math.floor(useFor)}}" ngModel name="days" disabled placeholder="Days">
                                     </div>  
                                 </div>
                             </div>
@@ -289,13 +289,8 @@
                         <td>{{r.amount | currency:'NGN':'symbol-narrow'}}</td>
                         <td>{{r.amount_paid | currency:'NGN':'symbol-narrow'}}</td>
                         <td>
-<<<<<<< HEAD
                           <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button>
                           <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
-=======
-                          <!-- <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button> -->
-                          <button type="button" *ngIf = "prescription == 'open' " class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
->>>>>>> e4ef18116f822c6f5be4c200ed0e5ab2d1c325ae
                       </td>                     
                         </tr>
                         <div *ngIf="!prescriptionsList">
@@ -381,7 +376,6 @@
                 </div>
                 </div>
                 </div>
-<<<<<<< HEAD
 
 
                 <!-- Default Size -->
@@ -399,11 +393,8 @@
                 <div class="row clearfix">
                     <div class="col-md-8">
                         <div class="form-group">
-                          <!-- <label>{{deptName}}</label> -->
-                          <Label>Day(s)</Label> 
-                            <input type="text" class="form-control" [value]="unitName" [(ngModel)]="editvoucher_day" >
                             <label for="">Despensable Period</label> 
-                            <input  class="form-control" [value]="unitid" [(ngModel)]="editvoucher_desPe" >
+                            <input type="number"  class="form-control" (keyup)="editVou($event)" [(ngModel)]="editvoucher_desPe" name="editvoucher_desPe"  >
                         </div>
                     </div>
                     <!-- <div class="col-md-4">
@@ -418,18 +409,18 @@
                     <div class="col-sm-12">
                         <div class="form-group mt-3">  
                           <label for="">Present Dispensable Amount  </label>                          
-                          <input type="text" class="form-control" [value]="unitValue" [(ngModel)]="editvoucher_preDisAmo" name="value" >
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]="editvoucher_preDisAmo" name="editvoucher_preDisAmo" >
                          <label for="">Total Quantity</label> 
-                          <input type="text" class="form-control" [value]="unitValue" [(ngModel)]=" editvoucher_tatalQuant" name="value" >
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]=" editvoucher_totalQuant" name="editvoucher_tatalQuant" >
 
                         </div>
                     </div>
                     <div class="col-sm-12">
                         <div class="form-group mt-3">  
                           <label for="">Use for Days  </label>                       
-                          <input type="text" class="form-control" [value]="unitValue" [(ngModel)]="editvoucher_UseForDays" name="value" >
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]="editvoucher_UseForDays" name="editvoucher_UseForDays" >
                           <label for=""> Total Cost:</label>
-                          <input type="text" class="form-control" [value]="unitValue" [(ngModel)]="editvoucher_totalCost" name="value" >
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]="editvoucher_totalCost" name="editvoucher_totalCost" >
 
                         </div>
                     </div>
@@ -447,12 +438,7 @@
         </div>
     </div>
 </div>
-
-
-
-=======
->>>>>>> e4ef18116f822c6f5be4c200ed0e5ab2d1c325ae
-            </div>
-        </div>
+</div>
+</div>
     </div>
 </div>

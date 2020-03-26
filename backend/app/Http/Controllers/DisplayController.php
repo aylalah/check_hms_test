@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -226,9 +225,25 @@ class DisplayController extends Controller
                 ->get();
     }
     public function editVoucher(Request $request){
-        $id=$request[0];
-        return $request;
-
+          $status;
+          switch ($request->refill) {
+              case 0:
+                 $status="non-refillable";
+                  break;
+               default:
+                  $status="refillable";
+                  break;
+          }
+        return $details =Doctor_prescriptions::where('id',$request->id)
+        ->update([
+            "days"=>$request->days,
+             "dispense"=>$request->dispense,
+             "quantity"=>$request->quantity,
+             "refill"=>$request->refill,
+             "remain"=>$request->remain,
+             "amount_paid"=>$request->amount_paid,
+             "refill_status"=>$status,
+            ]);
     }
     public function voucherData(Request $request){
        $id=$request[0];
@@ -524,7 +539,7 @@ class DisplayController extends Controller
         return Appointments::orderBy('appointments.id', 'DESC')->join('departments','appointments.department_id','=','departments.id')
                 ->join('customers','appointments.customer_id','=','customers.id')
                 ->select('appointments.treatment','customers.name as pat_name', 'customers.othername','customers.card_number','appointments.lab','appointments.prescription','appointments.invoice','appointments.voucher','appointments.status','appointments.updated_at','appointments.created_at','appointments.date','appointments.time','appointments.customer_id','appointments.department_id','appointments.voucher_id','appointments.branch_id','departments.name as dept_name','customers.patient_image')               
-                ->paginate(2);
+                ->get();
     }
     public function cancelPharmLog(Request $request){
         $id = $request[0];
