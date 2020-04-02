@@ -57,7 +57,7 @@
                 </div>
                   <div class="modal-body">             
                       <div class="row  justify-content-center">
-                             <h6>Are you sure you want to cancel this ?</h6>     
+                             <h6>Are you sure you want to cancel this opration ?</h6>     
                       </div>
                   </div>      
                   <div class="modal-footer">
@@ -72,7 +72,7 @@
                 <div class="card c_grid c_yellow">
                     <div class="body text-center p-4">
                         <div class="row">
-                          <div class="col-6"> <strong class="float-left">{{l.created_at.slice(11,13)%12}}{{l.created_at.slice(13,16)}} <small *ngIf="l.created_at.slice(11,13)<=11">am</small><small *ngIf="l.created_at.slice(11,13)>=12">pm</small></strong></div>
+                          <div class="col-6"> <strong class="float-left">{{l.created_at.slice(10,13)%12}}{{l.created_at.slice(13,16)}} <small *ngIf="l.created_at.slice(11,13)<=11">am</small><small *ngIf="l.created_at.slice(11,13)>=12">pm</small></strong></div>
                            <span *ngIf ="l.prescription ==='open'" class=" col-6"><i class="fa fa-remove text-danger float-right" (click)="cancle(l.id)" title="" data-toggle="modal" data-target="#AddDepartments"></i></span>
                         </div>
                         <div class="circle">
@@ -108,7 +108,7 @@
 <div class="spinner-grow text-success" role="status">
 <span class="sr-only">Loading...</span>
 </div>
-              </div>    
+        </div>    
         </div>
     </div>
 </div>
