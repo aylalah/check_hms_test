@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
@@ -225,6 +224,31 @@ class DisplayController extends Controller
                 ->where('id', '=', $id)             
                 ->get();
     }
+    public function editVoucher(Request $request){
+          $status;
+          switch ($request->refill) {
+              case 0:
+                 $status="non-refillable";
+                  break;
+               default:
+                  $status="refillable";
+                  break;
+          }
+        return $details =Doctor_prescriptions::where('id',$request->id)
+        ->update([
+            "days"=>$request->days,
+             "dispense"=>$request->dispense,
+             "quantity"=>$request->quantity,
+             "refill"=>$request->refill,
+             "remain"=>$request->remain,
+             "amount_paid"=>$request->amount_paid,
+             "refill_status"=>$status,
+            ]);
+    }
+    public function voucherData(Request $request){
+       $id=$request[0];
+       return $details =Doctor_prescriptions::where('id',$id)->get();
+    }
 
     public function edtduration($id)
     {
@@ -360,8 +384,6 @@ class DisplayController extends Controller
         $id = $branch->br_name;
         $bid = $branch->id;
         return response()->json([
-
-
            'item'=>DB::table($id)->orderBy('item_details.generic_name')->select( 'item_details.generic_name','item_details.id AS item_id', 'manufacturer_details.name','item_categories.cat_name', 'item_details.item_img', 'item_details.selling_price', 'item_details.price_2', 'item_details.price_3', 'item_details.purchasing_price', 'item_details.markup_price',$id.'.open_stock',$id.'.sales',$id.'.transfer',$id.'.receive',$id.'.total_remain',$id.'.close_balance',$id.'.physical_balance',$id.'.variance',$id.'.amount',$id.'.balance',$id.'.c_date',$id.'.c_time')
 
 //            'item'=>DB::table($id)->orderBy('item_details.generic_name')->select($id.'.*', 'item_details.id AS item_id',  'item_details.generic_name', 'manufacturer_details.name','item_categories.cat_name', 'item_details.item_img', 'item_details.selling_price', 'item_details.purchasing_price', 'item_details.markup_price')
@@ -519,10 +541,19 @@ class DisplayController extends Controller
                 ->select('appointments.treatment','customers.name as pat_name', 'customers.othername','customers.card_number','appointments.lab','appointments.prescription','appointments.invoice','appointments.voucher','appointments.status','appointments.updated_at','appointments.created_at','appointments.date','appointments.time','appointments.customer_id','appointments.department_id','appointments.voucher_id','appointments.branch_id','departments.name as dept_name','customers.patient_image')               
                 ->get();
     }
+    public function cancelPharmLog(Request $request){
+        $id = $request[0];
+        $cancel = DB::table("appointments")->where('id',$id)->delete();
+         if($cancel){
+             return response()->json("You have successfully calceled");
+         }
+    }
     public function displayDeptAppointment()
     {
         $deptId= Auth()->user()->dept_id;
         $branchId= Auth()->user()->branch_id;
+        $dt = Carbon::now();
+        $date = $dt->toFormattedDateString();
         return Appointments::orderBy('id', 'DESC')->join('departments','appointments.department_id','=','departments.id')
                 ->join('customers','appointments.customer_id','=','customers.id')
                 ->select('appointments.*','departments.name as dept_name', 'customers.name as pat_name', 'customers.id as cust_id', 'customers.othername', 'customers.card_number', 'customers.patient_image', 'customers.blood_group', 'customers.genotype')               
@@ -531,6 +562,7 @@ class DisplayController extends Controller
                 ->where('appointments.branch_id','=',$branchId)
                 ->where('appointments.status','!=','terminated')
                 ->where('appointments.status','!=','close')
+                ->where('date',$date)
                 ->get();
     }
 
@@ -637,6 +669,7 @@ class DisplayController extends Controller
     public function displayPharmPrescription($id)
     {
         $bId= Auth()->user()->branch_id;
+     
         return response()->json([
             "pres" => Doctor_prescriptions::orderBy('id') 
                     ->join ('item_details','doctor_prescriptions.item_id','=','item_details.id')

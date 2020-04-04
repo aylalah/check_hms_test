@@ -6,7 +6,6 @@ import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
 import { ForgotPasswordEmailComponent } from './auth/forgot-password-email/forgot-password-email.component';
 import { ForgotPasswordResetComponent } from './auth/forgot-password-reset/forgot-password-reset.component';
-// import { AccountComponent } from './user/account/account.component';
 import { BeforeLoginService } from './service/before-login.service';
 import { AfterLoginService } from './service/after-login.service';
 
@@ -14,15 +13,7 @@ import { DeptAdminRoleGuardService } from './service/guards/dept-admin-role-guar
 import { AdminRoleGuardService } from './service/guards/admin-role-guard.service';
 import { StaffRoleGuardService } from './service/guards/staff-role-guard.service';
 import { UserRoleGuardService } from './service/guards/user-role-guard.service';
-
-// import { DetailsComponent } from './user/details/details.component';
 import { ProfileComponent } from './admin/profile/profile.component';
-// import { PostComponent } from './user/post/post.component';
-// import { MypostComponent } from './user/mypost/mypost.component';
-// import { AddcategoryComponent } from './addcategory/addcategory.component';
-// import { AboutComponent } from './about/about.component';
-// import { ContactComponent } from './contact/contact.component';
-// import { UpdateComponent } from './user/update/update.component';
 import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { SettingsComponent } from './admin/settings/settings.component';
 import { HomeComponent } from './admin/home/home.component';

@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
+declare var $: any;
 
 @Component({
   selector: 'app-patient',
@@ -31,6 +32,16 @@ export class PatientComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+
+     //onkeyUp search
+      $("#patient_data").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $("table tr").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+  // oneky up end
+
     this.Jarwis.displayCustomer().subscribe(
       data=>{
       this.response = data;      

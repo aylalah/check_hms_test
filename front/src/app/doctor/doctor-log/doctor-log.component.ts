@@ -19,7 +19,9 @@ export class DoctorLogComponent implements OnInit {
   dept_name: any;
   patient_data: any;
 
-  public _res;
+  patient_search: any;
+  manual_search: any;
+
   
   constructor(
     private Jarwis: JarwisService,

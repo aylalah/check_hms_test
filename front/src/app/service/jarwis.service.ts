@@ -491,6 +491,9 @@ addCustCategories(data) {
 displayAllappointment() {
   return this.http.get(`${this.baseUrl}/displayAllappointment`,)
 }
+// nextPage(data){
+//   return this.http.get(data)
+// }
 
 displayDeptAppointment() {
   return this.http.get(`${this.baseUrl}/displayDeptAppointment`,{headers:{
@@ -830,4 +833,17 @@ updateGeneralSet(data) {
 addGeneralSet(data) {
   return this.http.post(`${this.baseUrl}/addGeneralset`, data)
 }
+cncel_pharm_log(data){
+ return this.http.post<any>(`${this.baseUrl}/cancelPharmLog`,data,{headers:{Authorization:`Bearer ${localStorage.token}`}}
+)
+}
+voucherData(data){
+ return this.http.post<any>(`${this.baseUrl}/voucherdata`,data,{headers:{Authorization:`Bearer ${localStorage.token}`}}
+)
+}
+editVoucher(data){
+  return this.http.post<any>(`${this.baseUrl}/editvoucher`,data,{headers:{Authorization:`Bearer ${localStorage.token}`}}
+ )
+ }
+
 }
