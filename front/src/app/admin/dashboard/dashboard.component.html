@@ -679,7 +679,12 @@
                 </div>
                 <div class="dropdown">
                     <span>Welcome,</span>
-                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown"><strong>{{fname}} {{lname}}</strong></a>
+                    <a href="javascript:void(0);" class="dropdown-toggle user-name" data-toggle="dropdown">
+                        <strong  *ngIf = "pos == '1'">Pharm. {{fname}} {{lname}}
+                        </strong>
+                        <strong  *ngIf = "pos == '3'">Dr. {{fname}} {{lname}}
+                        </strong>
+                    </a>
                     <ul class="dropdown-menu dropdown-menu-right account vivify flipInY">
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['admin-profile']}}]"><i class="icon-user"></i> My Profile</a></li>
                         <li><a href="javascript:void(0);"><i class="icon-envelope-open"></i>Messages</a></li>
@@ -831,7 +836,8 @@
 
             <div *ngIf = "role == '3003'">
                 <nav id="left-sidebar-nav" class="sidebar-nav">
-                    <ul id="main-menu" class="metismenu">
+
+                    <ul id="main-menu" class="metismenu"  *ngIf = "pos == '1'">
                         <li class="header">Admin</li>
                         <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: [home]}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>                        
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['add_patient']}}]"><i class="icon-user"></i><span>Add Patient</span></a></li>
@@ -887,19 +893,105 @@
                             </ul>
                         </li> -->
                     </ul>
+
+                    <!-- Doctor option -->
+                    <ul id="main-menu" class="metismenu"  *ngIf = "pos == '3'">
+                        <li class="header">Doctor Admin</li>
+                        <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: [home]}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>   
+                        
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['doctor_log']}}]"><i class="icon-user"></i><span>All Appointments</span></a></li>
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['open-appointments']}}]"><i class="icon-user"></i><span>Open Appointments</span></a></li>
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['success-appointments']}}]"><i class="icon-user"></i><span>Success Appointments</span></a></li>
+                              
+                                
+                        <li class="header">Module</li>
+                        <!-- <li>
+                            <a href="#Doctors" class="has-arrow"><i class="icon-user-follow"></i><span>Pharmacy</span></a>
+                            <ul> -->
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]"><i class="icon-user-follow"></i><span>Pharmacy Log</span></a></li>                             
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]"><i class="fa fa-refresh"></i><span>Refills</span></a></li>                                        
+                                <li class="header">Inventory</li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]"><i class="fa fa-table"></i><span>All Items</span></a></li>                                        
+                                <li class="header">Audit Trail</li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]"><i class="fa fa-history"></i><span>History</span></a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]"><i class="fa fa-check-square"></i><span>Report</span></a></li>
+                            <!-- </ul>
+                        </li> -->
+                        <li>
+                            <a class="has-arrow"><i class="fa fa-wrench"></i><span>Configurations</span></a>
+                            <ul>
+                                <li class="header">Item Settings</li>                                 
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_category']}}]">Class</a></li>
+                                <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['unit']}}]">Unit</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['item_type']}}]">Type</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['manufacturer']}}]">Brand</a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['shelves']}}]">Shelf</a></li>                              
+                            </ul>
+                        </li>                   
+                        <li>
+
+                            <a class="has-arrow"><i class="icon-settings"></i><span>Settings</span></a>
+                            <ul>
+                                
+                                <li class="header">Settings</li>                                
+                                <!-- <li><a [routerLink]="['/Admin', {outlets: {side: ['staffs']}}]"><i class="icon-envelope"></i><span>All Staffs</span></a></li> -->
+                                <!-- <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['department']}}]"><i class="icon-grid"></i><span>Departments</span></a></li> -->
+                                <!-- <li><a [routerLink]="['/Admin', {outlets: {side: ['set_department']}}]"><i class="icon-grid"></i><span>Set Departments</span></a></li>  -->
+                                <li><a [routerLink]="['/Admin', {outlets: {side: ['set_branch']}}]"><span>Our Centers</span></a></li>                                
+                                <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><span>Set Staff</span></a></li> 
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['duration']}}]"><span>Set Prescription Qty</span></a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['instruction']}}]"><span>Set Daily Supply</span></a></li>       
+                                <!-- <li><a><i class="icon-settings"></i><span>General Settings</span></a></li> -->
+                            </ul>
+                        </li>                    
+                        <!-- <li>
+                            <a class="has-arrow"><i class="icon-user"></i><span>Help/Support</span></a>
+                            <ul>
+                                <li><a>Help</a></li>
+                                <li><a>Support</a></li>                           
+                            </ul>
+                        </li> -->
+                    </ul>
+
                 </nav>             
             </div>
 
 
             <div *ngIf = "role == '4004'">
                 <nav id="left-sidebar-nav" class="sidebar-nav">
-                    <ul id="main-menu" class="metismenu">
-                        <li class="header">Admin</li>
+
+                    <!-- pharmacy ul -->
+                    <ul id="main-menu" class="metismenu"  *ngIf = "pos == '1'">
+                        <li class="header">Pharmacy</li>
                         <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: [home]}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>                        
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['add_patient']}}]"><i class="icon-user"></i><span>Add Patient</span></a></li>
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient']}}]"><i class="icon-user"></i><span>Patients</span></a></li>
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['patient_category']}}]"><i class="icon-user"></i><span>Patients Category</span></a></li>
                         <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['appointment']}}]"><i class="fa fa-sitemap"></i><span>Appointment</span></a></li>      
+                        <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Staff</span></a></li>    
+                        <li class="header">Module</li>
+                        <!-- <li>
+                            <a href="#Doctors" class="has-arrow"><i class="icon-user-follow"></i><span>Pharmacy</span></a>
+                            <ul> -->
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['pharmacy_log']}}]"><i class="icon-user-follow"></i><span>Pharmacy Log</span></a></li>                             
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['refill']}}]"><i class="fa fa-refresh"></i><span>Refills</span></a></li>                                        
+                                <li class="header">Inventory</li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['items']}}]"><i class="fa fa-table"></i><span>All Items</span></a></li>                                        
+                                <li class="header">Audit Trail</li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['history']}}]"><i class="fa fa-history"></i><span>History</span></a></li>
+                                <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['report']}}]"><i class="fa fa-check-square"></i><span>Report</span></a></li>
+                            <!-- </ul>
+                        </li> -->                                
+                    </ul>
+
+                    <!-- doctor ul -->
+                    <ul id="main-menu" class="metismenu"   *ngIf = "pos == '3'">
+                        <li class="header">Doctor</li>
+                        <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: [home]}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>                        
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['doctor_log']}}]"><i class="icon-user"></i><span>All Appointments</span></a></li>
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['open-appointments']}}]"><i class="icon-user"></i><span>Open Appointments</span></a></li>
+                        <li><a href="#" [routerLink]="['/Admin', {outlets: {side: ['success-appointments']}}]"><i class="icon-user"></i><span>Success Appointments</span></a></li>
+                        
                         <li><a href="" [routerLink]="['/Admin', {outlets: {side: ['all_staff']}}]"><i class="icon-users"></i><span>Staff</span></a></li>    
                         <li class="header">Module</li>
                         <!-- <li>

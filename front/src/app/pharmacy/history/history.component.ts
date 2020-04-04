@@ -6,6 +6,7 @@ import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
 import { ExportAsService, ExportAsConfig } from 'ngx-export-as';
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 @Component({
   selector: 'app-history',
   templateUrl: './history.component.html',
@@ -34,6 +35,8 @@ export class HistoryComponent implements OnInit {
   eDate: any;
   hAction: any;
   adds: any;
+  public _res;
+  
   constructor( 
     private exportAsService: ExportAsService,
     private Jarwis: JarwisService,
@@ -41,10 +44,21 @@ export class HistoryComponent implements OnInit {
     private router: Router,
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
+    private DocJarwis: DoctorJarwisService
   ) { }
 
   ngOnInit() {
+    //checking if router is  pharmacy
+    this.DocJarwis.profile().subscribe(
+      data=>{
+      this._res = data;
+      (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+    })
+  
+  }
 
+  public _continue(){
+    
     this.Jarwis. generalSettings().subscribe(
       data=>{
       this.response = data;      

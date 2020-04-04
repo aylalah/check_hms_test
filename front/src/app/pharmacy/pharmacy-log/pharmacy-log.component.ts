@@ -9,6 +9,8 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {startWith, map} from 'rxjs/operators';
 
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
+
 @Component({
   selector: 'app-pharmacy-log',
   templateUrl: './pharmacy-log.component.html',
@@ -36,7 +38,11 @@ export class PharmacyLogComponent implements OnInit {
   imgLink: any;
   spin: string;
   disabled = false;
+
+  public _res;
+
   delete_id;
+
   constructor(
     private Jarwis: JarwisService,
     private Token: TokenService,
@@ -44,9 +50,20 @@ export class PharmacyLogComponent implements OnInit {
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
     public actRoute: ActivatedRoute,
+    private DocJarwis: DoctorJarwisService
   ) { }
 
   ngOnInit() {
+
+    //checking if router is  pharmacy
+    this.DocJarwis.profile().subscribe(
+     data=>{
+     this._res = data;
+     (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+   })  
+ }
+
+  public _continue():void {
 
     this.Jarwis. generalSettings().subscribe(
       data=>{

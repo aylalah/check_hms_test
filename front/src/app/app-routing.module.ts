@@ -75,6 +75,9 @@ import { PhamAdminComponent } from './dashboard/pham-admin/pham-admin.component'
 import { PhamUserComponent } from './dashboard/pham-user/pham-user.component';
 import { AdminProfileComponent } from './admin-profile/admin-profile.component';
 import { RegisterComponent } from './setup/register/register.component';
+import { PatDetailComponent } from './doctor/pat-detail/pat-detail.component';
+import { OpenAppointmentsComponent } from './doctor/open-appointments/open-appointments.component';
+import { SuccessAppointmentsComponent } from './success-appointments/success-appointments.component';
 
 
 
@@ -147,8 +150,13 @@ const routes: Routes = [
 
          // Doctor
          {path: 'doctor_log', component: DoctorLogComponent, outlet: 'side',canActivate: [AfterLoginService] },
+         {path: 'open-appointments', component: OpenAppointmentsComponent, outlet: 'side',canActivate: [AfterLoginService] },
+         {path: 'success-appointments', component: SuccessAppointmentsComponent, outlet: 'side',canActivate: [AfterLoginService] },
          {path: 'doctor_home', component: DoctorHomeComponent, outlet: 'side',canActivate: [AfterLoginService] },
+         {path: 'Surgeon-department_admin', component: DoctorLogComponent, outlet: 'side', canActivate: [AfterLoginService], canActivateChild: [DeptAdminRoleGuardService] },
+         {path: 'Surgeon-staff', component: DoctorLogComponent, outlet: 'side', canActivate: [AfterLoginService], canActivateChild: [DeptAdminRoleGuardService] },
          {path: 'treatment/:id', component: MakePrescriptionComponent, outlet: 'side',canActivate: [AfterLoginService] },
+         {path: 'pat-detail/:id', component: PatDetailComponent, outlet: 'side',canActivate: [AfterLoginService] },
 
           // Payment
          {path: 'payment_log', component: PaymentLogComponent, outlet: 'side',canActivate: [AfterLoginService] },

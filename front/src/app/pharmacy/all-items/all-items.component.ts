@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 
 @Component({
   selector: 'app-all-items',
@@ -100,19 +101,30 @@ export class AllItemsComponent implements OnInit {
   varQuantity: any;
   varDetails: any;
   varId2: any;
+
   public itemss:any;
+
   constructor( 
     private Jarwis: JarwisService,
     private Token: TokenService,
     private router: Router,
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
-  ) { 
-    
-  }
+
+    private DocJarwis: DoctorJarwisService
+  ) { }
+
 
   ngOnInit() {
-    
+    //cehcink if its pharmacy trying to rout 
+    this.DocJarwis.profile().subscribe(
+      data=>{
+      this._res = data;
+      (this._res.det[0].position_id == 1)? this._continue() : this.router.navigateByUrl('/');
+    })
+  }
+
+  public _continue(): void {
     this.Jarwis.profile().subscribe(
       data=>{
       this.response = data;
@@ -228,10 +240,12 @@ export class AllItemsComponent implements OnInit {
 
     })
     this.onFilterChange()
+
 }
 prevIt(){
 
 }
+
 onFilterChange() {
   // console.log(event)
   // const filterValue=(event.target as HTMLInputElement).value;

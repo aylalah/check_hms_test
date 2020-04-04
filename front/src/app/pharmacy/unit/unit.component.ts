@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 
 @Component({
   selector: 'app-unit',
@@ -28,16 +29,27 @@ export class UnitComponent implements OnInit {
   unitDescrip: any;
   unitValue: any;
   disabled = false;
+  public _res;
 
   constructor( 
     private Jarwis: JarwisService,
     private Token: TokenService,
     private router: Router,
     private Auth: AuthService,
-    public snackBar: MatSnackBar, 
+    public snackBar: MatSnackBar,
+    private DocJarwis: DoctorJarwisService 
   ) { }
 
   ngOnInit() {
+    //checking if router is  pharmacy
+    this.DocJarwis.profile().subscribe(
+     data=>{
+     this._res = data;
+     (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+   })  
+ }
+
+  public _continue() {
     this.Jarwis.displayUnit().subscribe(
       data=>{
       this.response = data;      

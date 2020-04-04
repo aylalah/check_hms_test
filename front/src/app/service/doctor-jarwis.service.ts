@@ -10,7 +10,7 @@ export class DoctorJarwisService {
 
   // private baseUrl = 'https://hms.jtcheck.com/back/backend/public/api';
 
-  private baseUrl = 'http://localhost/buth-pharm/backend/public/api';
+  private baseUrl = 'http://localhost/check_hms_test/backend/public/api';
 
   getPatientData(data){
     return this.http.get(`${this.baseUrl}/patient-data/${data}`);
@@ -19,6 +19,24 @@ export class DoctorJarwisService {
   
   displayAppointment() {
     return this.http.get(`${this.baseUrl}/displayAppointment`,{headers:{
+      Authorization:`Bearer ${localStorage.token}`
+    }})
+  }
+
+  displayOpenAppointment() {
+    return this.http.get(`${this.baseUrl}/displayOpenAppointment`,{headers:{
+      Authorization:`Bearer ${localStorage.token}`
+    }})
+  }
+
+  displaySuccessAppointment() {
+    return this.http.get(`${this.baseUrl}/displaySuccessAppointment`,{headers:{
+      Authorization:`Bearer ${localStorage.token}`
+    }})
+  }
+
+  profile() {
+    return this.http.get(`${this.baseUrl}/me`,{headers:{
       Authorization:`Bearer ${localStorage.token}`
     }})
   }

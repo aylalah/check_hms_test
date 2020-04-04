@@ -1,36 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { JarwisService } from 'src/app/service/jarwis.service';
-import { TokenService } from 'src/app/service/token.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthService } from 'src/app/service/auth.service';
-import { MatSnackBar } from '@angular/material';
 import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
-declare var $:any;
+import { JarwisService } from 'src/app/service/jarwis.service';
+import { Router } from '@angular/router';
+declare var $: any;
 
 @Component({
-  selector: 'app-doctor-log',
-  templateUrl: './doctor-log.component.html',
-  styleUrls: ['./doctor-log.component.css']
+  selector: 'app-open-appointments',
+  templateUrl: './open-appointments.component.html',
+  styleUrls: ['./open-appointments.component.css']
 })
-export class DoctorLogComponent implements OnInit {
-  response: any;
-  log: any;
-  imgLink: any;
-  dept_name: any;
-  patient_data: any;
+export class OpenAppointmentsComponent implements OnInit {
 
-  patient_search: any;
-  manual_search: any;
+  public _res;
+  public dept_name;
+  public log;
+  response: any
+  imgLink: any
 
-  
   constructor(
+    private DocJarwis: DoctorJarwisService,
     private Jarwis: JarwisService,
-    private Token: TokenService,
-    private router: Router,
-    private Auth: AuthService,
-    public snackBar: MatSnackBar, 
-    public actRoute: ActivatedRoute,
-    private DocJarwis: DoctorJarwisService
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -53,7 +43,7 @@ export class DoctorLogComponent implements OnInit {
       this.imgLink = this.response[0].app_url;
     })
     
-    this.DocJarwis.displayAppointment().subscribe(
+    this.DocJarwis.displayOpenAppointment().subscribe(
       data=>{
       this.response = data;
       this.dept_name = data[0].dept_name;     

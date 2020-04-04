@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import { NgForm } from '@angular/forms';
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 
 declare let jQuery: any;
 declare let $ : any;
@@ -78,6 +79,9 @@ export class VoucherComponent implements OnInit {
   Instructionresponse_id: any;
   amt_value: any;
   sup_id: any;
+
+  public _res;
+
   editvoucher_id:any;
   editvoucher_day:any;
   editvoucher_desPe:any;
@@ -93,6 +97,7 @@ export class VoucherComponent implements OnInit {
   editvoucher_UseForDays1:any;
   editvoucher_totalCost1:any;
 
+
   constructor(
     private Jarwis: JarwisService,
     private Token: TokenService,
@@ -100,9 +105,20 @@ export class VoucherComponent implements OnInit {
     private Auth: AuthService,
     public snackBar: MatSnackBar, 
     public actRoute: ActivatedRoute,
+    private DocJarwis: DoctorJarwisService
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+    //checking if router is  pharmacy
+    this.DocJarwis.profile().subscribe(
+     data=>{
+     this._res = data;
+     (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+   })  
+ }
+
+  public _continue():void { 
+
 	this.actRoute.paramMap.subscribe((params => {
 	    let id = params.get('id');
 	    this.appId= id;

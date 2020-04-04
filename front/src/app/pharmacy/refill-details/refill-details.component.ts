@@ -6,6 +6,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/service/auth.service';
 import { MatSnackBar } from '@angular/material';
 import {FormBuilder, FormGroup, Validators, NgForm, FormControl} from "@angular/forms";
+import { DoctorJarwisService } from 'src/app/service/doctor-jarwis.service';
 
 
 @Component({
@@ -34,6 +35,7 @@ export class RefillDetailsComponent implements OnInit {
   rValue: any;
   rId: any;
   appId: any;
+  public _res;
 
   constructor( 
     private http: HttpClient,
@@ -44,9 +46,19 @@ export class RefillDetailsComponent implements OnInit {
     public snackBar: MatSnackBar, 
     public actRoute: ActivatedRoute,
     private formBuilder: FormBuilder,
+    private DocJarwis: DoctorJarwisService
   ) { }
 
   ngOnInit() {
+    //checking if router is  pharmacy
+    this.DocJarwis.profile().subscribe(
+     data=>{
+     this._res = data;
+     (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+   })  
+ }
+
+  public _continue() {
     this.Jarwis. generalSettings().subscribe(
       data=>{
       this.response = data;      

@@ -20,6 +20,7 @@ export class MakePrescriptionComponent implements OnInit {
   id: string;
 
   public patient;
+  public _res;
 
   constructor( 
     private DocJarwis: DoctorJarwisService,
@@ -31,6 +32,17 @@ export class MakePrescriptionComponent implements OnInit {
    ) { }
 
   ngOnInit() {
+
+    this.DocJarwis.profile().subscribe(
+      data=>{
+       
+      this._res = data;
+      (this._res.det[0].position_id == 3)? this._continue() : this.router.navigateByUrl('/');
+      
+    })
+  }
+
+  public _continue(): void {
     this.actRoute.paramMap.subscribe((params => {
       this.id = params.get('id');      
       this.DocJarwis.getPatientData(this.id).subscribe(data=>{

@@ -11,8 +11,8 @@ export class TokenService {
     // login: 'https://hms.jtcheck.com/back/backend/public/api/login',
     // signup: 'https://hms.jtcheck.com/back/backend/public/api/signup'
 
-    login: 'http://localhost/buth-pharm/backend/public/api/login',
-    signup: 'http://localhost/buth-pharm/backend/public/api/signup'
+    login: 'http://localhost/check_hms_test/backend/public/api/login',
+    signup: 'http://localhost/check_hms_test/backend/public/api/signup'
 
     
   };
