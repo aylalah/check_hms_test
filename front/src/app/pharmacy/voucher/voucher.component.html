@@ -204,7 +204,7 @@
                                 <div class="col-lg-4 col-md-6 col-sm-6">
                                     <label>Use for Day(s)</label>
                                     <div class="form-group">
-                                        <input type="number" class="form-control" value="{{math.round(useFor)}}" ngModel name="days" disabled placeholder="Days">
+                                        <input type="number" class="form-control" value="{{math.floor(useFor)}}" ngModel name="days" disabled placeholder="Days">
                                     </div>  
                                 </div>
                             </div>
@@ -272,7 +272,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let r of prescriptionsList; let i =index">
+                        <tr *ngFor="let r of prescriptionsList; let i =index" style="width: 100%; overflow: auto;">
                            <td>{{i+1}}</td>                                                                                     
                            <td class="w60">
                             <img src="http://{{ imgLink}}/backend/public/upload/uploads/{{r.item_img}}" data-toggle="tooltip" data-placement="top" title="Avatar Name" alt="Avatar" class="w35 rounded">
@@ -286,12 +286,11 @@
                         <td>{{r.quantity}}</td>                                                                          
                         <td>{{r.refill}}</td>
                         <td>{{r.remain}}</td>
-                     
                         <td>{{r.amount | currency:'NGN':'symbol-narrow'}}</td>
                         <td>{{r.amount_paid | currency:'NGN':'symbol-narrow'}}</td>
                         <td>
-                          <!-- <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button> -->
-                          <button type="button" *ngIf = "prescription == 'open' " class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" style="color: blue;" title="Edit" data-toggle="modal" data-target="#EditTra" (click)="editTrans(r.id)"><i class="fa fa-pencil"></i></button>
+                          <button type="button" class="btn btn-default btn-sm" style="color: red;" title="Delete" data-toggle="modal" (click)="deleteTrans(r.id)"><i class="fa fa-trash-o"></i></button>
                       </td>                     
                         </tr>
                         <div *ngIf="!prescriptionsList">
@@ -377,7 +376,69 @@
                 </div>
                 </div>
                 </div>
+
+
+                <!-- Default Size -->
+<div class="modal fade" id="EditTra" tabindex="1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="myLargeModalLabel">Edit Voucher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+                </button>
             </div>
+            <form class="form-auth-small m-t-20" role="form" #ed="ngForm"> 
+            <div class="modal-body">             
+                <div class="row clearfix">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label for="">Despensable Period</label> 
+                            <input type="number"  class="form-control" (keyup)="editVou($event)" [(ngModel)]="editvoucher_desPe" name="editvoucher_desPe"  >
+                        </div>
+                    </div>
+                    <!-- <div class="col-md-4">
+                        <div class="form-group">
+                            <label>{{posid}}</label>
+                            <input type="text" class="form-control" [value]="unitDescrip" ngModel name="box_size" >
+                        </div>
+                    </div> -->
+                    <!-- <div class="col-lg-12">
+                        <input type="file" class="dropify">
+                    </div> -->
+                    <div class="col-sm-12">
+                        <div class="form-group mt-3">  
+                          <label for="">Present Dispensable Amount  </label>                          
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]="editvoucher_preDisAmo" name="editvoucher_preDisAmo" >
+                         <label for="">Total Quantity</label> 
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]=" editvoucher_totalQuant" name="editvoucher_tatalQuant" >
+
+                        </div>
+                    </div>
+                    <div class="col-sm-12">
+                        <div class="form-group mt-3">  
+                          <label for="">Use for Days  </label>                       
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]="editvoucher_UseForDays" name="editvoucher_UseForDays" >
+                          <label for=""> Total Cost:</label>
+                          <input type="text" class="form-control" style="background-color: inherit;" disabled [value]="unitValue" [(ngModel)]="editvoucher_totalCost" name="editvoucher_totalCost" >
+
+                        </div>
+                    </div>
+                    <!-- <div class="col-sm-12">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-outline-secondary">Cancel</button>
+                    </div> -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button (click)="editVoucher()" class="btn btn-round btn-primary" data-dismiss="modal">Update<i *ngIf="disabled" class="fa fa-spin fa-spinner"></i></button>
+                <button type="button" class="btn btn-round btn-default" class="close" data-dismiss="modal" aria-label="Close">Close</button>
+            </div>
+            </form>
         </div>
+    </div>
+</div>
+</div>
+</div>
     </div>
 </div>

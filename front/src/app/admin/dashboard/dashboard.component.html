@@ -54,7 +54,7 @@
                 </div>
             </li>
             <li class="list-group-item">
-                Horizontal Henu
+                Horizontal Menu
                 <div class="float-right">
                     <label class="switch">
                         <input type="checkbox" class="hmenu-btn" >
@@ -699,7 +699,7 @@
 
             <div *ngIf = "role == '1001'">
             <nav id="left-sidebar-nav" class="sidebar-nav">
-                <ul id="main-menu" class="metismenu">
+                <ul id="main-menu" class="metismenu" style="height:500px; overflow: auto;">
                     <li class="header">Admin</li>
                     <li class="active has-arrow"><a [routerLink]="['/Admin', {outlets: {side: ['ngModel=home']}}]"><i class="icon-speedometer"></i><span>Dashboard</span></a></li>                        
                     <!-- <li><a [routerLink]="['/Admin', {outlets: {side: ['phamarcy-admin-dashboard']}}]"><i class="icon-speedometer"></i><span>Admin Dashboard</span> </a></li> 

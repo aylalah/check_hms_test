@@ -28,6 +28,9 @@ export class MakeAppointmentComponent implements OnInit {
   filterString = "";
   appoint: any;
   onScroll:any;
+  info;
+  nextbt:Boolean=false;
+  prevbt:Boolean=false;
   constructor( 
     private Jarwis: JarwisService,
     private Token: TokenService,
@@ -69,13 +72,46 @@ this.onFilterChange();
     // console.log(this.appoints)
     this.Jarwis.displayAllappointment().subscribe(
       data=>{
-      // this.response = data;      
-      this.appoints  = data
+      // this.response = data;  
+      // this.info=[data];   
+      // console.log(this.info) 
+      this.appoints  = data;
       this.appoint =  this.appoints.filter((cate) => this.isMatch(cate));
       
     })
   
   }
+//   nextP(){
+//     if (this.info[0].next_page_url==null) {
+//       this.nextbt=true;
+//     }
+//     else{
+//       let next = this.info[0].next_page_url;
+//       this.Jarwis.nextPage(next).subscribe(res=>{
+//         this.info=[res];
+//         this.info=[res];    
+//           this.appoints  = this.info[0].data;
+//           this.appoint =  this.appoints.filter((cate) => this.isMatch(cate));
+//       })
+//       this.nextbt=false;
+
+//     }
+// }
+// prviouseP(){
+//   if (this.info[0].prev_page_url==null){
+//     this.prevbt=false;
+//   } 
+//   else {
+//     let prev = this.info[0].prev_page_url;
+//     this.Jarwis.nextPage(prev).subscribe(res=>{
+//       this.info=[res];
+//       this.info=[res];   
+//         this.appoints  = this.info[0].data;
+//         this.appoint =  this.appoints.filter((cate) => this.isMatch(cate));
+//       })
+//       this.prevbt=true;
+//   }
+// }
     
   
   isMatch(item) {

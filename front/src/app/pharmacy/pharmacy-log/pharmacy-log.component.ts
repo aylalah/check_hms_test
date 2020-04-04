@@ -36,6 +36,7 @@ export class PharmacyLogComponent implements OnInit {
   imgLink: any;
   spin: string;
   disabled = false;
+  delete_id;
   constructor(
     private Jarwis: JarwisService,
     private Token: TokenService,
@@ -55,9 +56,9 @@ export class PharmacyLogComponent implements OnInit {
     
     this.Jarwis.displayDeptAppointment().subscribe(
       data=>{
+        // console.log(data)
       this.response = data;      
-      this.log = this.response; 
-     
+      this.log = this.response;
     })
     // Start Autocomplete
     this.Jarwis.displayCustomer().subscribe(
@@ -118,7 +119,6 @@ export class PharmacyLogComponent implements OnInit {
   onSubmit(form: NgForm) {
    this.disabled = true;
     this.Jarwis.addCustomer(form.value).subscribe(
-     
       data => this.handleResponse(data),
       error => this.handleError(error), 
            
@@ -128,13 +128,32 @@ export class PharmacyLogComponent implements OnInit {
       // console.log(data);   
       this.response = data;
       this.department = this.response
-     
-   
     })
-
 
     
   }
+  cancle(id){
+    this.delete_id = id;
+    // .subscribe(
+      //   data=>{
+        //   this.handleRespons(data);console.log(data)
+        // })
+      }
+  del(){
+    console.log(this.delete_id)
+    this.Jarwis.cncel_pharm_log(this.delete_id).subscribe(data=>{
+      this.handleRespons(data);
+      console.log(data)
+      this.Jarwis.displayDeptAppointment().subscribe(
+        data=>{
+        this.response = data;      
+        this.log = this.response; 
+      })
+    
+    },
+      err=>{this.handleError(err)}
+      )
+      }
 
   handleResponse(data) {    // 
     let snackBarRef = this.snackBar.open("Operation Successful", 'Dismiss', {
@@ -157,13 +176,11 @@ export class PharmacyLogComponent implements OnInit {
   }
 
   onClickSubmit() {
-
     this.spin="disable";
-
     this.disabled = true;
-
     this.Jarwis.makeAppointment(this.form).subscribe(
-      data => this.handleRespons(data),
+      data => {
+        this.handleRespons(data);console.log(data)},
         error => this.handleErro(error)
    );
    
