@@ -26,7 +26,7 @@
     "@angular/service-worker": "~7.2.0",
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "jwt-decode": "^2.2.0",
     "ng-lazyload-image": "^7.0.1",
     "ngx-export-as": "^1.4.0",
